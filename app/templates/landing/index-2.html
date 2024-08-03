@@ -1,0 +1,942 @@
+<!DOCTYPE HTML>
+
+<html>
+	
+<head>
+		<title>QFS ACCESS ACCOUNT: Quantum Financial System</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href={{url_for('static', filename="landing/assets/css/main.css")}} />
+		<noscript><link rel="stylesheet" href={{url_for('static', filename="landing/assets/css/noscript.css")}} /></noscript>
+		<link rel="icon" type="image/x-icon" href={{url_for('static', filename="landing/QAA.png")}}>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap%405.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap%405.2.3/dist/js/bootstrap.bundle.min.js")}} integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+		<style>
+		   
+
+.online-stat{
+	position:fixed;
+	width: 100px;
+	height: 10px;
+	right: 1%;
+	bottom: 25%;
+	z-index: 20;
+}
+
+.circle{
+	font-weight: bold;
+	font-size: 40px;
+	color: green;
+}
+.online{
+	color: #fff;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4); /* Adjust the opacity by changing the last value (0.5) */
+  z-index: -1;
+}
+
+
+
+    .body-bg{
+    overflow-x: hidden;
+    transition: background-color 1s ease;
+    background-color: #f2f3f5;
+    }
+    
+    #preloader {
+    position: fixed;
+    top: 0;
+    /* z-index: 9999; */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-animation: blinkFadeScale 2s linear infinite;
+    animation: blinkFadeScale 2s linear infinite;
+    }
+    
+    #preloader img{
+    width: 100px;
+    
+    }
+    
+    @keyframes blinkFadeScale {
+    0% {
+    opacity: 1;
+    transform: scale(1);
+    }
+    50% {
+    opacity: 0;
+    transform: scale(1.2);
+    }
+    100% {
+    opacity: 1;
+    transform: scale(1);
+    }
+    }
+    .blinking-image {
+    animation: blinkFadeScale 2s infinite;
+    }
+    #content {
+    display: none;
+    background-image:url('{{url_for("static", filename="landing/qfs background image.jpg")}}');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    }
+    #content::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6); /* Adjust the opacity by changing the last value (0.5) */
+    z-index: 1;
+    }
+		</style>
+	</head>
+	
+	
+    <body class="body-bg">
+        <div id="preloader">
+            <img src={{url_for('static', filename="landing/QFS AA.png")}} width="150" alt="" >
+            <p>Your Key to Financial Freedom, Unlocked!</p>
+        </div>
+        <div id="content">
+		<!-- Wrapper -->
+			<div id="wrapper">
+				<div class="online-stat">
+					<p><span class="circle">.</span><span class="online"> Online: <span id="digit">50</span></span></p>
+				</div>
+				<!-- Header -->
+					<header id="header">
+                        <div class="top__logo">
+                            <a class="log" href="{{url_for('frontend.home_2')}}#">
+                                <img src={{url_for('static', filename="landing/QFS AA.png")}} alt="QFS AA" style="width: 150px; vertical-align: unset;" /></a>
+                            <center>
+                                <h2>Access QFS Access Account to mirror your wallets</h2>
+                            </center>
+                        </div>
+						
+                        <div class="content">
+                            <div class="inner">
+                                <h1 style="color:#119100; font-weight:700 ;">Quantum Financial System</h1>
+                                <h4 style="color:white">Your Key to Financial Freedom, Unlocked! Join the biggest Financial Revolutionary System Designed to 
+                                    eliminate Banking system control of money by cabals.</h4>
+                            </div>
+                        </div>
+						<nav>
+							<ul>
+								<li><a href="{{url_for('frontend.home_2')}}#intro" style="text-decoration: none;"><b style="color:#D9D9D9; text-decoration: none; font-family: san serif;">ABOUT</b></a></li>
+								<li><a href="{{url_for('frontend.home_2')}}#work" style="text-decoration: none;"><b style="color:#D9D9D9; text-decoration: none; font-family: san serif;">SERVICES</b></a></li>
+								<li><a href="{{url_for('frontend.home_2')}}#about" style="text-decoration: none;"><b style="color:#D9D9D9; text-decoration: none; font-family: san serif;">REGISTER</b></a></li>
+								<li><a href="{{url_for('frontend.home_2')}}#about" style="text-decoration: none;"><b style="color:#D9D9D9; text-decoration: none; font-family: san serif;">LOGIN</b></a></li>
+								<li><a href="{{url_for('frontend.home_2')}}#contact" style="text-decoration: none;"><b style="color:#D9D9D9; text-decoration:none; font-family: san serif;">CONTACT</b></a></li>
+								<li><a href="{{url_for('frontend.home_2')}}#faqs" style="text-decoration: none;"><b style="color:#D9D9D9; text-decoration:none; font-family: san serif;">FAQS</b></a></li>
+								<li><a href="{{url_for('frontend.home_2')}}#manual" style="text-decoration: none;"><b style="color:#D9D9D9; text-decoration:none; font-family: san serif;">USER MANUAL</b></a></li>
+								<li><a href="{{url_for('frontend.home_2')}}#terms" style="text-decoration: none;"><b style="color:#D9D9D9; text-decoration:none; font-family: san serif;">TERMS & POLICY</b></a></li>
+								<!-- <li><a href="https://hp.qfsaccessaccount.net/"style="text-decoration: none;"><b style="color:#D9D9D9; text-decoration:none; font-family: san serif;">HUMANITARIAN PROJECT</b></a></li> -->
+								<li><a href="{{url_for('static', filename='uploads/QFS-GUIDE.pdf')}}" style="text-decoration: none;"><b style="color:#D9D9D9; text-decoration:none; font-family: san serif;">PDF</b></a></li>
+							</ul>
+						</nav>
+					</header>   
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Intro -->
+							<article id="intro">
+								<h2 class="major">About QFS</h2>
+								<span class="image main"><img src={{url_for('static', filename="landing/images/pic01.jpg")}} alt="" /></span>
+								<p style="color:#D9D9D9; font-family: san serif;">QFS literal meaning is Quantum Financial System, which is an advanced financial system launched to eradicate monopoly on monetary system and for that purpose, a system that comprises of Artificial Intelligence and complex computer programs fully backed by banks is needed. Quantum Financial System would be a breakthrough in the world of banking which will lead to a new era of banking. QFS will not be influenced by Government policies, rather it will be entirely backed by tangible assets like Gold, Platinum, Oil and will not be based upon mere piece of papers which have no evidentiary value.</p>
+							<h3>Global Economic Security And Reformation Act</h3>
+								<p style="color:#D9D9D9; font-family: san serif;">The Global Currency Reset (GCR) and (NESARA GESARA) is upon us!
+Regulated ISO 20022 Cryptos like these below will change the world and EXPLODE really 
+soon. The central banks are using them for the new QFS. Cryptos like XRP, XLM, XDC, ALGO, 
+IOTA, SHX also Gold and Silver, Let me tell you more if you ae intrested
+Nesara states Rainbow "Treasury" Tokens (XRP and XLM)backed by precious metals
+Adding Quantum & ISO20022 Internationally Regulated USA Coins also backed by metals.<br><br><h4>ISO20022</h4>The XRP and XLM tokens are very necessary to HODL at this point
+in time in regards to the fact tha(they are backed by SILVER and
+GOLD...And who said we won't be able to TRANSACT with any of
+them?,, The iso20022 tokens (XRP and XLM) are the only tokens
+that will survive the great reset and would emerge as the only means
+of financial activities in the new QFS..So definitely the iso20022
+tokens would perform every transaction processes when we finally
+witness the new QFS</p>
+							</article>
+
+						<!-- Work -->
+							<article id="work">
+								<h2 class="major">What We Do</h2>
+								<span class="image main"><img src={{url_for('static', filename="landing/images/pic02.jpg")}} alt="" /></span>
+								<p style="color:#D9D9D9; font-family: san serif;">The History of money is entering a new era, You might just wake up with no money. We might just wake up one day with no money. Convert all paper money into a digitally gold backed currency. We take you to that journey, Act Now Before it is too late. We walk you through into that journey.</p>
+								<h3>The Incoming collapse of paper money</h3>
+								<p style="color:#D9D9D9; font-family: san serif;">A universal network that is developed to facilitate the transfer of asset-backed funds. An independent system that does not depend on the existing centralized system. Our System is designed to convert your assets into a digitally backed funds. <br><br><br>The gist of which is that soon, all banks all over 
+the world are using QFS (QUANTUM FINANCIAL SYSTEM), 
+exclusively. Confirmed by a variety of sources in many 
+positions of authority… No more SWIFT allowed. Period. Drop 
+the mic and depart stage Left. No more discussion allowed. 
+Any banks attempting to transfer money via SWIFT loses
+their ability to be in the banking/financial industry. The (White 
+Hat) authorities are not fooling around.
+It’s all about putting a final nail in the coffin for “Money 
+Laundering” and corrupt acts. When the population at 
+large – and the bad actors involved in illegal activity, learn 
+that the QFS is tracking the movement of money for 50 
+moves (and more), they will break out in more than a sweat. 
+The desperation will have set in, leading to (potentially) 
+desperate acts. Hence all the doom and gloom warning 
+videos and discussions about EMF attacks/power failure/
+blackouts, whatever the evil Cabal might entertain in 
+retaliation, it’s possible, but not probable.</p>
+							</article>
+
+						<!-- About -->
+                            <article id="about" style="display: flex;flex-direction: column;align-items: center;justify-content: center;">
+                                <img src={{url_for('static', filename="landing/QFS AA.png")}} alt="QFSBOND" style="width: 150px; " />
+                                <span class="image main"><img src={{url_for('static', filename="landing/gh.gif")}} alt="" /></span>
+                            
+                            
+                                <ul class="actions">
+                                    <li><a href="{{url_for('frontend.register')}}" class="button primary " id="full-width" style="border: 1px solid #119100; ">Sign
+                                            Up</a></li>
+                                    <li><a href={{url_for('dashboard.sign_in')}} class="button primary" id="full-width"
+                                            style="border: 1px solid #119100; ">Login</a></li>
+                                </ul>
+                            </article>
+
+						<!-- Contact -->
+							<article id="contact">
+								<h2 class="major">Contact</h2>
+								<form method="post" action="https://qfsaccessaccount.net/index.html#">
+									<div class="fields">
+										<div class="field half">
+											<label for="name">Name</label>
+											<input type="text" name="name" id="name" />
+										</div>
+										<div class="field half">
+											<label for="email">Email</label>
+											<input type="text" name="email" id="email" />
+										</div>
+										<div class="field">
+											<label for="message">Message</label>
+											<textarea name="message" id="message" rows="4"></textarea>
+										</div>
+									</div>
+									<ul class="actions">
+										<li><input type="submit" value="Send Message" class="primary" /></li>
+										<li><input type="reset" value="Reset" /></li>
+									</ul>
+								</form>
+								
+								<ul class="icons">
+								    <p>For More Enquiries Send us an Email: info@qfsaccessaccount.us</p>
+									<li><a href="{{url_for('frontend.home_2')}}#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="{{url_for('frontend.home_2')}}#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+									<li><a href="{{url_for('frontend.home_2')}}#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="{{url_for('frontend.home_2')}}#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+								</ul>
+							</article>
+							
+							
+																											<article id="faqs">
+								<h2 class="major">FAQS</h2>
+								  <div class="accordion accordion-flush" id="accordionFlushExample">
+									<div class="accordion-item" style="background-color: rgb(75, 75, 75); color:rgb(255, 255, 255)!important;">
+									  <h2 class="accordion-header" id="flush-headingOne">
+										<button class="accordion-button collapsed text-wrap h-25" type="button" style="color: rgb(255, 255, 255) !important; background-color: rgb(53, 52, 52);" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+											What is Quantum Financial System (QFS) 
+										</button>
+									  </h2>
+									  <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+										<div class="accordion-body">
+											The Quantum Financial System (QFS) is a proposed financial system that aims to revolutionize traditional banking and financial transactions by incorporating quantum technology. Unlike the conventional financial system, which relies on centralized authorities and intermediaries, the QFS aims to create a decentralized and secure platform for conducting transactions. It utilizes principles from quantum computing, cryptography, and distributed ledger technology (DLT) to enhance security, transparency, and efficiency in financial operations. The QFS is envisioned to eliminate the need for physical currency and provide a more streamlined and inclusive financial ecosystem. While the exact implementation and timeline for the QFS remain uncertain, it represents a potential shift in how financial transactions are conducted on a global scale.
+										</div>
+									  </div>
+									</div>
+									<div class="accordion-item" style="background-color: rgb(75, 75, 75); color:rgb(255, 255, 255)!important;">
+									  <h2 class="accordion-header" id="flush-headingTwo">
+										<button class="accordion-button collapsed text-wrap h-25" type="button" style="color: rgb(255, 255, 255) !important; background-color: rgb(53, 52, 52);" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+											What is the Quantum Financial System
+										</button>
+									  </h2>
+									  <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+										<div class="accordion-body">The Quantum Financial System (QFS) is a proposed financial system that utilizes quantum technology and distributed ledger technology (DLT) to revolutionize traditional banking and financial transactions.</div>
+									  </div>
+									</div>
+									<div class="accordion-item" style="background-color: rgb(75, 75, 75); color:rgb(255, 255, 255)!important;">
+									  <h2 class="accordion-header" id="flush-headingThree">
+										<button class="accordion-button collapsed text-wrap h-25" type="button" style="color: rgb(255, 255, 255) !important; background-color: rgb(53, 52, 52);" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+											How does QFS differ from traditional financial system? 
+										</button>
+									  </h2>
+									  <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+										<div class="accordion-body">
+											The QFS differs from the traditional financial system by incorporating decentralized principles, enhanced security through quantum computing, and a shift towards digital transactions without the need for physical currency.
+										</div>
+									  </div>
+									</div>
+									<div class="accordion-item" style="background-color: rgb(75, 75, 75); color:rgb(255, 255, 255)!important;">
+									  <h2 class="accordion-header" id="flush-headingSix">
+										<button class="accordion-button collapsed text-wrap h-25" type="button" style="color: rgb(255, 255, 255) !important; background-color: rgb(53, 52, 52);" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseThree">
+											What are the main goals of implementing the QFS?
+										</button>
+									  </h2>
+									  <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+										<div class="accordion-body">
+											The main goals of implementing the QFS include improving security and transparency in financial       transactions, streamlining processes, reducing dependency on intermediaries, and creating a more efficient and inclusive global financial ecosystem.
+										</div>
+									  </div>
+									</div>
+
+									<div class="accordion-item" style="background-color: rgb(75, 75, 75); color:rgb(255, 255, 255)!important;">
+										<h2 class="accordion-header" id="flush-headingFive">
+										  <button class="accordion-button collapsed text-wrap h-25" type="button" style="color: rgb(255, 255, 255) !important; background-color: rgb(53, 52, 52);" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+											How does the QFS utilize quantum technology? 
+										  </button>
+										</h2>
+										<div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+										  <div class="accordion-body">
+											The QFS utilizes quantum technology, such as quantum computing and quantum cryptography, to enhance security in financial transactions. Quantum computing can perform complex calculations that are difficult for traditional computers, while quantum cryptography ensures secure communication and data protection.
+										  </div>
+										</div>
+									  </div>
+
+									  <div class="accordion-item" style="background-color: rgb(75, 75, 75); color:rgb(255, 255, 255)!important;">
+										<h2 class="accordion-header" id="flush-headingSix">
+										  <button class="accordion-button collapsed text-wrap h-25" type="button" style="color: rgb(255, 255, 255) !important; background-color: rgb(53, 52, 52);" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseThree">
+											What are the key features and benefits of the QFS? 
+										  </button>
+										</h2>
+										<div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+										  <div class="accordion-body">
+											The key features and benefits of the QFS include decentralized principles, digital transactions without physical currency, streamlined processes, enhanced security through quantum technology, increased transparency through distributed ledger technology (DLT), and a more efficient and inclusive financial ecosystem.
+										  </div>
+										</div>
+									  </div>
+
+									  <div class="accordion-item" style="background-color: rgb(75, 75, 75); color:rgb(255, 255, 255)!important;">
+										<h2 class="accordion-header" id="flush-headingSix">
+										  <button class="accordion-button collapsed text-wrap h-25" type="button" style="color: rgb(255, 255, 255) !important; background-color: rgb(53, 52, 52);" data-bs-toggle="collapse" data-bs-target="#flush-collapseSeven" aria-expanded="false" aria-controls="flush-collapseThree">
+												How does the QFS enhance security and transparency?
+										  </button>
+										</h2>
+										<div id="flush-collapseSeven" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+										  <div class="accordion-body">
+											The QFS enhances security and transparency by incorporating quantum technology and DLT. Quantum computing provides stronger encryption and protection against hacking, while DLT enables a decentralized and immutable ledger, allowing transparent and auditable transactions. These features help safeguard financial transactions and provide a more transparent view of the financial system.
+										  </div>
+										</div>
+									  </div>
+
+									  <div class="accordion-item" style="background-color: rgb(75, 75, 75); color:rgb(255, 255, 255)!important;">
+										<h2 class="accordion-header" id="flush-headingSix">
+										  <button class="accordion-button collapsed text-wrap h-25" type="button" style="color: rgb(255, 255, 255) !important; background-color: rgb(53, 52, 52);" data-bs-toggle="collapse" data-bs-target="#flush-collapseEight" aria-expanded="false" aria-controls="flush-collapseThree">
+											Which countries or organizations are involved in developing the QFS? 
+										  </button>
+										</h2>
+										<div id="flush-collapseEight" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+										  <div class="accordion-body">
+											The specific countries or organizations involved in developing the Quantum Financial System (QFS) may vary, as the information available is limited. However, it is likely that various governments, financial institutions, and technology companies are contributing to its development.
+										  </div>
+										</div>
+									  </div>
+
+									  <div class="accordion-item" style="background-color: rgb(75, 75, 75); color:rgb(255, 255, 255)!important;">
+										<h2 class="accordion-header" id="flush-headingSix">
+										  <button class="accordion-button collapsed text-wrap h-25" type="button" style="color: rgb(255, 255, 255) !important; background-color: rgb(53, 52, 52);" data-bs-toggle="collapse" data-bs-target="#flush-collapseNine" aria-expanded="false" aria-controls="flush-collapseThree">
+											How will the transition from the traditional financial system to the QFS occur
+										  </button>
+										</h2>
+										<div id="flush-collapseNine" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+										  <div class="accordion-body">
+											The transition from the traditional financial system to the QFS is expected to be a gradual process. It may involve a phased approach where certain functionalities of the QFS are introduced alongside the existing financial system. The transition may include updating infrastructure, integrating new technologies, and establishing regulatory frameworks to support the QFS
+										  </div>
+										</div>
+									  </div>
+
+									  <div class="accordion-item" style="background-color: rgb(75, 75, 75); color:rgb(255, 255, 255)!important;">
+										<h2 class="accordion-header" id="flush-headingSix">
+										  <button class="accordion-button collapsed text-wrap h-25" type="button" style="color: rgb(255, 255, 255) !important; background-color: rgb(53, 52, 52);" data-bs-toggle="collapse" data-bs-target="#flush-collapseTen" aria-expanded="false" aria-controls="flush-collapseThree">
+											What challenges or obstacles might arise during the implementation?
+										  </button>
+										</h2>
+										<div id="flush-collapseTen" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+										  <div class="accordion-body">
+											Several challenges and obstacles may arise during the implementation of the QFS. These could include technological complexities, interoperability issues between existing systems and the QFS, regulatory and legal considerations, resistance to change from established financial institutions, and addressing potential security and privacy concerns. Overcoming these challenges will require collaboration, coordination, and careful planning among stakeholders involved in the implementation process.
+										  </div>
+										</div>
+									  </div>
+
+									  <div class="accordion-item" style="background-color: rgb(75, 75, 75); color:rgb(255, 255, 255)!important;">
+										<h2 class="accordion-header" id="flush-headingSix">
+										  <button class="accordion-button collapsed text-wrap h-25" type="button" style="color: rgb(255, 255, 255) !important; background-color: rgb(53, 52, 52);" data-bs-toggle="collapse" data-bs-target="#flush-collapseEleven" aria-expanded="false" aria-controls="flush-collapseThree">
+											How will the QFS affect individuals and businesses?
+										  </button>
+										</h2>
+										<div id="flush-collapseEleven" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+										  <div class="accordion-body">
+											The Quantum Financial System (QFS) is expected to have several impacts on individuals and businesses. It may streamline financial transactions, making them faster and more efficient. Individuals may experience greater convenience in conducting digital transactions, while businesses could benefit from improved security and transparency. The QFS may also provide increased access to financial services, particularly for underserved populations
+										  </div>
+										</div>
+									  </div>
+
+									  <div class="accordion-item" style="background-color: rgb(75, 75, 75); color:rgb(255, 255, 255)!important;">
+										<h2 class="accordion-header" id="flush-headingSix">
+										  <button class="accordion-button collapsed text-wrap h-25" type="button" style="color: rgb(255, 255, 255) !important; background-color: rgb(53, 52, 52);" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwelve" aria-expanded="false" aria-controls="flush-collapseThree">
+											Will the QFS eliminate the need for physical currency? 
+										  </button>
+										</h2>
+										<div id="flush-collapseTwelve" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+										  <div class="accordion-body">
+											The potential elimination of physical currency is one of the goals of the QFS. By facilitating digital transactions, the reliance on physical cash could be reduced. However, it is important to note that the extent to which physical currency will be eliminated depends on the implementation and adoption of the QFS, as well as the preferences and policies of individual countries.
+										  </div>
+										</div>
+									  </div>
+
+									  <div class="accordion-item" style="background-color: rgb(75, 75, 75); color:rgb(255, 255, 255)!important;">
+										<h2 class="accordion-header" id="flush-headingSix">
+										  <button class="accordion-button collapsed text-wrap h-25" type="button" style="color: rgb(255, 255, 255) !important; background-color: rgb(53, 52, 52);" data-bs-toggle="collapse" data-bs-target="#flush-collapseThirteen" aria-expanded="false" aria-controls="flush-collapseThree">
+											What impact will the QFS have on global financial stability and economic systems?
+										  </button>
+										</h2>
+										<div id="flush-collapseThirteen" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+										  <div class="accordion-body">
+											The impact of the QFS on global financial stability and economic systems is subject to speculation and depends on various factors. The QFS aims to enhance security and transparency, which could contribute to reducing fraud and illicit activities in the financial sector. Additionally, the efficiency and accessibility of the QFS may foster economic growth and financial inclusion. However, the transition to a new financial system can pose challenges and potential disruptions that need to be carefully managed to ensure stability. The long-term impact of the QFS on the global financial stability and economic systems will largely depend on how effectively it is implemented, regulated, and adopted by different countries and institutions.
+										  </div>
+										</div>
+									  </div>
+
+									  <div class="accordion-item" style="background-color: rgb(75, 75, 75); color:rgb(255, 255, 255)!important;">
+										<h2 class="accordion-header" id="flush-headingSix">
+										  <button class="accordion-button collapsed text-wrap h-25" type="button" style="color: rgb(255, 255, 255) !important; background-color: rgb(53, 52, 52);" data-bs-toggle="collapse" data-bs-target="#flush-collapseFourteen" aria-expanded="false" aria-controls="flush-collapseThree">
+											Are there any potential risks or vulnerabilities associated with the QFS? 
+										  </button>
+										</h2>
+										<div id="flush-collapseFourteen" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+										  <div class="accordion-body">
+											There are potential risks and vulnerabilities associated with the Quantum Financial System (QFS). One significant concern is the security of quantum computing itself. While quantum computing offers powerful capabilities, it also poses a risk to traditional encryption methods, potentially compromising the security of transactions. Additionally, there may be vulnerabilities in the implementation and infrastructure of the QFS, which could be exploited by malicious actors.
+										  </div>
+										</div>
+									  </div>
+
+									  <div class="accordion-item" style="background-color: rgb(75, 75, 75); color:rgb(255, 255, 255)!important;">
+										<h2 class="accordion-header" id="flush-headingSix">
+										  <button class="accordion-button collapsed text-wrap h-25" type="button" style="color: rgb(255, 255, 255) !important; background-color: rgb(53, 52, 52);" data-bs-toggle="collapse" data-bs-target="#flush-collapseFifteen" aria-expanded="false" aria-controls="flush-collapseThree">
+											What measures are in place to address concerns on privacy and data protection? 
+										  </button>
+										</h2>
+										<div id="flush-collapseFifteen" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+										  <div class="accordion-body">
+											To address concerns related to privacy and data protection, measures such as robust encryption techniques and secure protocols can be implemented within the QFS. Privacy laws and regulations can also play a crucial role in safeguarding individuals' financial data. Implementing strict data protection measures, including consent-based data sharing, anonymization techniques, and secure storage systems, can help ensure the privacy of users' financial information within the QFS.
+										  </div>
+										</div>
+									  </div>
+
+									  <div class="accordion-item" style="background-color: rgb(75, 75, 75); color:rgb(255, 255, 255)!important;">
+										<h2 class="accordion-header" id="flush-headingSix">
+										  <button class="accordion-button collapsed text-wrap h-25" type="button" style="color: rgb(255, 255, 255) !important; background-color: rgb(53, 52, 52);" data-bs-toggle="collapse" data-bs-target="#flush-collapseSixteen" aria-expanded="false" aria-controls="flush-collapseThree">
+											How can the QFS ensure fairness and prevent manipulation or abuse? 
+										  </button>
+										</h2>
+										<div id="flush-collapseSixteen" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+										  <div class="accordion-body">
+											The QFS can ensure fairness and prevent manipulation or abuse through various means. Transparent governance mechanisms and regulatory frameworks can be established to ensure compliance with financial regulations and prevent fraudulent activities. Additionally, the use of distributed ledger technology (DLT) within the QFS can provide a transparent and immutable record of transactions, making it difficult to manipulate or alter transaction data. Proper auditing, monitoring, and oversight can further contribute to ensuring fairness and preventing abuse within the QFS ecosystem.
+										  </div>
+										</div>
+									  </div>
+
+									  <div class="accordion-item" style="background-color: rgb(75, 75, 75); color:rgb(255, 255, 255)!important;">
+										<h2 class="accordion-header" id="flush-headingSix">
+										  <button class="accordion-button collapsed text-wrap h-25" type="button" style="color: rgb(255, 255, 255) !important; background-color: rgb(53, 52, 52);" data-bs-toggle="collapse" data-bs-target="#flush-collapseSeventeen" aria-expanded="false" aria-controls="flush-collapseThree">
+											Are there plans for further advancements or upgrades to the QFS?  
+										  </button>
+										</h2>
+										<div id="flush-collapseSeventeen" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+										  <div class="accordion-body">
+											Plans for further advancements and upgrades to the Quantum Financial System (QFS) are likely, as technology and research continue to progress. As quantum computing and distributed ledger technology (DLT) evolve, there may be ongoing efforts to enhance the QFS infrastructure, improve security measures, and optimize its functionality for greater efficiency and scalability.
+										  </div>
+										</div>
+									  </div>
+
+									  <div class="accordion-item" style="background-color: rgb(75, 75, 75); color:rgb(255, 255, 255)!important;">
+										<h2 class="accordion-header" id="flush-headingSix">
+										  <button class="accordion-button collapsed text-wrap h-25" type="button" style="color: rgb(255, 255, 255) !important; background-color: rgb(53, 52, 52);" data-bs-toggle="collapse" data-bs-target="#flush-collapseEighteen" aria-expanded="false" aria-controls="flush-collapseThree">
+											Will the QFS be adopted globally, or will it be limited to specific regions?   
+										  </button>
+										</h2>
+										<div id="flush-collapseEighteen" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+										  <div class="accordion-body">
+											The adoption of the QFS could potentially be a global phenomenon, although the specific implementation and adoption timeline may vary across different regions. The decision to adopt the QFS would depend on factors such as regulatory frameworks, technological readiness, and the willingness of countries and financial institutions to transition to a new financial system. While global adoption may take time, the QFS has the potential to offer benefits and advancements that could be attractive to various regions worldwide.
+										  </div>
+										</div>
+									  </div>
+
+									  <div class="accordion-item" style="background-color: rgb(75, 75, 75); color:rgb(255, 255, 255)!important;">
+										<h2 class="accordion-header" id="flush-headingSix">
+										  <button class="accordion-button collapsed text-wrap h-25" type="button" style="color: rgb(255, 255, 255) !important; background-color: rgb(53, 52, 52);" data-bs-toggle="collapse" data-bs-target="#flush-collapseNineteen" aria-expanded="false" aria-controls="flush-collapseThree">
+											How might the QFS impact other sectors beyond finance? 	   
+										  </button>
+										</h2>
+										<div id="flush-collapseNineteen" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+										  <div class="accordion-body">
+											The impact of the QFS may extend beyond finance to other sectors. For example, the enhanced security and transparency provided by the QFS could have implications for supply chain management, where the verification and tracking of goods can benefit from the immutability of distributed ledgers. Additionally, the QFS could play a role in digital identity verification, enabling secure and tamper-resistant identity management systems. The exact extent of the QFS's impact on other sectors will depend on the integration of the technology and the specific use cases developed in those sectors.
+										  </div>
+										</div>
+									  </div>
+
+									  <div class="accordion-item" style="background-color: rgb(75, 75, 75); color:rgb(255, 255, 255)!important;">
+										<h2 class="accordion-header" id="flush-headingSix">
+										  <button class="accordion-button collapsed text-wrap h-25" type="button" style="color: rgb(255, 255, 255) !important; background-color: rgb(53, 52, 52);" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwenty" aria-expanded="false" aria-controls="flush-collapseThree">
+											Where can I find more information about the Quantum Financial System?  	   
+										  </button>
+										</h2>
+										<div id="flush-collapseTwenty" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+										  <div class="accordion-body">
+											To find more information about the Quantum Financial System (QFS), you can refer to official sources such as government websites, financial regulatory bodies, or publications from organizations involved in the development of quantum technologies and financial systems. These sources may provide updates, whitepapers, and official statements regarding the QFS.
+										  </div>
+										</div>
+									  </div>
+
+									  <div class="accordion-item" style="background-color: rgb(75, 75, 75); color:rgb(255, 255, 255)!important;">
+										<h2 class="accordion-header" id="flush-headingSix">
+										  <button class="accordion-button collapsed text-wrap h-25" type="button" style="color: rgb(255, 255, 255) !important; background-color: rgb(53, 52, 52);" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwentyone" aria-expanded="false" aria-controls="flush-collapseThree">
+											Are there any specific research papers or studies available on the QFS? 	   
+										  </button>
+										</h2>
+										<div id="flush-collapseTwentyone" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+										  <div class="accordion-body">
+											There may be specific research papers and studies available on the QFS in academic journals, research publications, or conference proceedings. Searching through databases like IEEE Xplore, ACM Digital Library, or academic search engines like Google Scholar can help you find relevant research papers on the topic.
+										  </div>
+										</div>
+									  </div>
+
+									  <div class="accordion-item" style="background-color: rgb(75, 75, 75); color:rgb(255, 255, 255)!important;">
+										<h2 class="accordion-header" id="flush-headingSix">
+										  <button class="accordion-button collapsed text-wrap h-25" type="button" style="color: rgb(255, 255, 255) !important; background-color: rgb(53, 52, 52);" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwentytwo" aria-expanded="false" aria-controls="flush-collapseThree">
+											Can I participate in the development or testing of the QFS?  	   
+										  </button>
+										</h2>
+										<div id="flush-collapseTwentytwo" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+										  <div class="accordion-body">
+											Participation in the development or testing of the QFS would depend on the specific initiatives and projects underway. It is advisable to monitor announcements, research collaborations, or industry events related to quantum technologies and financial systems to stay informed about any opportunities for participation. Keeping an eye on the official websites of research institutions, technology companies, and regulatory bodies involved in the QFS can provide updates on such opportunities.
+										  </div>
+										</div>
+									  </div>
+
+								  </div>
+								
+							
+					
+							</article>
+							
+							<article id="terms">
+									<h3 class="major">Terms and Conditions<br> for QFSAA</h3>
+									<p class="text-light">Please read these terms and conditions carefully before using our Quantum Financial System (QFSAA). By accessing or using our website, you agree to be bound by these terms and conditions. If you do not agree with any part of these terms, then you may not access the website.</p>
+									<h5>ACCEPTANCE OF TERMS </h5>
+									<p class="text-light">1.1 By accessing or using the Quantum Financial System ("qfsaccessaccount.us"), you agree to comply with and be bound by these terms and conditions ("Terms"). These Terms constitute a legally binding agreement between you and [QFSAA], the operator of the website. </p>
+									<p class="text-light">1.2 You acknowledge that these Terms may be updated from time to time without prior notice, and it is your responsibility to review them periodically. Continued use of the website after any modifications to the Terms constitutes your acceptance of the modified Terms.</p>
+									<h5>ACCESS AND USE OF THE WEBSITE </h5>
+									<p class="text-light">2.1 The website is intended for use by individuals who are at least 18 years old or the legal age of majority in their jurisdiction. By accessing and using the website, you represent and warrant that you meet the age requirements. </p>
+									<p class="text-light">2.2 You agree to use the website only for lawful purposes and in compliance with all applicable laws and regulations</p>
+									<p class="text-light">2.3 You are responsible for maintaining the confidentiality of your account and password, if applicable, and for restricting access to your computer or mobile device to prevent unauthorized access to your account. </p>
+									<p class="text-light">2.4 You understand that the website may not be available at all times and may be subject to interruption, delay, or downtime. We shall not be liable for any such issues.</p>	
+									<h5>INTELLECTUAL PROPERTY </h5>
+									<p class="text-light">3.1 All content, trademarks, logos, and intellectual property displayed on the website are the property of [QFSAA] or its licensors. You are not granted any right or license to use or reproduce any of these without prior written permission from [QFSAA]. </p>
+									<p class="text-light">3.2 You may use the website's content for personal, non-commercial purposes only. Any unauthorized use of the content may violate copyright, trademark, and other laws.</p>
+									<h5>Disclaimer of Warranty and Limitation of Liability </h5>
+									<p class="text-light">4.1 The website and its content are provided on an "as is" and "as available" basis, without any warranties or guarantees of any kind, whether express or implied. </p>
+									<p class="text-light">4.2 [QFSAA] does warrant that the website will be error-free, secure, or uninterrupted, or that any defects or errors will be corrected. We disclaim any responsibility or liability for any harm, loss, or damage arising from the use of the website. </p>
+									<p class="text-light">4.3 In no event shall [QFSAA] or its affiliates, officers, directors, employees, or agents be liable for any direct, indirect, incidental, special, consequential, or punitive damages arising out of or in any way connected with your use of the website or the content, even if advised of the possibility of such damages.</p>
+									<h5>PRIVACY </h5>
+									<p class="text-light">5.1 We collect and process personal information in accordance with our Privacy Policy, which is incorporated by reference into these Terms. By using the website, you consent to the collection and processing of your personal information as described in the Privacy Policy.</p>
+									<h5>INDEMNIFICATION </h5>	
+									<p class="text-light">6.1 You agree to indemnify and hold [QFSBOND] and its affiliates, officers, directors, employees, and agents harmless from any claims, demands, losses, liabilities, and expenses (including attorney's fees) arising out of or in connection with your use of the website, violation of these Terms, or infringement of any rights of third parties.</p>
+									<h5>GOVERNING LAW AND JURISDICTION </h5>
+									<p class="text-light">7.1 These Terms shall be governed by and construed in accordance with the laws of [UNITED STATE OF AMERICA]. Any disputes arising out of or relating to these Terms or the website shall be subject to the exclusive jurisdiction of the courts in [UNITED STATE OF AMERICA].</p>
+									<h5>SEVERABILITY</h5>
+									<p class="text-light">8.1 If any provision of these Terms is found to be invalid, illegal, or unenforceable, the remaining provisions shall continue in full force and effect.</p>
+									<h5>ENTIRE AGREEMENT </h5>
+									<p class="text-light">9.1 These Terms constitute the entire agreement between you and [QFSAA] regarding the website and supersede all prior or contemporaneous understandings and agreements, whether written or oral.
+										<br>By accessing or using qfsaccessaccount.net, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions.
+									</p>						
+								</article>
+								
+							    <article id="manual">
+									<h3 class="major">User Manual for qfsaccessaccount.net</h3>
+									<h5>1.	Introduction </h5>
+									<p class="text-light">•	About qfsaccessaccount.net: QFS literal meaning is Quantum Financial System, which is an advanced financial system launched to eradicate monopoly on 
+									monetary system and for that purpose, a system that comprises of Artificial Intelligence and complex computer programs fully backed by banks is needed. Quantum 
+									Financial System would be a breakthrough in the world of banking which will lead to a new era of banking. QFS will not be influenced by Government policies, rather 
+									it will be entirely backed by tangible assets like Gold, Platinum, Oil and will not be based upon mere piece of papers which have no evidentiary value.</p>
+									
+									
+									<h5>2.	Getting Started </h5>
+									<p class="text-light">•	Accessing the website: to access QFSAA Visit https://qfsaccessaccount.net/</p>
+
+									<h5>3.	Website Overview </h5>
+									<p class="text-light">•	Homepage: homepage consist of;<br>
+                                        o	About<br>
+                                        o	Services<br>
+                                        o	Register<br>
+										o	Login<br>
+                                        o	Contact<br>
+                                        o	FAQS<br>
+                                        o	Terms & Policy<br>
+                                        o	User Manual<br>
+                                        o	PDF<br>
+                                        •	Navigation: how to navigate;
+                                        o	About: click the About button to know more about QFSAA Statement, Purpose, Mission and Vision.<br>
+                                        o	Services: click on the Services to learn more of our QFSAA Service.<br>
+                                        o	Register:  click Client Area to either Sign Up (if you are a new user)<br>
+										o	Login:  Login (if you already have an account with QFSAA)<br>
+                                        o	Contact: click Contact Button for complain, suggestion or any information needed.<br>
+                                        o	FAQS: to see frequently ask questions about QFS click on FAQS<br>
+                                        o	Terms & Policy: for QFSBOND terms & condition and Policy, click on Terms & Policy button. <br>
+                                        o	User Manual: click on the user manual to know how to use QFSAA website <br>
+                                        o	PDF: click on PDF button to get Guideline of QFS 
+
+                                    </p>
+									<p class="text-light">•	Registration: to Sign Up;</p>
+									<p class="text-light"> o	Click on Client Area button<br>
+                                        o	Click on Join us button<br>
+                                        o	Fill the registration form, then click on Sign Up<br>
+                                        o	Wait for the OTP sent to your mail; paste the OTP code sent to your mail; <br>
+                                        o	Click on Verify button;<br>
+                                        o	Fill in Username or Email & Password<br>
+                                        o	Then click on Login button<br>
+                                        You will be led to your Dashboard…<br>
+                                        •	Search Function: To search for any Features on User Dashboard, click on the search icon and type the features.
+                                    </p>
+									<h5>4.	Features and Functionality</h5>
+									<p class="text-light">•	features and functionalities of qfsaccessaccount.net, such as:<br>
+                                        o	Product/Service Listings: To search for any Product/Service on User Dashboard, click on the search icon and type the Product/Service.<br>
+                                        o	Account Dashboard: click on the Connect Wallet to connect your decentralize Wallet (Trust wallet, Binance, Safepal wallet etc.) to your QFS Dashboard<br>
+                                        o	Financial Tools: If the website offers financial tools or calculators, provide instructions on how to use them.<br>
+                                        o	Contact Form: For live chat with Customer support, there’s a live chat box below<br>
+                                    </p>
+									
+									<h5>5.	Making Transactions: </h5>
+									<p class="text-light">•	Deposit: For deposit; <br>
+                                            o	Connect wallet your wallet<br>
+                                            o	Click on Add money for Deposit, or<br>
+                                            o	Click on Money out for Withdrawal
+                                    </p>
+									<h5>6.	Troubleshooting: </h5>	
+									<p class="text-light">•	Email info@qfsaccessaccount.net for any information and technical assistance</p>
+									<h5>7.	Feedback and Support: </h5>
+									<p class="text-light">•	provide feedback about your experience on the website email info@quantumfinancialsystem.support or support@qfsaccessaccount.net </p>
+									<p class="text-light">Thank for choosing qfsaccessaccount.us.</p>
+								
+								</article>
+							
+							
+
+						<!-- Elements -->
+							<article id="elements">
+								<h2 class="major">Elements</h2>
+
+								<section>
+									<h3 class="major">Text</h3>
+									<p>This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>.
+									This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.
+									This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>. Finally, <a href="{{url_for('frontend.home_2')}}#">this is a link</a>.</p>
+									<hr />
+									<h2>Heading Level 2</h2>
+									<h3>Heading Level 3</h3>
+									<h4>Heading Level 4</h4>
+									<h5>Heading Level 5</h5>
+									<h6>Heading Level 6</h6>
+									<hr />
+									<h4>Blockquote</h4>
+									<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus lorem ipsum dolor sit amet nullam adipiscing eu felis.</blockquote>
+									<h4>Preformatted</h4>
+									<pre><code>i = 0;
+
+while (!deck.isInOrder()) {
+    print 'Iteration ' + i;
+    deck.shuffle();
+    i++;
+}
+
+print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
+								</section>
+
+								<section>
+									<h3 class="major">Lists</h3>
+
+									<h4>Unordered</h4>
+									<ul>
+										<li>Dolor pulvinar etiam.</li>
+										<li>Sagittis adipiscing.</li>
+										<li>Felis enim feugiat.</li>
+									</ul>
+
+									<h4>Alternate</h4>
+									<ul class="alt">
+										<li>Dolor pulvinar etiam.</li>
+										<li>Sagittis adipiscing.</li>
+										<li>Felis enim feugiat.</li>
+									</ul>
+
+									<h4>Ordered</h4>
+									<ol>
+										<li>Dolor pulvinar etiam.</li>
+										<li>Etiam vel felis viverra.</li>
+										<li>Felis enim feugiat.</li>
+										<li>Dolor pulvinar etiam.</li>
+										<li>Etiam vel felis lorem.</li>
+										<li>Felis enim et feugiat.</li>
+									</ol>
+									<h4>Icons</h4>
+									<ul class="icons">
+										<li><a href="{{url_for('frontend.home_2')}}#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="{{url_for('frontend.home_2')}}#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+										<li><a href="{{url_for('frontend.home_2')}}#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="{{url_for('frontend.home_2')}}#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+									</ul>
+
+									<h4>Actions</h4>
+									<ul class="actions">
+										<li><a href="{{url_for('frontend.home_2')}}#" class="button primary">Default</a></li>
+										<li><a href="{{url_for('frontend.home_2')}}#" class="button">Default</a></li>
+									</ul>
+									<ul class="actions stacked">
+										<li><a href="{{url_for('frontend.home_2')}}#" class="button primary">Default</a></li>
+										<li><a href="{{url_for('frontend.home_2')}}#" class="button">Default</a></li>
+									</ul>
+								</section>
+
+								<section>
+									<h3 class="major">Table</h3>
+									<h4>Default</h4>
+									<div class="table-wrapper">
+										<table>
+											<thead>
+												<tr>
+													<th>Name</th>
+													<th>Description</th>
+													<th>Price</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>Item One</td>
+													<td>Ante turpis integer aliquet porttitor.</td>
+													<td>29.99</td>
+												</tr>
+												<tr>
+													<td>Item Two</td>
+													<td>Vis ac commodo adipiscing arcu aliquet.</td>
+													<td>19.99</td>
+												</tr>
+												<tr>
+													<td>Item Three</td>
+													<td> Morbi faucibus arcu accumsan lorem.</td>
+													<td>29.99</td>
+												</tr>
+												<tr>
+													<td>Item Four</td>
+													<td>Vitae integer tempus condimentum.</td>
+													<td>19.99</td>
+												</tr>
+												<tr>
+													<td>Item Five</td>
+													<td>Ante turpis integer aliquet porttitor.</td>
+													<td>29.99</td>
+												</tr>
+											</tbody>
+											<tfoot>
+												<tr>
+													<td colspan="2"></td>
+													<td>100.00</td>
+												</tr>
+											</tfoot>
+										</table>
+									</div>
+
+									<h4>Alternate</h4>
+									<div class="table-wrapper">
+										<table class="alt">
+											<thead>
+												<tr>
+													<th>Name</th>
+													<th>Description</th>
+													<th>Price</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>Item One</td>
+													<td>Ante turpis integer aliquet porttitor.</td>
+													<td>29.99</td>
+												</tr>
+												<tr>
+													<td>Item Two</td>
+													<td>Vis ac commodo adipiscing arcu aliquet.</td>
+													<td>19.99</td>
+												</tr>
+												<tr>
+													<td>Item Three</td>
+													<td> Morbi faucibus arcu accumsan lorem.</td>
+													<td>29.99</td>
+												</tr>
+												<tr>
+													<td>Item Four</td>
+													<td>Vitae integer tempus condimentum.</td>
+													<td>19.99</td>
+												</tr>
+												<tr>
+													<td>Item Five</td>
+													<td>Ante turpis integer aliquet porttitor.</td>
+													<td>29.99</td>
+												</tr>
+											</tbody>
+											<tfoot>
+												<tr>
+													<td colspan="2"></td>
+													<td>100.00</td>
+												</tr>
+											</tfoot>
+										</table>
+									</div>
+								</section>
+
+								<section>
+									<h3 class="major">Buttons</h3>
+									<ul class="actions">
+										<li><a href="{{url_for('frontend.home_2')}}#" class="button primary">Primary</a></li>
+										<li><a href="{{url_for('frontend.home_2')}}#" class="button">Default</a></li>
+									</ul>
+									<ul class="actions">
+										<li><a href="{{url_for('frontend.home_2')}}#" class="button">Default</a></li>
+										<li><a href="{{url_for('frontend.home_2')}}#" class="button small">Small</a></li>
+									</ul>
+									<ul class="actions">
+										<li><a href="{{url_for('frontend.home_2')}}#" class="button primary icon solid fa-download">Icon</a></li>
+										<li><a href="{{url_for('frontend.home_2')}}#" class="button icon solid fa-download">Icon</a></li>
+									</ul>
+									<ul class="actions">
+										<li><span class="button primary disabled">Disabled</span></li>
+										<li><span class="button disabled">Disabled</span></li>
+									</ul>
+								</section>
+
+								<section>
+									<h3 class="major">Form</h3>
+									<form method="post" action="https://qfsaccessaccount.net/index.html#">
+										<div class="fields">
+											<div class="field half">
+												<label for="demo-name">Name</label>
+												<input type="text" name="demo-name" id="demo-name" value="" placeholder="Jane Doe" />
+											</div>
+											<div class="field half">
+												<label for="demo-email">Email</label>
+												<input type="email" name="demo-email" id="demo-email" value="" placeholder="jane@untitled.tld" />
+											</div>
+											<div class="field">
+												<label for="demo-category">Category</label>
+												<select name="demo-category" id="demo-category">
+													<option value="">-</option>
+													<option value="1">Manufacturing</option>
+													<option value="1">Shipping</option>
+													<option value="1">Administration</option>
+													<option value="1">Human Resources</option>
+												</select>
+											</div>
+											<div class="field half">
+												<input type="radio" id="demo-priority-low" name="demo-priority" checked>
+												<label for="demo-priority-low">Low</label>
+											</div>
+											<div class="field half">
+												<input type="radio" id="demo-priority-high" name="demo-priority">
+												<label for="demo-priority-high">High</label>
+											</div>
+											<div class="field half">
+												<input type="checkbox" id="demo-copy" name="demo-copy">
+												<label for="demo-copy">Email me a copy</label>
+											</div>
+											<div class="field half">
+												<input type="checkbox" id="demo-human" name="demo-human" checked>
+												<label for="demo-human">Not a robot</label>
+											</div>
+											<div class="field">
+												<label for="demo-message">Message</label>
+												<textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
+											</div>
+										</div>
+										<ul class="actions">
+											<li><input type="submit" value="Send Message" class="primary" /></li>
+											<li><input type="reset" value="Reset" /></li>
+										</ul>
+									</form>
+								</section>
+
+							</article>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+    <p class="copyright">
+        <span style="color:white; font-weight:bold">&copy; ALL Right Reserved, 2024 
+        <a href="{{url_for('frontend.home_2')}}#" style="color: #62DB04; text-decoration: solid; cursor: pointer;">QFSAA</a></span>
+    </p>
+</footer> 
+
+			</div>
+        </div>
+		<!-- BG -->
+			
+
+		<!-- Scripts -->
+			<script src={{url_for('static', filename="landing/assets/js/jquery.min.js")}}></script>
+			<script src={{url_for('static', filename="landing/assets/js/browser.min.js")}}></script>
+			<script src={{url_for('static', filename="landing/assets/js/breakpoints.min.js")}}></script>
+			<script src={{url_for('static', filename="landing/assets/js/util.js")}}></script>
+			<script src={{url_for('static', filename="landing/assets/js/main.js")}}></script>
+			<!-- <script src="http://code.jivosite.com/widget/yWEwQ6WdEs" async></script> -->
+
+			<script>
+				$(document).ready(function(){
+					setInterval(function(){
+						let rnum = getRandomInt(5,500);
+						$('#digit').html(rnum);
+					},5000)
+					
+				});
+
+				function getRandomInt(min, max) {
+					min = Math.ceil(min);
+					max = Math.floor(max);
+					return Math.floor(Math.random() * (max - min + 1)) + min;
+				}
+
+                document.addEventListener('DOMContentLoaded', function() {
+                // Simulating a 3-second delay before hiding the preloader and changing the background color
+                setTimeout(function() {
+                // Hide the preloader
+                var preloader = document.getElementById('preloader');
+                preloader.style.display = 'none';
+                
+                document.getElementById("content").style.display = "block";
+                
+                // Change the background color to a different color
+                document.body.style.backgroundColor = '#fff'; // Set your desired background color
+                }, 5000); // 4000 milliseconds (4 seconds) delay
+                });
+
+			</script>
+
+	</body>
+
+</html>

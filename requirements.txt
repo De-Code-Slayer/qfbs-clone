@@ -1,0 +1,13 @@
+gunicorn
+Flask
+python_dotenv
+flask_sqlalchemy
+psycopg2
+flask_login
+Flask-Migrate
+requests
+flask-talisman
+PyJWT
+mysqlclient
+# APScheduler
+# psycopg2-binary

@@ -1,0 +1,794 @@
+
+<!DOCTYPE html>
+<html lang="en"  />
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="QAA.png" rel="icon">
+	<link rel="stylesheet" href="../assets/css/card.css">
+	<title> My Virtual Cards | Qfs Access Account </title>
+
+   <!-- General CSS Files -->
+   <!--<link rel="stylesheet" href="../assets/dashboard/modules/bootstrap/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="../assets/dashboard/css/style.css">
+    <link rel="stylesheet" href="../assets/dashboard/css/components.css">
+    <style>
+         .pop-one{
+            top: 20%;
+        }
+
+        .pop-two{
+            top: 30%;
+        }
+        .popup {
+            display: none;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            /*background-color: #000;*/
+            background-color: #147917;
+            position: fixed;
+            text-align: center;
+            color: #fff;
+            padding: 10px;
+            border-radius: 6px;
+            /*top: 30%;*/
+            right: 1%;
+            z-index: 100;
+            font-weight: bolder;
+        }
+      
+        /* The actual popup */
+        .popup .popuptext {
+            visibility: hidden;
+            width: 160px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -80px;
+        }
+        /* Popup arrow */
+        .popup .popuptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+        /* Toggle this class - hide and show the popup */
+        .popup .show {
+            visibility: visible;
+            -webkit-animation: fadeIn 1s;
+            animation: fadeIn 1s;
+        }  
+.online-stat{
+	position:relative;
+	width: 100px;
+	height: 30px;
+    margin-left: 20%;
+	/* bottom: 5%; */
+    /* right: 40%; */
+	/* z-index: 20; */
+}
+
+.circle{
+	font-weight: bold;
+	font-size: 40px;
+	color: green;
+}
+/* .online{
+	color: #fff;
+} */
+    </style>
+
+</head>
+
+<body>
+
+
+<div id="app">
+	<div class="main-wrapper main-wrapper-1">
+		<!-- Top Navbar -->
+<div class="navbar-bg"></div>
+            <nav class="navbar navbar-expand-lg main-navbar" style:"background-color: #147917;">
+
+                <!--------------- Search -------------->
+                <form class="form-inline mr-auto">
+                    <ul class="navbar-nav mr-3">
+                        <li><a href="javascript:void(0)" data-toggle="sidebar" class="nav-link nav-link-lg"><i
+						class="fas fa-bars"></i></a></li>
+                        <li><a href="javascript:void(0)" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i
+						class="fas fa-search"></i></a></li>
+                    </ul>
+                    <div class="search-element">
+                        <input class="form-control global-search" type="search" placeholder="Search" aria-label="Search" data-width="250">
+                        <span class="btn"><i class="fas fa-search"></i></span>
+                        <div class="search-backdrop d-none"></div>
+                        <div class="search-result d-none">
+                            <div class="search-header">
+                                Result </div>
+                            <div class="content"></div>
+                        </div>
+                    </div>
+                </form>
+
+                <ul class="navbar-nav navbar-right">
+
+                    <!--------------- Notifications -------------->
+                    <li class="dropdown dropdown-list-toggle" id="pushNotificationArea">
+                        <a href="javascript:void(0)" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg" :class="items.length ? 'beep' : '' ">
+				<i class="far fa-bell"></i>
+			</a>
+                        <div class="dropdown-menu dropdown-list dropdown-menu-right shadow">
+                            <div class="dropdown-header text-center text-uppercase">Notifications </div>
+                            <div class="notification-panel">
+                                <div class="dropdown-list-content dropdown-list-icons" v-for="(item, index) in items" href="javascript:void(0)" @click.prevent="readAt(item.id, item.description.link)">
+                                    <a class="dropdown-item dropdown-item-unread">
+                                        <div class="dropdown-item-icon bg-primary text-white">
+                                            <i :class="item.description.icon"></i>
+                                        </div>
+                                        <div class="dropdown-item-desc" v-cloak>
+                                            {{ item.description.text }}
+                                            <div class="time text-primary" v-cloak>{{ item.formatted_date }}</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="dropdown-footer text-center align-items-center single-border-top">
+                                <a href="javascript:void(0)" class="notification-clear-btn no-underline text-capitalize" v-if="items.length > 0" @click.prevent="readAll">Clear all</a>
+                                <a href="javascript:void(0)" class="no-underline text-capitalize" v-else="">No notification found</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!--------------- User Profile Menu -------------->
+                    <li class="dropdown"><a href="javascript:void(0)" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+									<img alt="Georgy Wat" src="https://www.gravatar.com/avatar/3aa90a79fc58869002a4530b5ef342f9?s=500&amp;d=mp"
+						 class="rounded-circle mr-1">
+					<div class="d-sm-none d-lg-inline-block">John smith</div></a>
+                        <div class="dropdown-menu dropdown-menu-right shadow-sm">
+                            <a href="./profile.php" class="dropdown-item has-icon">
+					<i class="far fa-user"></i> Profile				</a>
+                            <a href="./qr-code.php" class="dropdown-item has-icon">
+						<i class="fas fa-qrcode"></i> QR Code					</a>
+
+                            <a href="../../../user/password/reset.php" class="dropdown-item has-icon">
+					<i class="fas fa-unlock-alt"></i> Change Password				</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="javascript:void(0)" type="button" class="dropdown-item has-icon text-danger" data-toggle="modal" data-target="#logoutModal">
+					<i class="fas fa-sign-out-alt"></i> Logout				</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Start Logout Modal -->
+            <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-danger pb-2" id="logoutModalLabel">Confirmation !</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+                        </div>
+                        <div class="modal-body logout-body">
+                            Are you sure you want to logout? </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                            <a href="https://qfsaccessaccount.us/user/logout" type="button" class="btn btn-primary" onclick="event.preventDefault();
+			document.getElementById('logout-form').submit();">Logout</a>
+
+                            <form id="logout-form" action="../../../user/incs/log_out.php" method="POST" class="d-none">
+                                <input type="hidden" name="_token" value="xbegwQlCSk72J9sKURD5zLNTbR0du6Retz0xphju"> </form>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- End Logout Modal -->
+		<!-- Sidebar -->
+ <div class="main-sidebar sidebar-style-2 shadow-sm">
+                <aside id="sidebar-wrapper">
+                    <div class="sidebar-brand">
+                        <a href="investment.php">
+				<img src="QFS AA.png" width="150" class="dashboard-logo"
+					 alt="Logo">
+			</a>
+                    </div>
+                    <div class="sidebar-brand sidebar-brand-sm">
+                        <a href="#">
+				<img src="QAA.png" class="dashboard-logo-sm"
+					 alt="Logo">
+			</a>
+                    </div>
+
+                    <ul class="sidebar-menu">
+                        <li class="menu-header">Dashboard</li>
+                        <li class="dropdown  ">
+                            <a href="./dashboard.php" class="nav-link"><i
+						class="fas fa-home text-primary"></i><span>Dashboard</span></a>
+                        </li>
+
+                        <li class="menu-header">Manage Content</li>
+
+                        <li class="dropdown active">
+                            <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
+						<i class="fas fa-chart-bar text-green"></i> <span>Fixed Deposit</span>
+					</a>
+                            <ul class="dropdown-menu">
+                                <li class="active">
+                                    <a class="nav-link" href="investment.php">
+								New Fixed Deposit							</a>
+                                </li>
+                                <li class="active">
+                                    <a class="nav-link" href="#">
+								My Fixed Deposits							</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown ">
+                            <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
+							<i class="fas fa-money-check-alt text-green"></i> <span>Deposit</span>
+						</a>
+                            <ul class="dropdown-menu">
+                                <li class="">
+                                    <a class="nav-link" href="manual.php">
+									Deposit Now <small></small>
+								</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-link" href="fundlist.php">
+									Deposit List								</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown ">
+                            <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
+							<i class="fas fa-user-friends text-primary"></i> <span>Send Money</span>
+						</a>
+                            <ul class="dropdown-menu">
+                                <li class="">
+                                    <a class="nav-link" href="transfer.php">
+									Send Money								</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-link" href="transfer-list.php">
+									Transfer List								</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown ">
+                            <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
+							<i class="fas fa-search-dollar text-info"></i> <span>Request Money</span>
+						</a>
+                            <ul class="dropdown-menu">
+                                <li class="">
+                                    <a class="nav-link" href="request-money.php">
+									New Request								</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-link" href="request-payout.php">
+									All Request								</a>
+                                </li>
+                            </ul>
+                        </li>
+                        
+                        <li class="dropdown ">
+                            <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
+							<i class="fas fa-file-invoice-dollar text-info"></i> <span>Transaction</span>
+						</a>
+                            <ul class="dropdown-menu">
+                                <li class="">
+                                    <a class="nav-link" href="transaction_history.php">
+									Transaction History							</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown ">
+                            <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
+							<i class="fas fa-exchange-alt text-teal"></i> <span>Exchange</span>
+						</a>
+                            <ul class="dropdown-menu">
+                                <li class="">
+                                    <a class="nav-link" href="exchange.php">
+									Exchange								</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-link" href="exchange-list.php">
+									All Exchange								</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown ">
+                            <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
+							<i class="fas fa-gift text-orange"></i> <span>Redeem</span>
+						</a>
+                            <ul class="dropdown-menu">
+                                <li class="">
+                                    <a class="nav-link" href="generate-redeem-code.php">
+									Generate New Code								</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-link" href="#">
+									Generated List								</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-link" href="insert-redeem-code.php">
+									Insert Redeem Code								</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown ">
+                            <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
+							<i class="fas fa-handshake text-purple"></i> <span>Escrow</span>
+						</a>
+                            <ul class="dropdown-menu">
+                                <li class="">
+                                    <a class="nav-link" href="escrow-create-request.php">
+									Create a request								</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-link" href="escrow-list.php">
+									Escrow List								</a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+                        <li class="">
+                            <a class="nav-link" href="dispute-list.php"><i
+								class="fa fa-gavel text-danger"></i>
+							<span>Dispute</span></a>
+                        </li>
+                        <li class="">
+                            <a class="nav-link" href="qr-payment-list.php"><i
+								class="fas fa-qrcode text-success"></i>
+							<span>QR Payment</span></a>
+                        </li>
+
+
+                        <li class="">
+                            <a class="nav-link" href="virtual-card_log.php"><i
+								class="fas fa-credit-card text-danger"></i>
+							<span>QFS Card</span></a>
+                        </li>
+
+                        <li class="dropdown ">
+                            <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
+							<i class="fas fa-file-invoice-dollar text-primary"></i> <span>Voucher</span>
+						</a>
+                            <ul class="dropdown-menu">
+                                <li class="">
+                                    <a class="nav-link" href="voucher-create-request.php">
+									Create voucher								</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-link" href="voucher-list.php">
+									Voucher List								</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown ">
+                            <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
+							<i class="fas fa-file-invoice text-primary"></i> <span>Invoice</span>
+						</a>
+                            <ul class="dropdown-menu">
+                                <li class="">
+                                    <a class="nav-link" href="invoice.php">
+									Create Invoice								</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-link" href="#">
+									Invoice List								</a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+
+                        <li class="dropdown ">
+                            <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
+							<i class="far fa-lightbulb text-danger"></i> <span>Bill</span>
+						</a>
+                            <ul class="dropdown-menu">
+                                <li class="">
+                                    <a class="nav-link" href="pay-bill.php">
+									Pay Bill								</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-link" href="list.php">
+									Pay List								</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown ">
+                            <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
+							<i class="far fa-money-bill-alt text-indigo"></i> <span>Payout</span>
+						</a>
+                            <ul class="dropdown-menu">
+                                <li class="">
+                                    <a class="nav-link" href="request-payout.php">
+									Request Payout								</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-link" href="payout-list.php">
+									Payout List								</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown ">
+                            <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
+						<i class="fas fa-list-ul text-info"></i> <span>More</span>
+					</a>
+                            <ul class="dropdown-menu">
+                                <li class="">
+                                    <a class="nav-link" href="transaction-list.php">
+								Transactions							</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-link" href="tickets.php">
+								Tickets							</a>
+                                </li>
+                                <li class="">
+                                <a class="nav-link" href="twostep-security.php">
+								2FA Security							</a>
+                                  <!--<a class="nav-link" href="#">
+								2FA Security							</a>
+                                </li>-->
+                                <li class="">
+                                    <a class="nav-link" href="create.php">
+								Security PIN							</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-link" href="#">
+								Manage PIN uses							</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-link" href="commission-list.php">
+								Commission List							</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-link" href="#">
+								Verification Center							</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-link" href="./push-notification-show.php">
+								Push Notify Setting							</a>
+                                </li>
+
+                                <li class="">
+                                    <a class="nav-link" href="setting.php">
+								Setting							</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
+                    </div>
+                </aside>
+            </div>			<div class="main-content">
+		<section class="section">
+			<div class="section-header">
+				<h1>My Virtual Cards</h1>
+				<div class="section-header-breadcrumb">
+					<div class="breadcrumb-item active">
+						<a href="#">Dashboard</a>
+					</div>
+					<div class="breadcrumb-item">My Virtual Cards</div>
+				</div>
+			</div>
+			<!------ alert ------>
+			<div class="row ">
+				<div class="col-md-12">
+					<div class="bd-callout bd-callout-primary mx-2">
+						<i class="fa-3x fas fa-info-circle text-primary"></i> A “virtual card” is stored on your phone and can be used to pay contactless in stores or online, but has its own unique card number, expiry date, and CVC.					</div>
+				</div>
+			</div>
+						<div class="row mb-3">
+				<div class="container-fluid" id="container-wrapper">
+					<div class="row justify-content-md-center">
+						
+					<div class="col-md-4 p-2">
+							<a href="request.php" class="decoration__none">
+								<div class="bank-card-box">
+									<div class="top-area">
+										<div class="icon">
+											<i class="fas fa-credit-card"></i>
+										</div>
+										<div class="text">
+											<div class="d-flex justify-content-start">
+												<h5 class="mr-2">Request ATM Card</h5>
+																							</div>
+											<span
+												class="text-danger">Per Card Request Charge 20 USD</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+                          
+										<!--<div class="col-md-4 p-2">
+							<a href="request.php" class="decoration__none">
+								<div class="bank-card-box">
+									<div class="top-area">
+										<div class="icon">
+											<i class="fas fa-credit-card"></i>
+										</div>
+										<div class="text">
+											<div class="d-flex justify-content-start">
+												<h5 class="mr-2">Request ATM Card</h5>
+																							</div>
+											<span
+												class="text-danger">Per Card Request Charge 20 USD</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>-->
+
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	
+	
+	<div id="blockRqst" class="modal fade" tabindex="-1" role="dialog"
+		 aria-labelledby="primary-header-modalLabel"
+		 aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title text-dark font-weight-bold"
+						id="primary-header-modalLabel">Block Confirmation</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				</div>
+				<form action="" method="post" class="blockForm">
+					<input type="hidden" name="_token" value="Pn0pf6rk9qjdwTgRFkbLsZZuJaTurUSBWFEmgVXd">					<div class="modal-body">
+						<p>Are You sure to send block request for this card ?</p>
+						<div class="row">
+							<div class="col-md-12">
+								<label>Reason For Block</label>
+								<textarea class="form-control" name="reason"></textarea>
+															</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary">Yes</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	
+	<div id="fundRqst" class="modal fade" tabindex="-1" role="dialog"
+		 aria-labelledby="primary-header-modalLabel"
+		 aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title text-dark font-weight-bold"
+						id="primary-header-modalLabel">Add Fund Confirmation</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				</div>
+				<form action="#" method="post" class="blockForm">
+					<input type="hidden" name="_token" value="Pn0pf6rk9qjdwTgRFkbLsZZuJaTurUSBWFEmgVXd">					<div class="modal-body">
+						<p>Are You sure to send fund request for this card ?</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary">Yes</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+		<!-- Footer -->
+            <!-- Footer -->
+            <footer class="main-footer">
+                <div" class="footer-left">
+                    Copyright &copy; 2023
+                    <div class="bullet"></div> All rights reserved by <b>QFSAA</b>
+                        <div class="online-stat">
+	                        <p><span class="circle">.</span><span class="online"> Online: <span id="digit">50</span></span></p>
+	                    </div>
+                </div>
+
+                <div class="footer-right">
+
+                </div>
+            </footer>
+   <div class="popup pop-one"><i class="fa fa-check-circle" id="pop-check"></i> <span id="full-name"></span> from <span
+            id="country-name"></span> just <span id="payment-action"></span> <span id="deposited-withdrew"></span> <span
+            id="full-amount"></span>
+    </div>
+
+    <div class="popup pop-two"><i class="fa fa-check-circle" id="pop-check"></i> <span id="full_name"></span> from <span
+                id="country_name"></span> just <span id="action-type"></span>
+    </div>
+
+    	</div>
+</div>
+
+<!-- General JS Scripts -->
+<script src="https://qfsnesara.io/assets/dashboard/modules/jquery.min.js"></script>
+<script src="https://qfsnesara.io/assets/dashboard/modules/popper.js"></script>
+<script src="https://qfsnesara.io/assets/dashboard/modules/bootstrap/js/bootstrap.min.js"></script>
+<script src="https://qfsnesara.io/assets/dashboard/modules/nicescroll/jquery.nicescroll.min.js"></script>
+<script src="https://qfsnesara.io/assets/dashboard/js/stisla.js"></script>
+
+<!-- JS Libraies -->
+<script src="https://qfsnesara.io/assets/dashboard/js/pusher.min.js"></script>
+<script src="https://qfsnesara.io/assets/dashboard/js/vue.min.js"></script>
+<script src="https://qfsnesara.io/assets/dashboard/js/axios.min.js"></script>
+<script src="https://qfsnesara.io/assets/dashboard/js/notiflix-aio-2.7.0.min.js"></script>
+<script src="../assets/js/xhamster.min.js"></script>
+<script src="../assets/js/notify-pop.js"></script>
+<script src="../assets/js/card.js"></script>
+
+<!-- Template JS File -->
+<script src="https://qfsnesara.io/assets/dashboard/js/scripts.js"></script>
+
+
+    	<script>
+				$(document).ready(function(){
+					setInterval(function(){
+						let rnum = getRandomInt(5,500);
+						$('#digit').html(rnum);
+					},5000)
+					
+				});
+
+				function getRandomInt(min, max) {
+					min = Math.ceil(min);
+					max = Math.floor(max);
+					return Math.floor(Math.random() * (max - min + 1)) + min;
+				}
+		</script>
+
+<script>
+    $(document).ready(function () {
+        $(document).ajaxStart(function () {
+            $('#wait').removeClass('d-none').show();
+        });
+        $(document).ajaxComplete(function () {
+            $('#wait').hide();
+        });
+    });
+</script>
+
+<script>
+    'use strict';
+    let pushNotificationArea = new Vue({
+        el: "#pushNotificationArea",
+        data: {
+            items: [],
+        },
+        beforeMount() {
+            this.getNotifications();
+            this.pushNewItem();
+        },
+        methods: {
+            getNotifications() {
+                let app = this;
+                axios.get("https://qfsnesara.io/user/push-notification-show")
+                    .then(function (res) {
+                        app.items = res.data;
+                    })
+            },
+            readAt(id, link) {
+                let app = this;
+                let url = "https://qfsnesara.io/user/push-notification-readAt/0";
+                url = url.replace(/.$/, id);
+                axios.get(url)
+                    .then(function (res) {
+                        if (res.status) {
+                            app.getNotifications();
+                            if (link !== '#') {
+                                window.location.href = link
+                            }
+                        }
+                    })
+            },
+            readAll() {
+                let app = this;
+                let url = "https://qfsnesara.io/user/push.notification.readAll";
+                axios.get(url)
+                    .then(function (res) {
+                        if (res.status) {
+                            app.items = [];
+                        }
+                    })
+            },
+            pushNewItem() {
+                let app = this;
+                Pusher.logToConsole = false;
+                let pusher = new Pusher("your_app_KEY", {
+                    encrypted: true,
+                    cluster: "ap2"
+                });
+                let channel = pusher.subscribe('user-notification.' + "118");
+                channel.bind('App\\Events\\UserNotification', function (data) {
+                    app.items.unshift(data.message);
+                });
+                channel.bind('App\\Events\\UpdateUserNotification', function (data) {
+                    app.getNotifications();
+                });
+            }
+        }
+    });
+
+    // for search
+    $(document).on('input', '.global-search', function () {
+        var search = $(this).val().toLowerCase();
+
+        if (search.length == 0) {
+            $('.search-result').find('.content').html('');
+            $(this).siblings('.search-backdrop').addClass('d-none');
+            $(this).siblings('.search-result').addClass('d-none');
+            return false;
+        }
+
+        $('.search-result').find('.content').html('');
+        $(this).siblings('.search-backdrop').removeClass('d-none');
+        $(this).siblings('.search-result').removeClass('d-none');
+
+        var match = $('.sidebar-menu li').filter(function (idx, element) {
+            if (!$(element).find('a').hasClass('has-dropdown') && !$(element).hasClass('menu-header'))
+                return $(element).text().trim().toLowerCase().indexOf(search) >= 0 ? element : null;
+        }).sort();
+
+        if (match.length == 0) {
+            $('.search-result').find('.content').append(`<div class="search-item"><a href="javascript:void(0)">No result found</a></div>`);
+            return false;
+        }
+
+        match.each(function (index, element) {
+            var item_text = $(element).text().replace(/(\d+)/g, '').trim();
+            var item_url = $(element).find('a').attr('href');
+            if (item_url != '#') {
+                $('.search-result').find('.content').append(`<div class="search-item"><a href="${item_url}">${item_text}</a></div>`);
+            }
+        });
+    });
+</script>
+
+
+
+	<script>
+		'use strict';
+		$(document).on('click', '.blockRqst', function () {
+			var route = $(this).data('route');
+			$('.blockForm').attr('action', route);
+		})
+	</script>
+</body>
+</html>

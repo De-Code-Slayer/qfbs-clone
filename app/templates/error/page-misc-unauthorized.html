@@ -1,0 +1,31 @@
+    {% extends 'error_base.html' %}
+
+
+
+    {% block content %}
+
+    <!--Under Maintenance -->
+    <div class="container-xxl container-p-y">
+      <div class="misc-wrapper">
+        <h2 class="mb-2 mx-2">You are not Authorized to visit the page you are trying to access!</h2>
+        <p class="mb-4 mx-2">Sorry but you do not have the appropriate privileges to access this page</p>
+        <a href="" class="btn btn-primary">Back to home</a>
+        <div class="mt-4">
+          <img
+            src={{ url_for('static', filename="/assets/img/illustrations/girl-doing-yoga-light.png")}}
+            alt="girl-doing-yoga-light"
+            width="500"
+            class="img-fluid"
+            data-app-dark-img="illustrations/girl-doing-yoga-dark.png"
+            data-app-light-img="illustrations/girl-doing-yoga-light.png"
+          />
+        </div>
+      </div>
+    </div>
+    <!-- /Under Maintenance -->
+
+    <!-- / Content -->
+
+  
+
+    {% endblock %}

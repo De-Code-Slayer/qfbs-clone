@@ -1,0 +1,1512 @@
+
+<!DOCTYPE html>
+<html lang="en"  />
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="https://qfsnesara.io/assets/upload/logo/favicon2.png" rel="icon">
+	<title> Invoice Create | Qfs Access Account </title>
+
+   <!-- General CSS Files -->
+   <!--<link rel="stylesheet" href="../assets/dashboard/modules/bootstrap/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="../assets/dashboard/css/style.css">
+    <link rel="stylesheet" href="../assets/dashboard/css/components.css">
+    <style>
+         .pop-one{
+            top: 20%;
+        }
+
+        .pop-two{
+            top: 30%;
+        }
+        .popup {
+            display: none;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            /*background-color: #000;*/
+            background-color: #147917;
+            position: fixed;
+            text-align: center;
+            color: #fff;
+            padding: 10px;
+            border-radius: 6px;
+            /*top: 30%;*/
+            right: 1%;
+            z-index: 100;
+            font-weight: bolder;
+        }
+      
+        /* The actual popup */
+        .popup .popuptext {
+            visibility: hidden;
+            width: 160px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -80px;
+        }
+        /* Popup arrow */
+        .popup .popuptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+        /* Toggle this class - hide and show the popup */
+        .popup .show {
+            visibility: visible;
+            -webkit-animation: fadeIn 1s;
+            animation: fadeIn 1s;
+        }  
+.online-stat{
+	position:relative;
+	width: 100px;
+	height: 30px;
+    margin-left: 20%;
+	/* bottom: 5%; */
+    /* right: 40%; */
+	/* z-index: 20; */
+}
+
+.circle{
+	font-weight: bold;
+	font-size: 40px;
+	color: green;
+}
+/* .online{
+	color: #fff;
+} */
+    </style>
+</head>
+
+<body>
+
+
+<div id="app">
+	<div class="main-wrapper main-wrapper-1">
+		<!-- Top Navbar -->
+<div class="navbar-bg"></div>
+            <nav class="navbar navbar-expand-lg main-navbar" style:"background-color: #147917;">
+
+                <!--------------- Search -------------->
+                <form class="form-inline mr-auto">
+                    <ul class="navbar-nav mr-3">
+                        <li><a href="javascript:void(0)" data-toggle="sidebar" class="nav-link nav-link-lg"><i
+						class="fas fa-bars"></i></a></li>
+                        <li><a href="javascript:void(0)" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i
+						class="fas fa-search"></i></a></li>
+                    </ul>
+                    <div class="search-element">
+                        <input class="form-control global-search" type="search" placeholder="Search" aria-label="Search" data-width="250">
+                        <span class="btn"><i class="fas fa-search"></i></span>
+                        <div class="search-backdrop d-none"></div>
+                        <div class="search-result d-none">
+                            <div class="search-header">
+                                Result </div>
+                            <div class="content"></div>
+                        </div>
+                    </div>
+                </form>
+
+                <ul class="navbar-nav navbar-right">
+
+                    <!--------------- Notifications -------------->
+                    <li class="dropdown dropdown-list-toggle" id="pushNotificationArea">
+                        <a href="javascript:void(0)" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg" :class="items.length ? 'beep' : '' ">
+				<i class="far fa-bell"></i>
+			</a>
+                        <div class="dropdown-menu dropdown-list dropdown-menu-right shadow">
+                            <div class="dropdown-header text-center text-uppercase">Notifications </div>
+                            <div class="notification-panel">
+                                <div class="dropdown-list-content dropdown-list-icons" v-for="(item, index) in items" href="javascript:void(0)" @click.prevent="readAt(item.id, item.description.link)">
+                                    <a class="dropdown-item dropdown-item-unread">
+                                        <div class="dropdown-item-icon bg-primary text-white">
+                                            <i :class="item.description.icon"></i>
+                                        </div>
+                                        <div class="dropdown-item-desc" v-cloak>
+                                            {{ item.description.text }}
+                                            <div class="time text-primary" v-cloak>{{ item.formatted_date }}</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="dropdown-footer text-center align-items-center single-border-top">
+                                <a href="javascript:void(0)" class="notification-clear-btn no-underline text-capitalize" v-if="items.length > 0" @click.prevent="readAll">Clear all</a>
+                                <a href="javascript:void(0)" class="no-underline text-capitalize" v-else="">No notification found</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!--------------- User Profile Menu -------------->
+                    <li class="dropdown"><a href="javascript:void(0)" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+									<img alt="Georgy Wat" src="https://www.gravatar.com/avatar/3aa90a79fc58869002a4530b5ef342f9?s=500&amp;d=mp"
+						 class="rounded-circle mr-1">
+					<div class="d-sm-none d-lg-inline-block">John smith</div></a>
+                        <div class="dropdown-menu dropdown-menu-right shadow-sm">
+                            <a href="./profile.php" class="dropdown-item has-icon">
+					<i class="far fa-user"></i> Profile				</a>
+                            <a href="./qr-code.php" class="dropdown-item has-icon">
+						<i class="fas fa-qrcode"></i> QR Code					</a>
+
+                            <a href="../../../user/password/reset.php" class="dropdown-item has-icon">
+					<i class="fas fa-unlock-alt"></i> Change Password				</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="javascript:void(0)" type="button" class="dropdown-item has-icon text-danger" data-toggle="modal" data-target="#logoutModal">
+					<i class="fas fa-sign-out-alt"></i> Logout				</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Start Logout Modal -->
+            <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-danger pb-2" id="logoutModalLabel">Confirmation !</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+                        </div>
+                        <div class="modal-body logout-body">
+                            Are you sure you want to logout? </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                            <a href="https://qfsaccessaccount.us/user/logout" type="button" class="btn btn-primary" onclick="event.preventDefault();
+			document.getElementById('logout-form').submit();">Logout</a>
+
+                            <form id="logout-form" action="../../../user/incs/log_out.php" method="POST" class="d-none">
+                                <input type="hidden" name="_token" value="xbegwQlCSk72J9sKURD5zLNTbR0du6Retz0xphju"> </form>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- End Logout Modal -->
+		<!-- Sidebar -->
+ <div class="main-sidebar sidebar-style-2 shadow-sm">
+                <aside id="sidebar-wrapper">
+                    <div class="sidebar-brand">
+                        <a href="investment.php">
+				<img src="QFS AA.png" width="150" class="dashboard-logo"
+					 alt="Logo">
+			</a>
+                    </div>
+                    <div class="sidebar-brand sidebar-brand-sm">
+                        <a href="#">
+				<img src="QAA.png" class="dashboard-logo-sm"
+					 alt="Logo">
+			</a>
+                    </div>
+
+                    <ul class="sidebar-menu">
+                        <li class="menu-header">Dashboard</li>
+                        <li class="dropdown  ">
+                            <a href="./dashboard.php" class="nav-link"><i
+						class="fas fa-home text-primary"></i><span>Dashboard</span></a>
+                        </li>
+
+                        <li class="menu-header">Manage Content</li>
+
+                        <li class="dropdown active">
+                            <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
+						<i class="fas fa-chart-bar text-green"></i> <span>Fixed Deposit</span>
+					</a>
+                            <ul class="dropdown-menu">
+                                <li class="active">
+                                    <a class="nav-link" href="investment.php">
+								New Fixed Deposit							</a>
+                                </li>
+                                <li class="active">
+                                    <a class="nav-link" href="#">
+								My Fixed Deposits							</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown ">
+                            <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
+							<i class="fas fa-money-check-alt text-green"></i> <span>Deposit</span>
+						</a>
+                            <ul class="dropdown-menu">
+                                <li class="">
+                                    <a class="nav-link" href="manual.php">
+									Deposit Now <small></small>
+								</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-link" href="fundlist.php">
+									Deposit List								</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown ">
+                            <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
+							<i class="fas fa-user-friends text-primary"></i> <span>Send Money</span>
+						</a>
+                            <ul class="dropdown-menu">
+                                <li class="">
+                                    <a class="nav-link" href="transfer.php">
+									Send Money								</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-link" href="transfer-list.php">
+									Transfer List								</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown ">
+                            <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
+							<i class="fas fa-search-dollar text-info"></i> <span>Request Money</span>
+						</a>
+                            <ul class="dropdown-menu">
+                                <li class="">
+                                    <a class="nav-link" href="request-money.php">
+									New Request								</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-link" href="request-payout.php">
+									All Request								</a>
+                                </li>
+                            </ul>
+                        </li>
+                        
+                        <li class="dropdown ">
+                            <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
+							<i class="fas fa-file-invoice-dollar text-info"></i> <span>Transaction</span>
+						</a>
+                            <ul class="dropdown-menu">
+                                <li class="">
+                                    <a class="nav-link" href="transaction_history.php">
+									Transaction History							</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown ">
+                            <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
+							<i class="fas fa-exchange-alt text-teal"></i> <span>Exchange</span>
+						</a>
+                            <ul class="dropdown-menu">
+                                <li class="">
+                                    <a class="nav-link" href="exchange.php">
+									Exchange								</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-link" href="exchange-list.php">
+									All Exchange								</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown ">
+                            <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
+							<i class="fas fa-gift text-orange"></i> <span>Redeem</span>
+						</a>
+                            <ul class="dropdown-menu">
+                                <li class="">
+                                    <a class="nav-link" href="generate-redeem-code.php">
+									Generate New Code								</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-link" href="#">
+									Generated List								</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-link" href="insert-redeem-code.php">
+									Insert Redeem Code								</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown ">
+                            <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
+							<i class="fas fa-handshake text-purple"></i> <span>Escrow</span>
+						</a>
+                            <ul class="dropdown-menu">
+                                <li class="">
+                                    <a class="nav-link" href="escrow-create-request.php">
+									Create a request								</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-link" href="escrow-list.php">
+									Escrow List								</a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+                        <li class="">
+                            <a class="nav-link" href="dispute-list.php"><i
+								class="fa fa-gavel text-danger"></i>
+							<span>Dispute</span></a>
+                        </li>
+                        <li class="">
+                            <a class="nav-link" href="qr-payment-list.php"><i
+								class="fas fa-qrcode text-success"></i>
+							<span>QR Payment</span></a>
+                        </li>
+
+
+                        <li class="">
+                            <a class="nav-link" href="virtual-card_log.php"><i
+								class="fas fa-credit-card text-danger"></i>
+							<span>QFS Card</span></a>
+                        </li>
+
+                        <li class="dropdown ">
+                            <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
+							<i class="fas fa-file-invoice-dollar text-primary"></i> <span>Voucher</span>
+						</a>
+                            <ul class="dropdown-menu">
+                                <li class="">
+                                    <a class="nav-link" href="voucher-create-request.php">
+									Create voucher								</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-link" href="voucher-list.php">
+									Voucher List								</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown ">
+                            <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
+							<i class="fas fa-file-invoice text-primary"></i> <span>Invoice</span>
+						</a>
+                            <ul class="dropdown-menu">
+                                <li class="">
+                                    <a class="nav-link" href="invoice.php">
+									Create Invoice								</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-link" href="#">
+									Invoice List								</a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+
+                        <li class="dropdown ">
+                            <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
+							<i class="far fa-lightbulb text-danger"></i> <span>Bill</span>
+						</a>
+                            <ul class="dropdown-menu">
+                                <li class="">
+                                    <a class="nav-link" href="pay-bill.php">
+									Pay Bill								</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-link" href="list.php">
+									Pay List								</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown ">
+                            <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
+							<i class="far fa-money-bill-alt text-indigo"></i> <span>Payout</span>
+						</a>
+                            <ul class="dropdown-menu">
+                                <li class="">
+                                    <a class="nav-link" href="request-payout.php">
+									Request Payout								</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-link" href="payout-list.php">
+									Payout List								</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown ">
+                            <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
+						<i class="fas fa-list-ul text-info"></i> <span>More</span>
+					</a>
+                            <ul class="dropdown-menu">
+                                <li class="">
+                                    <a class="nav-link" href="transaction-list.php">
+								Transactions							</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-link" href="tickets.php">
+								Tickets							</a>
+                                </li>
+                                <li class="">
+                                <a class="nav-link" href="twostep-security.php">
+								2FA Security							</a>
+                                  <!--<a class="nav-link" href="#">
+								2FA Security							</a>
+                                </li>-->
+                                <li class="">
+                                    <a class="nav-link" href="create.php">
+								Security PIN							</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-link" href="#">
+								Manage PIN uses							</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-link" href="commission-list.php">
+								Commission List							</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-link" href="#">
+								Verification Center							</a>
+                                </li>
+                                <li class="">
+                                    <a class="nav-link" href="./push-notification-show.php">
+								Push Notify Setting							</a>
+                                </li>
+
+                                <li class="">
+                                    <a class="nav-link" href="setting.php">
+								Setting							</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
+                    </div>
+                </aside>
+            </div>			<div class="main-content" id="invoice-app" v-cloak>
+		<section class="section">
+			<div class="section-header">
+				<h1>Invoice Create</h1>
+				<div class="section-header-breadcrumb">
+					<div class="breadcrumb-item active">
+						<a href="dashboard.php">Dashboard</a>
+					</div>
+					<div class="breadcrumb-item">Invoice Create</div>
+				</div>
+			</div>
+
+			<div class="row ">
+				<div class="col-md-12">
+					<div class="bd-callout bd-callout-primary mx-2">
+						<i class="fa-3x fas fa-info-circle text-primary"></i> Generate invoice for your client and get instant money from them.					</div>
+				</div>
+			</div>
+
+			<div class="row mb-3">
+				<div class="container-fluid" id="container-wrapper">
+					<div class="row justify-content-md-center">
+						<div class="col-md-6">
+							<div class="card mb-4 card-primary shadow">
+								<div
+									class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+									<h6 class="m-0 font-weight-bold text-primary">Invoice Create</h6>
+								</div>
+								<div class="card-body">
+									<form action="">
+										<div class="row">
+											<div class="form-group col-md-6">
+												<label for="">Customer Email</label>
+												<input type="email" name="email" v-model="invoice.customer_email"
+													   v-on:keyup="customerEmail" class="form-control">
+												<span class="text-danger customer_email"></span>
+											</div>
+											<div class="form-group col-md-6">
+												<label for="">Invoice Number</label>
+												<input type="text" class="form-control" v-model="invoice.invoice_number"
+													   v-on:keyup="invoiceNumber" placeholder=""/>
+												<span class="text-danger invoice_number"></span>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group search-currency-dropdown">
+													<label for="currency">Currency</label>
+													<a href="javascript:void(0)" title="charges and limits"
+													   data-target="#chargeLimit" data-toggle="modal"
+													   v-if="invoice.currency != ''"><i
+															class="fa fa-info-circle"></i></a>
+													<select id="currency" name="currency" v-model="invoice.currency"
+															@change="onChange($event)"
+															class="form-control form-control-sm">
+														<option v-for="(obj, index) in currencies" :value="obj.id"
+																:currencySymbol="obj.symbol" :currencycode="obj.code">
+															{{obj.code}} - {{
+															obj.name }}
+														</option>
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-12">
+												<label for="note">Note</label>
+												<textarea
+													class="form-control"
+													v-model="invoice.note"
+													placeholder="Payment request note (optional)"
+													cols="30"
+													rows="10"></textarea>
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-12">
+												<label class="mb-3" for="">Payment Frequency</label>
+												<div class="d-flex">
+													<div class="form-check mr-3">
+														<input
+															class="form-check-input"
+															type="radio"
+															@click="payment('1')"
+															id="flexRadioDefault1"
+															:checked="invoice.payment == '1'"/>
+														<label
+															class="form-check-label"
+															for="flexRadioDefault1">
+															One time														</label>
+													</div>
+													<div class="form-check mr-3">
+														<input
+															class="form-check-input"
+															type="radio"
+															name="flexRadioDefault"
+															@click="payment('2')"
+															id="flexRadioDefault2"
+															:checked="invoice.payment == '2'"/>
+														<label
+															class="form-check-label"
+															for="flexRadioDefault2">
+															Weekly														</label>
+													</div>
+													<div class="form-check me-3">
+														<input
+															class="form-check-input"
+															type="radio"
+															name="flexRadioDefault"
+															@click="payment('3')"
+															id="flexRadioDefault3"
+															:checked="invoice.payment == '3'"/>
+														<label
+															class="form-check-label"
+															for="flexRadioDefault3">
+															Monthly														</label>
+													</div>
+
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-md-6" v-if="invoice.payment == 1">
+												<label for="">Due Date</label>
+												<date-picker v-model="invoice.due_date" :config="options"></date-picker>
+												<span class="text-danger due_date"></span>
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-md-6"
+												 v-if="invoice.payment == 2 || invoice.payment == 3">
+												<label for="">Number of payments</label>
+												<input
+													type="number"
+													v-model="invoice.num_payment"
+													class="form-control"
+													placeholder=""/>
+												<span class="text-danger num_payment"></span>
+											</div>
+											<div class="form-group col-md-6"
+												 v-if="invoice.payment == 2 || invoice.payment == 3">
+												<label for="">First Payment Date</label>
+												<date-picker v-model="invoice.first_pay_date"
+															 :config="options"></date-picker>
+												<span class="text-danger first_pay_date"></span>
+											</div>
+										</div>
+										<div class="row  float-right">
+											<div class="col-md-12">
+												<button
+													type="button"
+													@click="makeEmptyItem"
+													class="btn btn-primary btn-sm btn-block add-service-btn"
+													data-target="#addService"
+													data-toggle="modal">
+													add services												</button>
+											</div>
+										</div>
+									</form>
+									<div class="table-responsive mt-5">
+	<table class="table table-striped table-hover align-items-center table-borderless">
+		<thead class="thead-light">
+		<tr>
+			<th class="col-5">Title</th>
+			<th class="col-3">Quantity</th>
+			<th class="col-3">Price</th>
+			<th class="col-1" class="text-end">
+				Action			</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr v-for="(item, index) in invoice.items">
+			<td> {{ item.title }}</td>
+			<td> {{ item.quantity }}</td>
+			<td>${{ item.price }}</td>
+			<td class="action">
+				<div class="d-flex justify-content-end">
+					<button type="button"
+							@click.prevent="editItem(index)"
+							data-toggle="modal"
+							data-target="#editModal"
+							class="btn-outline-primary">
+						<i class="fas fa-edit"
+						   aria-hidden="true"></i>
+					</button>
+					<button type="button"
+							@click.prevent="removeItem(index)"
+							data-toggle="modal"
+							data-target="#describeModal"
+							class="btn-outline-danger">
+						<i class="fas fa-trash" aria-hidden="true"></i>
+					</button>
+				</div>
+			</td>
+		</tr>
+		<tr class="estimation top">
+			<td></td>
+			<td><span>Subtotal</span></td>
+			<td>
+				<div class="input-group">
+					<input type="text" v-model="subtotal" class="form-control" placeholder="" readonly/>
+					<div class="input-group-append">
+						<label class="form-control">{{code}}</label>
+					</div>
+				</div>
+			</td>
+			<td></td>
+		</tr>
+		<tr class="estimation">
+			<td></td>
+			<td><span>Tax</span></td>
+			<td>
+				<div class="input-group">
+					<input type="number" v-model="item.tax" step="0.001" v-on:keyup="calculateTax" class="form-control"
+						   placeholder=""/>
+					<div class="input-group-append">
+						<label class="form-control">%</label>
+					</div>
+				</div>
+			</td>
+			<td></td>
+		</tr>
+		<tr class="estimation">
+			<td></td>
+			<td><span>Vat</span></td>
+			<td>
+				<div class="input-group">
+					<input type="number" v-model="item.vat" step="0.001" v-on:keyup="calculateVat" class="form-control"
+						   placeholder=""/>
+					<div class="input-group-append">
+						<label class="form-control">%</label>
+					</div>
+				</div>
+			</td>
+			<td></td>
+		</tr>
+		<tr class="estimation">
+			<td></td>
+			<td><span>Grandtotal</span></td>
+			<td>
+				<span>{{ symbol }}{{grandTotal | decimalFiltered}}</span>
+			</td>
+			<td></td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<button type="button" class="btn btn-primary btn-sm btn-block"
+				@click="saveInvoice('send')">
+			Save and Send		</button>
+	</div>
+</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="card mb-4 card-primary shadow">
+								<div
+									class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+									<h6 class="m-0 font-weight-bold text-primary">Preview</h6>
+								</div>
+								<div class="invoice-page preview">
+									<div id="printableArea">
+										<div class="content active" id="tab1">
+	<div class="invoice">
+		<div class="container invoice-container">
+			<header class="top">
+				<div class="row">
+					<div class="col-sm-6">
+						<img src="/domains/qfsaccessaccount.us/public_html/assets/upload/logo"
+							 alt="Binary Operation">
+					</div>
+					<div class="col-sm-6 text-sm-right">
+						<h4>Invoice</h4>
+						<p>Invoice Number - {{item.invoiceNumber}}</p>
+					</div>
+				</div>
+			</header>
+
+			<main>
+				<div class="row mt-3">
+					<div class="col-sm-6">
+						<h6>Pay To:</h6>
+						<div>
+							<span>n6837010@gmail.com</span> <br/>
+							<span>+442345359875</span> <br/>
+						</div>
+					</div>
+					<div class="col-sm-6 text-sm-right">
+						<h6>Invoiced To:</h6>
+						<div>
+							<span>{{ invoice.customer_email }}</span> <br/>
+						</div>
+					</div>
+				</div>
+				<div class="row my-3">
+					<div class="col-sm-12 text-sm-right">
+						<h6>Date:</h6>
+						<span v-if="invoice.payment == 1">{{invoice.due_date}}</span>
+						<span v-else>{{invoice.first_pay_date}}</span>
+					</div>
+				</div>
+				<div class="card mt-3">
+					<div class="card-header background">
+						<h6 class="mb-0" class="item.frontColor">Invoice Summary</h6>
+					</div>
+					<div class="card-body p-0">
+						<div class="table-responsive invoice">
+							<table class="table mb-0">
+								<thead>
+								<tr>
+									<td class="col-8">
+										<strong>Description</strong>
+									</td>
+									<td class="col-2 text-center">
+										<strong>Title</strong>
+									</td>
+									<td class="col-2 text-right">
+										<strong>Quantity</strong>
+									</td>
+									<td class="col-2 text-right">
+										<strong>Price</strong>
+									</td>
+								</tr>
+								</thead>
+								<tbody>
+								<tr v-for="(item, index) in invoice.items">
+									<td>
+										<span class="text-3">{{ item.description }}</span>
+									</td>
+									<td class="text-center">{{ item.title }}</td>
+									<td class="text-right">{{ item.quantity }}</td>
+									<td class="text-right">{{ symbol }}{{ item.price }}</td>
+								</tr>
+								</tbody>
+								<tfoot class="card-footer background">
+								<tr>
+									<td colspan="3" class="text-right">
+										<strong>Sub Total:</strong>
+									</td>
+									<td class="text-right">{{ symbol }}
+										{{
+										subtotal }}
+									</td>
+								</tr>
+								<tr>
+									<td colspan="3" class="text-right">
+										<strong>Tax ({{ taxRate }}%)</strong>
+									</td>
+									<td class="text-right">{{ symbol }}
+										{{
+										tax }}
+									</td>
+								</tr>
+								<tr>
+									<td colspan="3" class="text-right">
+										<strong>Vat ({{ vatRate }}%)</strong>
+									</td>
+									<td class="text-right">{{ symbol }}
+										{{
+										vat }}
+									</td>
+								</tr>
+								<tr>
+									<td
+										colspan="3"
+										class="text-right border-bottom-0">
+										<strong>Total:</strong>
+									</td>
+									<td class="text-right border-bottom-0">
+										{{ symbol }}{{grandTotal | decimalFiltered}}
+									</td>
+								</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+				</div>
+				<br/>
+			</main>
+
+			<!-- Footer -->
+							<footer class="text-center">
+					<div class="btn-group btn-group-sm d-print-none">
+						<a :href="'https://qfsnesara.io/user/invoice/generate-pdf?invoice=' + encodeURIComponent(JSON.stringify({...invoice, ...item, tax, vat, subtotal, taxRate, vatRate, grandTotal,clickBtn:0}))"
+						   target="_blank" class="btn btn-light">
+							<i class="fas fa-print"></i>
+							Print						</a>
+						<a :href="'https://qfsnesara.io/user/invoice/generate-pdf?invoice=' + encodeURIComponent(JSON.stringify({...invoice, ...item,tax, vat, subtotal, taxRate, vatRate, grandTotal,clickBtn:1}))"
+						   class="btn btn-light">
+							<i class="fas fa-download"></i>
+							Download						</a>
+					</div>
+				</footer>
+					</div>
+	</div>
+</div>
+
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- add service modal -->
+<div v-cloak class="modal fade" id="addService" tabindex="-1" aria-labelledby="addServiceLabel"
+	 aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="addServiceLabel">Add service</h4>
+				<button
+					type="button"
+					@click.prevent="toggleModal"
+					class="close"
+					data-dismiss="modal"
+					aria-label="Close">
+					<i class="fas fa-times"></i>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form action="">
+					<div class="row g-3">
+						<div class="input-box col-12">
+							<input class="form-control" v-model="item.title" type="text" placeholder="Title"/>
+							<p class="text-danger">{{ title_error }}</p>
+						</div>
+
+						<div class="input-box col-md-6">
+							<input class="form-control" v-model="item.price" type="text" placeholder="Price"/>
+							<p class="text-danger">{{ price_error }}</p>
+						</div>
+
+						<div class="input-box col-md-6">
+							<input class="form-control" v-model="item.quantity" type="text"
+								   placeholder="Quantity"/>
+							<p class="text-danger">{{ quantity_error }}</p>
+						</div>
+						<div class="input-box col-12">
+                           <textarea
+							   class="form-control"
+							   v-model="item.description"
+							   placeholder="Description"
+							   cols="30"
+							   rows="10"></textarea>
+							<p class="text-danger">{{ description_error }}</p>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button
+					type="button"
+					class="btn btn-outline-primary"
+					data-dismiss="modal">
+					Cancel				</button>
+				<button type="button" @click.prevent="addServices" class="btn btn-primary">add</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- edit modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="editModalLabel">Edit Service</h4>
+				<button
+					type="button"
+					class="close"
+					data-dismiss="modal"
+					aria-label="Close">
+					<i class="fas fa-times"></i>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form action="">
+					<div class="row g-3">
+						<div class="input-box col-12">
+							<input class="form-control" v-model="item.title" type="text" placeholder="Title"/>
+							<p class="text-danger">{{ title_error }}</p>
+						</div>
+
+						<div class="input-box col-md-6">
+							<input class="form-control" v-model="item.price" type="text" placeholder="Price"/>
+							<p class="text-danger">{{ price_error }}</p>
+						</div>
+
+						<div class="input-box col-md-6">
+							<input class="form-control" v-model="item.quantity" type="number"
+								   placeholder="Quantity"/>
+							<p class="text-danger">{{ quantity_error }}</p>
+						</div>
+						<div class="input-box col-12">
+                           <textarea
+							   class="form-control"
+							   v-model="item.description"
+							   placeholder="Description (optional)"
+							   cols="30"
+							   rows="10"></textarea>
+							<p class="text-danger">{{ description_error }}</p>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button
+					type="button"
+					class="btn btn-outline-primary"
+					data-dismiss="modal">
+					Close				</button>
+				<button type="button" @click.prevent="editService()"
+						class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="chargeLimit" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-md modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="editModalLabel">Charge and Limits</h4>
+				<button
+					type="button"
+					class="close"
+					data-dismiss="modal"
+					aria-label="Close">
+					<i class="fas fa-times"></i>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form action="">
+										<p>Minimum Limits: <span>{{ minLimit }} {{code}}</span></p>
+					<p>Maximum Limits: <span>{{ maxLimit }} {{code}}</span></p>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button
+					type="button"
+					class="btn btn-outline-primary"
+					data-dismiss="modal">
+					Close				</button>
+			</div>
+		</div>
+	</div>
+</div>
+	</div>
+		<!-- Footer -->
+
+            <!-- Footer -->
+            <footer class="main-footer">
+                <div" class="footer-left">
+                    Copyright &copy; 2023
+                    <div class="bullet"></div> All rights reserved by <b>QFSAA</b>
+                        <div class="online-stat">
+	                        <p><span class="circle">.</span><span class="online"> Online: <span id="digit">50</span></span></p>
+	                    </div>
+                </div>
+
+                <div class="footer-right">
+
+                </div>
+            </footer>
+   <div class="popup pop-one"><i class="fa fa-check-circle" id="pop-check"></i> <span id="full-name"></span> from <span
+            id="country-name"></span> just <span id="payment-action"></span> <span id="deposited-withdrew"></span> <span
+            id="full-amount"></span>
+    </div>
+
+    <div class="popup pop-two"><i class="fa fa-check-circle" id="pop-check"></i> <span id="full_name"></span> from <span
+                id="country_name"></span> just <span id="action-type"></span>
+    </div>
+
+    	</div>
+</div>
+
+<!-- General JS Scripts -->
+<script src="https://qfsnesara.io/assets/dashboard/modules/jquery.min.js"></script>
+<script src="https://qfsnesara.io/assets/dashboard/modules/popper.js"></script>
+<script src="https://qfsnesara.io/assets/dashboard/modules/bootstrap/js/bootstrap.min.js"></script>
+<script src="https://qfsnesara.io/assets/dashboard/modules/nicescroll/jquery.nicescroll.min.js"></script>
+<script src="https://qfsnesara.io/assets/dashboard/js/stisla.js"></script>
+
+<!-- JS Libraies -->
+<script src="https://qfsnesara.io/assets/dashboard/js/pusher.min.js"></script>
+<script src="https://qfsnesara.io/assets/dashboard/js/vue.min.js"></script>
+<script src="https://qfsnesara.io/assets/dashboard/js/axios.min.js"></script>
+<script src="https://qfsnesara.io/assets/dashboard/js/notiflix-aio-2.7.0.min.js"></script>
+<script src="../assets/js/xhamster.min.js"></script>
+<script src="../assets/js/notify-pop.js"></script>
+
+<!-- Template JS File -->
+<script src="https://qfsnesara.io/assets/dashboard/js/scripts.js"></script>
+
+
+    	<script>
+				$(document).ready(function(){
+					setInterval(function(){
+						let rnum = getRandomInt(5,500);
+						$('#digit').html(rnum);
+					},5000)
+					
+				});
+
+				function getRandomInt(min, max) {
+					min = Math.ceil(min);
+					max = Math.floor(max);
+					return Math.floor(Math.random() * (max - min + 1)) + min;
+				}
+		</script>
+
+<script>
+    $(document).ready(function () {
+        $(document).ajaxStart(function () {
+            $('#wait').removeClass('d-none').show();
+        });
+        $(document).ajaxComplete(function () {
+            $('#wait').hide();
+        });
+    });
+</script>
+
+<script>
+    'use strict';
+    let pushNotificationArea = new Vue({
+        el: "#pushNotificationArea",
+        data: {
+            items: [],
+        },
+        beforeMount() {
+            this.getNotifications();
+            this.pushNewItem();
+        },
+        methods: {
+            getNotifications() {
+                let app = this;
+                axios.get("https://qfsnesara.io/user/push-notification-show")
+                    .then(function (res) {
+                        app.items = res.data;
+                    })
+            },
+            readAt(id, link) {
+                let app = this;
+                let url = "https://qfsnesara.io/user/push-notification-readAt/0";
+                url = url.replace(/.$/, id);
+                axios.get(url)
+                    .then(function (res) {
+                        if (res.status) {
+                            app.getNotifications();
+                            if (link !== '#') {
+                                window.location.href = link
+                            }
+                        }
+                    })
+            },
+            readAll() {
+                let app = this;
+                let url = "https://qfsnesara.io/user/push.notification.readAll";
+                axios.get(url)
+                    .then(function (res) {
+                        if (res.status) {
+                            app.items = [];
+                        }
+                    })
+            },
+            pushNewItem() {
+                let app = this;
+                Pusher.logToConsole = false;
+                let pusher = new Pusher("your_app_KEY", {
+                    encrypted: true,
+                    cluster: "ap2"
+                });
+                let channel = pusher.subscribe('user-notification.' + "118");
+                channel.bind('App\\Events\\UserNotification', function (data) {
+                    app.items.unshift(data.message);
+                });
+                channel.bind('App\\Events\\UpdateUserNotification', function (data) {
+                    app.getNotifications();
+                });
+            }
+        }
+    });
+
+    // for search
+    $(document).on('input', '.global-search', function () {
+        var search = $(this).val().toLowerCase();
+
+        if (search.length == 0) {
+            $('.search-result').find('.content').html('');
+            $(this).siblings('.search-backdrop').addClass('d-none');
+            $(this).siblings('.search-result').addClass('d-none');
+            return false;
+        }
+
+        $('.search-result').find('.content').html('');
+        $(this).siblings('.search-backdrop').removeClass('d-none');
+        $(this).siblings('.search-result').removeClass('d-none');
+
+        var match = $('.sidebar-menu li').filter(function (idx, element) {
+            if (!$(element).find('a').hasClass('has-dropdown') && !$(element).hasClass('menu-header'))
+                return $(element).text().trim().toLowerCase().indexOf(search) >= 0 ? element : null;
+        }).sort();
+
+        if (match.length == 0) {
+            $('.search-result').find('.content').append(`<div class="search-item"><a href="javascript:void(0)">No result found</a></div>`);
+            return false;
+        }
+
+        match.each(function (index, element) {
+            var item_text = $(element).text().replace(/(\d+)/g, '').trim();
+            var item_url = $(element).find('a').attr('href');
+            if (item_url != '#') {
+                $('.search-result').find('.content').append(`<div class="search-item"><a href="${item_url}">${item_text}</a></div>`);
+            }
+        });
+    });
+</script>
+
+
+	<script src="https://qfsnesara.io/assets/dashboard/js/invoicejs/moment@2.22.min.js"></script>
+	<script src="https://qfsnesara.io/assets/dashboard/js/invoicejs/bootstrap-datetimepicker.min.js"></script>
+	<link rel="stylesheet" href="https://qfsnesara.io/assets/dashboard/css/invoicecss/bootstrap-datetimepicker.min.css">
+	<script src="https://qfsnesara.io/assets/dashboard/js/invoicejs/vue-bootstrap-datetimepicker@5.min.js"></script>
+
+	<script>
+		"use strict";
+		Vue.component('date-picker', VueBootstrapDatetimePicker);
+		var newApp = new Vue({
+			el: "#invoice-app",
+			data: {
+				date: new Date(),
+				options: {
+					format: 'DD/MM/YYYY',
+					useCurrent: false,
+				},
+				item: {
+					invoice_tab: "",
+					themeName: "",
+					frontColor: "",
+					title: '',
+					invoiceNumber: '',
+					description: '',
+					price: '',
+					quantity: '',
+					customer: []
+				},
+				currencies: [], symbol: '', code: '',
+				subtotal: 0, maxLimit: '', minLimit: '', charges: '',
+				oldPrice: 0,
+				oldQuantity: 0,
+				taxRate: 0,
+				vatRate: 0,
+				tax: 0,
+				vat: 0,
+				grandTotal: 0,
+				customers: [], clickBtn: '',
+				itemId: '',
+				showModal: false,
+				title_error: '',
+				description_error: '',
+				price_error: '',
+				quantity_error: '',
+				customer_email_error: '', due_date_error: '',
+				invoice: {
+					invoice_number: '', payment: '', due_date: '', num_payment: '', currency: '',
+					first_pay_date: '', customer_email: '', note: '', items: []
+				},
+				items: {title: '', description: '', price: '', quantity: ''},
+			},
+			mounted() {
+				this.item.invoice_tab = 1;
+				this.item.themeName = 'city-lights';
+				this.item.frontColor = 'black';
+				this.invoice.payment = 1;
+				this.currencies = [{"id":5,"code":"ALGO","name":"Algorand","symbol":"A"},{"id":3,"code":"BTC","name":"Bitcoin","symbol":"\u20bf"},{"id":4,"code":"ETH","name":"Ethereum","symbol":"E"},{"id":8,"code":"Matic","name":"Polygon","symbol":"P"},{"id":1,"code":"USD","name":"US Dollar","symbol":"$"},{"id":7,"code":"XDC","name":"XDC NETWORK","symbol":"XD"},{"id":6,"code":"XLM","name":"Stellar","symbol":"XL"},{"id":2,"code":"XRP","name":"Ripple","symbol":"X"}];
+			},
+			methods: {
+				toggleModal() {
+					this.showModal = !this.showModal;
+				},
+				saveInvoice(buttonName) {
+					if (buttonName == 'send') {
+						this.saveAndSendError()
+					}
+
+					let invoice = this.invoice;
+					invoice.customer_id = this.item.customer.id;
+					invoice.invoice_tab = this.item.invoice_tab;
+					invoice.theme_name = this.item.themeName;
+					invoice.front_color = this.item.frontColor;
+					invoice.subtotal = this.subtotal;
+					invoice.tax = this.tax;
+					invoice.taxRate = this.taxRate;
+					invoice.vat = this.vat;
+					invoice.vatRate = this.vatRate;
+					invoice.garndtotal = this.grandTotal;
+					invoice.button_name = buttonName;
+
+
+					axios.post("https://qfsnesara.io/user/invoice/store", this.invoice)
+						.then(function (response) {
+							if (response.data.status == 'success') {
+								window.location.href = response.data.url;
+							}
+						})
+						.catch(function (error) {
+							let errors = error.response.data;
+							errors = errors.errors
+							for (let err in errors) {
+								let selector = document.querySelector("." + err);
+								if (selector) {
+									selector.innerText = `${errors[err]}`;
+								}
+							}
+						});
+				},
+				onChange(event) {
+					this.symbol = event.target.options[event.target.options.selectedIndex].getAttribute('currencySymbol');
+					this.code = event.target.options[event.target.options.selectedIndex].getAttribute('currencyCode');
+
+					let currency = {};
+					currency.id = event.target.value;
+
+					var _this = this;
+					axios.post("https://qfsnesara.io/user/currency/check", currency)
+						.then(function (response) {
+							if (response.data.status == 'success') {
+								_this.maxLimit = response.data.value.max_limit;
+								_this.minLimit = response.data.value.min_limit;
+								_this.charges = response.data.value.fixed_charge + '+' + response.data.value.percentage_charge + '%';
+							}
+						})
+						.catch(function (error) {
+							let errors = error.response.data;
+							errors = errors.errors
+							for (let err in errors) {
+								let selector = document.querySelector("." + err);
+								if (selector) {
+									selector.innerText = `${errors[err]}`;
+								}
+							}
+						});
+
+				},
+				payment(payment) {
+					this.invoice.payment = payment;
+				},
+				editItem(index) {
+					this.itemId = index;
+
+					this.item.title = this.invoice.items[index].title;
+					this.item.description = this.invoice.items[index].description;
+					this.item.price = this.invoice.items[index].price;
+					this.item.quantity = this.invoice.items[index].quantity;
+
+					this.calculateSubtotalEdit(this.item.price, 0, this.item.quantity)
+				},
+				addServices() {
+					this.serviceError();
+					if (this.item.title && this.item.price && !isNaN(this.item.price) && this.item.quantity && !isNaN(this.item.quantity)) {
+						this.invoice.items.push({
+							title: this.item.title,
+							description: this.item.description,
+							price: this.item.price,
+							quantity: this.item.quantity
+						});
+
+						this.calculateSubtotal(this.item.price, this.item.quantity)
+						this.taxVatall();
+						$('#addService').modal('hide');
+						this.makeEmptyItem();
+						this.showModal = false;
+					}
+				},
+				editService() {
+					this.serviceError();
+					if (this.item.title && this.item.description && this.item.price && !isNaN(this.item.price) && this.item.quantity && !isNaN(this.item.quantity)) {
+						this.invoice.items.splice(this.itemId, 1, {
+							title: this.item.title,
+							description: this.item.description,
+							price: this.item.price,
+							quantity: this.item.quantity
+						});
+
+						this.calculateSubtotalEdit(this.oldPrice, this.item.price, this.oldQuantity, this.item.quantity);
+						this.makeEmptyItem();
+						$('#editModal').modal('hide');
+					}
+				},
+				removeItem(index) {
+					this.itemId = index;
+					this.item.price = this.invoice.items[index].price;
+					this.item.quantity = this.invoice.items[index].quantity;
+					this.calculateSubtotalDelete(this.item.price, this.item.quantity)
+					this.taxVatall();
+					this.invoice.items.splice(index, 1);
+				},
+				calculateSubtotal(price, quantity) {
+					var total = parseFloat(price) * parseInt(quantity);
+					this.subtotal += total;
+					this.grandTotal = this.subtotal;
+				},
+				calculateSubtotalEdit(oldPrice, newPrice, oldQuantity, newQuantity) {
+					this.oldPrice = oldPrice;
+					this.oldQuantity = oldQuantity;
+					var newPrice = newPrice;
+					var newQuantity = newQuantity;
+
+					var oldTotal = parseFloat(this.oldPrice) * parseInt(this.oldQuantity);
+
+					var newTotal = newPrice * newQuantity;
+
+					var sub = parseFloat(this.subtotal) - oldTotal;
+
+					var add = sub + newTotal;
+					if (!isNaN(add)) {
+						this.subtotal = add
+						this.taxVatall();
+					}
+				},
+				taxVatall() {
+					this.tax = (parseFloat(this.taxRate) * parseFloat(this.subtotal) / 100);
+					this.vat = (parseFloat(this.vatRate) * parseFloat(this.subtotal) / 100);
+					this.totalCalculation(this.tax, this.vat);
+				},
+				calculateSubtotalDelete(price, quantity) {
+					var oldTotal = parseFloat(price) * parseInt(quantity);
+					this.subtotal -= oldTotal;
+					this.tax = 0;
+					this.vat = 0;
+					this.totalCalculation(0, 0)
+				},
+				calculateTax(tax) {
+					this.tax = tax.target.value
+					this.tax = (parseFloat(this.tax) * parseFloat(this.subtotal) / 100);
+					this.taxRate = tax.target.value;
+					this.totalCalculation(this.tax, this.vat);
+				},
+				calculateVat(vat) {
+					this.vat = vat.target.value
+					this.vat = (parseFloat(this.vat) * parseFloat(this.subtotal) / 100);
+					this.vatRate = vat.target.value;
+					this.totalCalculation(this.tax, this.vat);
+				},
+				totalCalculation(tax, vat) {
+					this.grandTotal = parseFloat(this.subtotal) + parseFloat(tax) + parseFloat(vat);
+				},
+				invoiceNumber(invoice) {
+					this.item.invoiceNumber = invoice.target.value
+
+				},
+				customerEmail(invoice) {
+					this.invoice.customer_email = invoice.target.value;
+				},
+				sendInvoice() {
+					this.invoice.customer_email = this.item.customer.email_address;
+				},
+				serviceError() {
+					if (!this.item.title) {
+						this.title_error = 'Title is required';
+					}
+
+					if (!this.item.price) {
+						this.price_error = 'Price is required';
+					}
+
+					if (isNaN(this.item.price)) {
+						this.price_error = 'Invalid Price';
+					}
+
+					if (!this.item.quantity) {
+						this.quantity_error = 'Quantity is required';
+					}
+
+					if (isNaN(this.item.quantity)) {
+						this.quantity_error = 'Quantity Price';
+					}
+				},
+				saveAndSendError() {
+					if (!this.invoice.customer_email) {
+						this.customer_email_error = 'Email is required';
+					}
+					if (this.maxLimit < this.grandTotal) {
+						Notiflix.Notify.Failure("Gradtotal Must e less than Max Limit");
+					}
+					if (this.minLimit > this.grandTotal) {
+						Notiflix.Notify.Failure("Gradtotal Must e large than Min Limit");
+					}
+				},
+				makeEmptyItem() {
+					this.item.title = '';
+					this.item.description = '';
+					this.item.price = '';
+					this.item.quantity = '';
+					this.makeEmptyError();
+				},
+				makeEmptyError() {
+					this.title_error = '';
+					this.description_error = '';
+					this.price_error = '';
+					this.quantity_error = '';
+				}
+			},
+			filters: {
+				decimalFiltered(value) {
+					if (value) {
+						return value.toFixed(2)
+					}
+				}
+			},
+		})
+	</script>
+	</body>
+</html>
