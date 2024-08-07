@@ -132,6 +132,7 @@ class Transactions(db.Model):
         transaction_type = db.Column(db.String(255))
         coin = db.Column(db.String(255))
         amount = db.Column(db.Float)
+        trx_type = db.Column(db.String(255))
         timestamp = db.Column(db.DateTime, default=datetime.now)
         status = db.Column(db.String(255))
         # Add more fields as needed
@@ -144,3 +145,154 @@ class Referrals(db.Model):
     reffered_user_name = db.Column(db.String(255))
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     # Add more fields as needed
+
+
+
+class DepositTRX(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+        transaction_type = db.Column(db.String(255))
+        coin = db.Column(db.String(255))
+        amount = db.Column(db.Float)
+        timestamp = db.Column(db.DateTime, default=datetime.now)
+        status = db.Column(db.String(255))
+        # Add more fields as needed
+
+
+
+class SendMoney(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+        transaction_type = db.Column(db.String(255))
+        coin = db.Column(db.String(255))
+        amount = db.Column(db.Float)
+        trx_type = db.Column(db.String(255))
+        timestamp = db.Column(db.DateTime, default=datetime.now)
+        status = db.Column(db.String(255))
+        # Add more fields as needed
+
+class RequestMoney(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+        transaction_type = db.Column(db.String(255))
+        coin = db.Column(db.String(255))
+        amount = db.Column(db.Float)
+        trx_type = db.Column(db.String(255))
+        timestamp = db.Column(db.DateTime, default=datetime.now)
+        status = db.Column(db.String(255))
+        # Add more fields as needed
+
+class Exchange(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+        transaction_type = db.Column(db.String(255))
+        coin = db.Column(db.String(255))
+        amount = db.Column(db.Float)
+        trx_type = db.Column(db.String(255))
+        timestamp = db.Column(db.DateTime, default=datetime.now)
+        status = db.Column(db.String(255))
+        # Add more fields as needed
+
+class Redeem(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+        transaction_type = db.Column(db.String(255))
+        coin = db.Column(db.String(255))
+        amount = db.Column(db.Float)
+        trx_type = db.Column(db.String(255))
+        timestamp = db.Column(db.DateTime, default=datetime.now)
+        status = db.Column(db.String(255))
+        # Add more fields as needed
+
+class Escrow(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+        transaction_type = db.Column(db.String(255))
+        coin = db.Column(db.String(255))
+        amount = db.Column(db.Float)
+        trx_type = db.Column(db.String(255))
+        timestamp = db.Column(db.DateTime, default=datetime.now)
+        status = db.Column(db.String(255))
+        # Add more fields as needed
+
+class Dispute(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+        transaction_type = db.Column(db.String(255))
+        coin = db.Column(db.String(255))
+        amount = db.Column(db.Float)
+        trx_type = db.Column(db.String(255))
+        timestamp = db.Column(db.DateTime, default=datetime.now)
+        status = db.Column(db.String(255))
+        # Add more fields as needed
+
+class QrPayment(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+        transaction_type = db.Column(db.String(255))
+        coin = db.Column(db.String(255))
+        amount = db.Column(db.Float)
+        trx_type = db.Column(db.String(255))
+        timestamp = db.Column(db.DateTime, default=datetime.now)
+        status = db.Column(db.String(255))
+        # Add more fields as needed
+
+
+class QFS(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+        transaction_type = db.Column(db.String(255))
+        coin = db.Column(db.String(255))
+        amount = db.Column(db.Float)
+        trx_type = db.Column(db.String(255))
+        timestamp = db.Column(db.DateTime, default=datetime.now)
+        status = db.Column(db.String(255))
+        # Add more fields as needed
+
+
+class Voucher(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+        transaction_type = db.Column(db.String(255))
+        coin = db.Column(db.String(255))
+        amount = db.Column(db.Float)
+        trx_type = db.Column(db.String(255))
+        timestamp = db.Column(db.DateTime, default=datetime.now)
+        status = db.Column(db.String(255))
+        # Add more fields as needed
+
+
+class Invoice(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+        transaction_type = db.Column(db.String(255))
+        coin = db.Column(db.String(255))
+        amount = db.Column(db.Float)
+        trx_type = db.Column(db.String(255))
+        timestamp = db.Column(db.DateTime, default=datetime.now)
+        status = db.Column(db.String(255))
+        # Add more fields as needed
+
+
+class Bill(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+        transaction_type = db.Column(db.String(255))
+        coin = db.Column(db.String(255))
+        amount = db.Column(db.Float)
+        trx_type = db.Column(db.String(255))
+        timestamp = db.Column(db.DateTime, default=datetime.now)
+        status = db.Column(db.String(255))
+        # Add more fields as needed
+
+
+class Payout(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+        transaction_type = db.Column(db.String(255))
+        coin = db.Column(db.String(255))
+        amount = db.Column(db.Float)
+        trx_type = db.Column(db.String(255))
+        timestamp = db.Column(db.DateTime, default=datetime.now)
+        status = db.Column(db.String(255))
+        # Add more fields as needed

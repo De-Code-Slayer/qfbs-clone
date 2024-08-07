@@ -35,15 +35,7 @@ db = SQLAlchemy()
 UPLOADS_PATH = join(dirname(realpath(__file__)), u'static\\uploads')
 
 
-# def ping_connection(dbapi_connection, connection_record, connection_proxy):
-#     cursor = dbapi_connection.cursor()
-#     try:
-#         cursor.execute("SELECT 1")
-#     except:
-#         raise DisconnectionError()
-#     cursor.close()
 
-# event.listen(Engine, "engine_connect", ping_connection)
 
 
 
@@ -56,7 +48,7 @@ def create_app(test_config=None):
 
     # upload folder
     app.config['UPLOAD_FOLDER'] = UPLOADS_PATH
-    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('SQLALCHEMY_DATABASE_URI')
+    app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///project.db' #os.getenv('SQLALCHEMY_DATABASE_URI')
     # app.config["SQLALCHEMY_DATABASE_URI"] = heroku_database_url
     app.config['SQLALCHEMY_POOL_RECYCLE'] = 299 # Recycle connections every 30 seconds
     app.config['SQLALCHEMY_POOL_SIZE'] = 100  # Maximum number of connections to keep in the pool

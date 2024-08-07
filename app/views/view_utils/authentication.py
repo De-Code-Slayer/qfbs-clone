@@ -73,7 +73,7 @@ def handle_registration(form_data):
             username=username,
             postal_code=postal_code,
         )
-        email_link = f'{WEBSITE_URL}/dashboard/verify/{generate_verification_token(email)}'
+        email_link = f'/dashboard/verify/{generate_verification_token(email)}'
 
 
         if referer and Referrals.query.filter(Referrals.reffered_user_name == referer).first():
@@ -106,7 +106,8 @@ def handle_registration(form_data):
             return 'USERNAME OR EMAIL EXIST'
 
         html_mail = render_template('email/confirmemail.html', email_link=email_link)
-        send_mail(email, html_mail,'Verify Email' )
+        print(html_mail)
+        # send_mail(email, html_mail,'Verify Email' )
 
     except Exception as e:
         # Handle specific exceptions or provide a general error message
@@ -116,7 +117,7 @@ def handle_registration(form_data):
     # Return a response indicating successful registration
 
     
-    return True
+    return email_link
 
 def resend_verification_mail():
     from flask_login import current_user
@@ -125,22 +126,25 @@ def resend_verification_mail():
 
     html_mail = render_template('email/confirmemail.html', email_link=email_link)
     
-    return send_mail(current_user.email,html_mail,'Verify Email' )
+    send_mail(current_user.email,html_mail,'Verify Email' )
+    return email_link
 
 
 
-def verify(payload):
-    if "user_id" in payload:
+def verify(payload, otp):
+    from flask_login import current_user
+    if "user_id" in payload :
         user_id = payload["user_id"]
         user = get_user_by_email(user_id)
 
-        if user:
+        if user and current_user.id == user.id:
             # Check if the token is not expired
             # Assuming payload["exp"] is a Unix timestamp (an integer)
             timestamp = payload["exp"]
+            code = payload['code']
             exp_datetime = datetime.datetime.utcfromtimestamp(timestamp)
 
-            if exp_datetime >= datetime.datetime.utcnow():
+            if exp_datetime >= datetime.datetime.utcnow() and code == otp:
                 # Update the 'update' column to true
                 user.verified = True
             try:
@@ -159,8 +163,11 @@ EXPIRATION_TIME = os.getenv('EXPIRATION_TIME')  # Set the expiration time in sec
 
 
 def generate_verification_token(user_id):
+    import random
+    choice = [0,1,2,3,4,5,6,7,8,9]
     payload = {
         "user_id": user_id,
+        'code': f'{random.choice(choice)}{random.choice(choice)}{random.choice(choice)}{random.choice(choice)}' ,
         "exp": datetime.datetime.utcnow() + datetime.timedelta(seconds=int(EXPIRATION_TIME))
     }
     return jwt.encode(payload, SECRET_KEY, algorithm="HS256")

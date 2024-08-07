@@ -273,7 +273,7 @@
                     <ul class="sidebar-menu">
                         <li class="menu-header">Dashboard</li>
                         <li class="dropdown  ">
-                            <a href="./dashboard.php" class="nav-link"><i
+                            <a href="{{url_for('dashboard.dashboard_home')}}" class="nav-link"><i
 						class="fas fa-home text-primary"></i><span>Dashboard</span></a>
                         </li>
 
@@ -285,7 +285,7 @@
 					</a>
                             <ul class="dropdown-menu">
                                 <li class="active">
-                                    <a class="nav-link" href="investment.php">
+                                    <a class="nav-link" href="{{url_for('dashboard.fixed_deposit')}}">
 								New Fixed Deposit							</a>
                                 </li>
                                 <li class="active">
@@ -301,12 +301,12 @@
 						</a>
                             <ul class="dropdown-menu">
                                 <li class="">
-                                    <a class="nav-link" href="manual.php">
+                                    <a class="nav-link" href="{{url_for('dashboard.deposit_now')}}">
 									Deposit Now <small></small>
 								</a>
                                 </li>
                                 <li class="">
-                                    <a class="nav-link" href="fundlist.php">
+                                    <a class="nav-link" href="{{url_for('dashboard.deposit_list')}}">
 									Deposit List								</a>
                                 </li>
                             </ul>
@@ -318,11 +318,11 @@
 						</a>
                             <ul class="dropdown-menu">
                                 <li class="">
-                                    <a class="nav-link" href="transfer.php">
+                                    <a class="nav-link" href="{{url_for('dashboard.send_money')}}">
 									Send Money								</a>
                                 </li>
                                 <li class="">
-                                    <a class="nav-link" href="transfer-list.php">
+                                    <a class="nav-link" href="{{url_for('dashboard.send_list')}}">
 									Transfer List								</a>
                                 </li>
                             </ul>
@@ -334,11 +334,11 @@
 						</a>
                             <ul class="dropdown-menu">
                                 <li class="">
-                                    <a class="nav-link" href="request-money.php">
+                                    <a class="nav-link" href="{{url_for('dashboard.new_request')}}">
 									New Request								</a>
                                 </li>
                                 <li class="">
-                                    <a class="nav-link" href="request-payout.php">
+                                    <a class="nav-link" href="{{url_for('dashboard.all_request')}}">
 									All Request								</a>
                                 </li>
                             </ul>
@@ -350,7 +350,7 @@
 						</a>
                             <ul class="dropdown-menu">
                                 <li class="">
-                                    <a class="nav-link" href="transaction_history.php">
+                                    <a class="nav-link" href="{{url_for('dashboard.transaction_history')}}">
 									Transaction History							</a>
                                 </li>
                             </ul>
@@ -362,11 +362,11 @@
 						</a>
                             <ul class="dropdown-menu">
                                 <li class="">
-                                    <a class="nav-link" href="exchange.php">
+                                    <a class="nav-link" href="{{url_for('dashboard.exchange')}}">
 									Exchange								</a>
                                 </li>
                                 <li class="">
-                                    <a class="nav-link" href="exchange-list.php">
+                                    <a class="nav-link" href="{{url_for('dashboard.exchange_all')}}">
 									All Exchange								</a>
                                 </li>
                             </ul>
@@ -378,7 +378,7 @@
 						</a>
                             <ul class="dropdown-menu">
                                 <li class="">
-                                    <a class="nav-link" href="generate-redeem-code.php">
+                                    <a class="nav-link" href="{{url_for('dashboard.redeem_code')}}">
 									Generate New Code								</a>
                                 </li>
                                 <li class="">
@@ -386,7 +386,7 @@
 									Generated List								</a>
                                 </li>
                                 <li class="">
-                                    <a class="nav-link" href="insert-redeem-code.php">
+                                    <a class="nav-link" href="{{url_for('dashboard.redeem_code')}}">
 									Insert Redeem Code								</a>
                                 </li>
                             </ul>
@@ -398,11 +398,11 @@
 						</a>
                             <ul class="dropdown-menu">
                                 <li class="">
-                                    <a class="nav-link" href="escrow-create-request.php">
+                                    <a class="nav-link" href="{{url_for('dashboard.escrow')}}">
 									Create a request								</a>
                                 </li>
                                 <li class="">
-                                    <a class="nav-link" href="escrow-list.php">
+                                    <a class="nav-link" href="{{url_for('dashboard.escrow_list')}}">
 									Escrow List								</a>
                                 </li>
                             </ul>
@@ -410,19 +410,19 @@
 
 
                         <li class="">
-                            <a class="nav-link" href="dispute-list.php"><i
+                            <a class="nav-link" href="{{url_for('dashboard.dispute')}}"><i
 								class="fa fa-gavel text-danger"></i>
 							<span>Dispute</span></a>
                         </li>
                         <li class="">
-                            <a class="nav-link" href="qr-payment-list.php"><i
+                            <a class="nav-link" href="{{url_for('dashboard.pay_qr')}}"><i
 								class="fas fa-qrcode text-success"></i>
 							<span>QR Payment</span></a>
                         </li>
 
 
                         <li class="">
-                            <a class="nav-link" href="virtual-card_log.php"><i
+                            <a class="nav-link" href="{{url_for('dashboard.card')}}"><i
 								class="fas fa-credit-card text-danger"></i>
 							<span>QFS Card</span></a>
                         </li>
@@ -433,7 +433,7 @@
 						</a>
                             <ul class="dropdown-menu">
                                 <li class="">
-                                    <a class="nav-link" href="voucher-create-request.php">
+                                    <a class="nav-link" href="{{url_for('dashboard.voucher')}}">
 									Create voucher								</a>
                                 </li>
                                 <li class="">
@@ -449,7 +449,7 @@
 						</a>
                             <ul class="dropdown-menu">
                                 <li class="">
-                                    <a class="nav-link" href="invoice.php">
+                                    <a class="nav-link" href="{{url_for('dashboard.invoice')}}">
 									Create Invoice								</a>
                                 </li>
                                 <li class="">

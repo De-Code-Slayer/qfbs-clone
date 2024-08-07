@@ -1,0 +1,53 @@
+
+
+{% extends 'base.html'%}
+
+{% block body %}
+<div class="main-content">
+	<section class="section">
+		<div class="section-header">
+			<h1>Insert Redeem Code</h1>
+			<div class="section-header-breadcrumb">
+				<div class="breadcrumb-item active">
+					<a href="dashboard.php">Dashboard</a>
+				</div>
+				<div class="breadcrumb-item">Insert Redeem Code</div>
+			</div>
+		</div>
+
+		<div class="row mb-3">
+			<div class="container-fluid" id="container-wrapper">
+				<div class="row justify-content-md-center">
+					<div class="col-md-12">
+						<div class="card mb-4 card-primary shadow">
+							<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+								<h6 class="m-0 font-weight-bold text-primary">Insert Redeem Code</h6>
+							</div>
+							<div class="card-body">
+								<form action="https://qfsnesara.io/user/insert-redeem-code" method="post">
+									<input type="hidden" name="_token" value="Pn0pf6rk9qjdwTgRFkbLsZZuJaTurUSBWFEmgVXd">									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<label for="utr">Redeem Code</label>
+												<input type="text" id="redeemCode" value=""
+													   name="redeemCode" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+													   class="form-control "
+													   autocomplete="off">
+												<div class="invalid-feedback">
+																									</div>
+												<div class="valid-feedback"></div>
+											</div>
+										</div>
+									</div>
+									<button type="submit" id="submit" class="btn btn-primary btn-sm btn-block" disabled>Submit redeem code</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</section>
+</div>
+	{% endblock %}

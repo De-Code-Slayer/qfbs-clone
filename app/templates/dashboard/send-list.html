@@ -1,17 +1,16 @@
-
-
 {% extends 'base.html'%}
 
 {% block body %}
-        <div class="main-content">
+
+<div class="main-content">
                 <section class="section">
                     <div class="section-header">
-                        <h1>Exchange Money</h1>
+                        <h1>Sent/Received Money List</h1>
                         <div class="section-header-breadcrumb">
                             <div class="breadcrumb-item active">
-                                <a href="https://qfsnesara.io/user/dashboard">Dashboard</a>
+                                <a href="https://qfsaccessaccount.us/user/dashboard">Dashboard</a>
                             </div>
-                            <div class="breadcrumb-item">Exchange Money</div>
+                            <div class="breadcrumb-item">Sent/Received Money List</div>
                         </div>
                     </div>
 
@@ -24,8 +23,23 @@
                                             <h6 class="m-0 font-weight-bold text-primary">Search</h6>
                                         </div>
                                         <div class="card-body">
-                                            <form action="#" method="get">
+                                            <form action="https://qfsnesara.io/user/transfer-search" method="get">
                                                 <div class="row">
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <input placeholder="Sender" name="sender" value="" type="text" class="form-control form-control-sm">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <input placeholder="Receiver" name="receiver" value="" type="text" class="form-control form-control-sm">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <input placeholder="E-mail" name="email" value="" type="text" class="form-control form-control-sm">
+                                                        </div>
+                                                    </div>
                                                     <div class="col-md-2">
                                                         <div class="form-group">
                                                             <input placeholder="Transaction ID" name="utr" value="" type="text" class="form-control form-control-sm">
@@ -48,64 +62,26 @@
                                                     </div>
                                                     <div class="col-md-2">
                                                         <div class="form-group search-currency-dropdown">
-                                                            <select name="from_wallet" class="form-control form-control-sm">
-				<option value="">Select From Currency</option>
-									<option value="724" >
-						USD
-						- US Dollar </option>
-									<option value="725" >
-						XRP
-						- Ripple </option>
-									<option value="726" >
-						BTC
-						- Bitcoin </option>
-									<option value="727" >
-						ETH
-						- Ethereum </option>
-									<option value="728" >
-						ALGO
-						- Algorand </option>
-									<option value="729" >
-						XLM
-						- Stellar </option>
-									<option value="730" >
-						XDC
-						- XDC NETWORK </option>
-									<option value="731" >
-						Matic
-						- Polygon </option>
+                                                            <select name="currency_id" class="form-control form-control-sm">
+				<option value="">All Currency</option>
+									<option value="5" > ALGO - Algorand </option>
+									<option value="3" > BTC - Bitcoin </option>
+									<option value="4" > ETH - Ethereum </option>
+									<option value="8" > Matic - Polygon </option>
+									<option value="1" > USD - US Dollar </option>
+									<option value="7" > XDC - XDC NETWORK </option>
+									<option value="6" > XLM - Stellar </option>
+									<option value="2" > XRP - Ripple </option>
 							</select>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
                                                         <div class="form-group search-currency-dropdown">
-                                                            <select name="to_wallet" class="form-control form-control-sm">
-				<option value="">Select To Currency</option>
-									<option value="724" >
-						USD
-						- US Dollar </option>
-									<option value="725" >
-						XRP
-						- Ripple </option>
-									<option value="726" >
-						BTC
-						- Bitcoin </option>
-									<option value="727" >
-						ETH
-						- Ethereum </option>
-									<option value="728" >
-						ALGO
-						- Algorand </option>
-									<option value="729" >
-						XLM
-						- Stellar </option>
-									<option value="730" >
-						XDC
-						- XDC NETWORK </option>
-									<option value="731" >
-						Matic
-						- Polygon </option>
-							</select>
+                                                            <select name="type" class="form-control form-control-sm">
+				<option value="">All Type</option>
+				<option value="sent" >Sent</option>
+				<option value="received" >Received</option>
+			</select>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
@@ -132,19 +108,20 @@
                                 <div class="col-lg-12">
                                     <div class="card mb-4 card-primary shadow">
                                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                            <h6 class="m-0 font-weight-bold text-primary">Exchange Money</h6>
+                                            <h6 class="m-0 font-weight-bold text-primary">Sent/Received Money List</h6>
                                         </div>
                                         <div class="card-body">
                                             <div class="table-responsive">
                                                 <table class="table table-striped table-hover align-items-center table-borderless">
                                                     <thead class="thead-light">
                                                         <tr>
-                                                            <th>Exchange</th>
-                                                            <th>Amount</th>
-                                                            <th>Charge</th>
-                                                            <th>Exchange Rate</th>
-                                                            <th>Exchange Amount</th>
+                                                            <th>SL</th>
+                                                            <th>Sender</th>
+                                                            <th>Receiver</th>
+                                                            <th>Receiver E-Mail</th>
                                                             <th>Transaction ID</th>
+                                                            <th>Amount</th>
+                                                            <th>Type</th>
                                                             <th>Status</th>
                                                             <th>Created time</th>
                                                             <th>Action</th>
@@ -169,4 +146,4 @@
 
                 </section>
             </div>
-{% endblock %}
+        {% endblock %}
