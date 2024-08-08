@@ -6,6 +6,7 @@ from flask_login import current_user
 from app import db, UPLOADS_PATH
 import logging
 from os import path
+from ...database.models import *
 
 
 
@@ -13,25 +14,6 @@ from os import path
 ALLOWED_EXTENSIONS = {'png', 'jpg','jpeg'}
 
 basedir = path.abspath(path.dirname(__file__))
-
-def follow_trader(traded_plan, traded_amount, trader_id):
-    import os
-    try:
-        current_user.trader_profile_id = trader_id
-        current_user.traded_plan = traded_plan
-        current_user.traded_amount = traded_amount
-        db.session.commit()
-        #db.session.close()
-    except Exception as e:
-        # Handle specific exceptions or provide a general error message
-        db.session.rollbacl()
-        logging.error(f'Error occurred: {str(e)}')
-        return False
-    else:
-        mail_address = os.getenv('EMAIL_ADDRESS')
-        send_mail(mail_address, 'Trade Coppied', f'{current_user.email} just  followed trader {trader_id}')
-        
-        return True
 
 
 
@@ -217,6 +199,89 @@ def proccess_withdrawal(request_data):
 def get_trx():
 
     return Transactions.query.filter((Transactions.user_id == current_user.id)).all()
+
+
+def create_fixed_deposit(form_data):
+    plan  = form_data.get('plan')
+    interest  = form_data.get('currency')
+    min_amount  = form_data.get('min')
+    max_amount  =  form_data.get('max')
+    tenure  =  form_data.get('tenure')
+    amount  =  form_data.get('amount')
+
+    try:
+         new_trx = Fixed_DepositTRX(plan=plan, interest=interest, min_amount=min_amount, max_amount=max_amount, tenure=tenure,amount=amount)
+         db.session.add(new_trx)
+         db.session.commit()
+    except Exception as e:
+        logging.error(f'{e}')
+
+    
+
+
+def create_deposit(form_data):
+    curency  = form_data.get('currency')
+    amount  = form_data.get('amount')
+    wallet  = form_data.get('wallet')
+    
+
+    try:
+         new_trx = DepositTRX(curency=curency, wallet=wallet,amount=amount)
+         db.session.add(new_trx)
+         db.session.commit()
+    except Exception as e:
+        logging.error(f'{e}')
+    pass
+
+def send_money():
+    pass
+
+def create_request_money():
+    pass
+
+def create_exchange():
+    pass
+
+def create_redeem_code():
+    pass
+
+def verify_redeem_code():
+    pass
+
+def create_escrow():
+    pass
+
+
+def create_dispute():
+    pass
+
+def create_voucher():
+    pass
+
+
+def create_invoice():
+    pass
+
+
+def create_bill():
+    pass
+
+
+def create_payout():
+    pass
+
+
+def create_qrpayment():
+    pass
+
+def create_qfs_card():
+    pass
+
+
+
+
+
+
 
 
 

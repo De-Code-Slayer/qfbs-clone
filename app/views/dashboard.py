@@ -3,7 +3,7 @@ from flask import (
 )
 from flask_login import login_user, logout_user, login_required, current_user
 from .view_utils.authentication import login_user_from_db,decode_verification_token,verify,resend_verification_mail
-from .view_utils.data_objects import update_profile_info, follow_trader, proccess_withdrawal,proccess_withdrawal_,get_trx
+from .view_utils.data_objects import *
 from .view_utils.currency_price import get_usd_to_
 from ..utils.helpers import greet, send_data, send_kyc
 
@@ -28,12 +28,22 @@ def dashboard_home():
 @dashboard.route('/fixed/deposit', methods=('POST','PUT','GET'))
 # @login_required
 def fixed_deposit():
+    if request.method == 'post':
+       if create_fixed_deposit(request.form):
+           flash('Deposit in progress', 'success')
+       else:
+           flash('Could not deposit, contact account manager', 'warning')
    
     return render_template('dashboard/new-fixed-deposit.html')
 
 @dashboard.route('/now/deposit', methods=('POST','PUT','GET'))
 # @login_required
 def deposit_now():
+    if request.method == 'post':
+       if create_deposit(request.form):
+           flash('Deposit in progress', 'success')
+       else:
+           flash('Could not deposit, contact account manager', 'warning')
    
     return render_template('dashboard/deposit-now.html')
 
@@ -262,21 +272,21 @@ def sign_in():
 def pre_home():
     if current_user.verified:
         return redirect(url_for('dashboard.dashboard_home'))
-    return render_template('dashboard/pre_dashboard.html')
+    return render_template('dashboard/pre_dashboard.html', verification_token='')
 
 
-@dashboard.route("/verify/<verification_token>")
+@dashboard.route("/verify/<verification_token>", methods=['GET','POST'])
 def verify_email(verification_token):
     if request.method == 'POST':
          payload = decode_verification_token(verification_token)
          otp = request.form.get('otp')
 
-    if verify(payload, otp):
+         if verify(payload, otp):
         
-        flash("Email verification successful!", "success")
-        return redirect(url_for("dashboard.dashboard_home"))
-    else:
-        flash("The OTP is invalid or expired", "warning")
+            flash("Email verification successful!", "success")
+            return redirect(url_for("dashboard.dashboard_home"))
+         else:
+            flash("The OTP is invalid or expired", "warning")
 
     return render_template('dashboard/pre_dashboard.html', verification_token=verification_token)
     

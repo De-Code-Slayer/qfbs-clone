@@ -22,7 +22,7 @@
 
                                 <div class="col-md-12">
                                     <br>
-                                    <form action="#" method="post">
+                                    <form  method="post">
                                         <input type="hidden" name="_token" value="xbegwQlCSk72J9sKURD5zLNTbR0du6Retz0xphju">
                                         <section class=" ">
                                             <div class="bs-stepper horizontal-wizard-example">
@@ -36,7 +36,7 @@
                                                             <p id="image"></p>
                                                             <div class="mb-3 col-md-12">
                                                                 <label class="form-label" for="username">Plan</label>
-                                                                <select id="gateway" onchange="myFunction()" name="plan" class="form-control">
+                                                                <select id="gateway" onchange="myFunction()" name="plan" class="form-control" required>
               <option selected disabled>Select An Option</option>
                                                         <option
                                data-id="1"
@@ -85,7 +85,7 @@
                                                         <div class="row">
                                                             <div class="mb-3 col-md-12">
                                                                 <label class="form-label" for="first-name">Amount</label>
-                                                                <input type="text" name="amount" id="amount" class="form-control" placeholder="0.00" />
+                                                                <input type="text" name="amount" id="amount" class="form-control" placeholder="0.00" required />
                                                             </div>
                                                         </div>
 

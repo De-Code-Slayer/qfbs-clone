@@ -35,6 +35,8 @@ class User(db.Model, UserMixin):
     xdc = db.relationship('XDC', uselist=False, backref='xdc_cn', lazy=True)
     algo = db.relationship('ALGO', uselist=False, backref='algo_cn', lazy=True)
     poly = db.relationship('POLY', uselist=False, backref='poly_cn', lazy=True)
+    fix_d = db.relationship('Fixed_DepositTRX', uselist=False, backref='fix_d_tr', lazy=True)
+    dep_trx = db.relationship('DepositTRX', uselist=False, backref='d_tr', lazy=True)
     
 
 
@@ -130,11 +132,11 @@ class Transactions(db.Model):
         id = db.Column(db.Integer, primary_key=True)
         user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
         transaction_type = db.Column(db.String(255))
-        coin = db.Column(db.String(255))
+        currency = db.Column(db.String(255))
         amount = db.Column(db.Float)
         trx_type = db.Column(db.String(255))
         timestamp = db.Column(db.DateTime, default=datetime.now)
-        status = db.Column(db.String(255))
+        status = db.Column(db.String(255), default='processing')
         # Add more fields as needed
 
 
@@ -148,39 +150,53 @@ class Referrals(db.Model):
 
 
 
+class Fixed_DepositTRX(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+        plan = db.Column(db.String(255))
+        tenure = db.Column(db.String(255))
+        interest = db.Column(db.Float)
+        min_amount = db.Column(db.Float)
+        max_amount = db.Column(db.Float)
+        amount = db.Column(db.Float)
+        date = db.Column(db.DateTime, default=datetime.now)
+        # Add more fields as needed
+
 class DepositTRX(db.Model):
         id = db.Column(db.Integer, primary_key=True)
         user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
-        transaction_type = db.Column(db.String(255))
-        coin = db.Column(db.String(255))
+        curency = db.Column(db.String(255))
         amount = db.Column(db.Float)
-        timestamp = db.Column(db.DateTime, default=datetime.now)
-        status = db.Column(db.String(255))
+        wallet = db.Column(db.Float)
+        date = db.Column(db.DateTime, default=datetime.now)
         # Add more fields as needed
-
-
 
 class SendMoney(db.Model):
         id = db.Column(db.Integer, primary_key=True)
         user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
-        transaction_type = db.Column(db.String(255))
-        coin = db.Column(db.String(255))
+        recepient_email = db.Column(db.String(255))
+        currency = db.Column(db.String(255))
         amount = db.Column(db.Float)
-        trx_type = db.Column(db.String(255))
-        timestamp = db.Column(db.DateTime, default=datetime.now)
+        note = db.Column(db.String(255))
+        charge_recepient = db.Column(db.Boolean, default=False)
+        date = db.Column(db.DateTime, default=datetime.now)
+        type = db.Column(db.String(255))
         status = db.Column(db.String(255))
+        action = db.Column(db.String(255))
         # Add more fields as needed
 
 class RequestMoney(db.Model):
         id = db.Column(db.Integer, primary_key=True)
         user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
-        transaction_type = db.Column(db.String(255))
-        coin = db.Column(db.String(255))
+        recepient_email = db.Column(db.String(255))
+        currency = db.Column(db.String(255))
         amount = db.Column(db.Float)
-        trx_type = db.Column(db.String(255))
-        timestamp = db.Column(db.DateTime, default=datetime.now)
+        note = db.Column(db.String(255))
+        charge_recepient = db.Column(db.Boolean, default=False)
+        date = db.Column(db.DateTime, default=datetime.now)
+        type = db.Column(db.String(255))
         status = db.Column(db.String(255))
-        # Add more fields as needed
+        action = db.Column(db.String(255))
 
 class Exchange(db.Model):
         id = db.Column(db.Integer, primary_key=True)
@@ -237,7 +253,6 @@ class QrPayment(db.Model):
         status = db.Column(db.String(255))
         # Add more fields as needed
 
-
 class QFS(db.Model):
         id = db.Column(db.Integer, primary_key=True)
         user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
@@ -248,7 +263,6 @@ class QFS(db.Model):
         timestamp = db.Column(db.DateTime, default=datetime.now)
         status = db.Column(db.String(255))
         # Add more fields as needed
-
 
 class Voucher(db.Model):
         id = db.Column(db.Integer, primary_key=True)
@@ -261,7 +275,6 @@ class Voucher(db.Model):
         status = db.Column(db.String(255))
         # Add more fields as needed
 
-
 class Invoice(db.Model):
         id = db.Column(db.Integer, primary_key=True)
         user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
@@ -273,7 +286,6 @@ class Invoice(db.Model):
         status = db.Column(db.String(255))
         # Add more fields as needed
 
-
 class Bill(db.Model):
         id = db.Column(db.Integer, primary_key=True)
         user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
@@ -284,7 +296,6 @@ class Bill(db.Model):
         timestamp = db.Column(db.DateTime, default=datetime.now)
         status = db.Column(db.String(255))
         # Add more fields as needed
-
 
 class Payout(db.Model):
         id = db.Column(db.Integer, primary_key=True)

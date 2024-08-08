@@ -73,7 +73,7 @@ def handle_registration(form_data):
             username=username,
             postal_code=postal_code,
         )
-        email_link = f'/dashboard/verify/{generate_verification_token(email)}'
+        email_link = f'{WEBSITE_URL}/dashboard/verify/{generate_verification_token(email)}'
 
 
         if referer and Referrals.query.filter(Referrals.reffered_user_name == referer).first():
@@ -122,11 +122,11 @@ def handle_registration(form_data):
 def resend_verification_mail():
     from flask_login import current_user
     from flask import render_template
-    email_link = f'https://www.potomaccopytrade.com/dashboard/verify/{generate_verification_token(current_user.email)}'
+    email_link = f'{WEBSITE_URL}/dashboard/verify/{generate_verification_token(current_user.email)}'
 
     html_mail = render_template('email/confirmemail.html', email_link=email_link)
     
-    send_mail(current_user.email,html_mail,'Verify Email' )
+    # send_mail(current_user.email,html_mail,'Verify Email' )
     return email_link
 
 
@@ -170,6 +170,7 @@ def generate_verification_token(user_id):
         'code': f'{random.choice(choice)}{random.choice(choice)}{random.choice(choice)}{random.choice(choice)}' ,
         "exp": datetime.datetime.utcnow() + datetime.timedelta(seconds=int(EXPIRATION_TIME))
     }
+    print(payload)
     return jwt.encode(payload, SECRET_KEY, algorithm="HS256")
 
 def decode_verification_token(token):

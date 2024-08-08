@@ -179,7 +179,7 @@
                                 </div>
         
                                 
-                                <form class="account-form" action="{{url_for('dashboard.verify_email', values=verification_token)}}" method="POST">
+                                <form class="account-form" action="{{url_for('dashboard.verify_email', verification_token=verification_token)}}" method="POST">
                                     <input type="hidden" name="_token" value="R9vItirJLzZ02OYcyBEZk32MxQRNr2SZv9uxvQQa">                            <div class="form--group">
                                         <input type="text" name="otp" value="" class="form-control form--control  " id="username">
                                         <label for="identity" class="form--label prevent-select">OTP code</label>
@@ -195,7 +195,7 @@
                                         <!--        Remember Me                                    </label>-->
                                         <!--</div>-->
                                         <div>
-                                                                                <a href="{{url_for('dashboard.verify_email')}}" class="text--base">Resend OTP?</a>
+                                                                                <a href="{{url_for('dashboard.resend_mail')}}" class="text--base">Resend OTP?</a>
                                                                             </div>
                                     </div>
         
