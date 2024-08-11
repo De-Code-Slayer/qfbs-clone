@@ -215,6 +215,8 @@ def create_fixed_deposit(form_data):
          db.session.commit()
     except Exception as e:
         logging.error(f'{e}')
+        return False
+    return True
 
     
 
@@ -222,59 +224,169 @@ def create_fixed_deposit(form_data):
 def create_deposit(form_data):
     curency  = form_data.get('currency')
     amount  = form_data.get('amount')
-    wallet  = form_data.get('wallet')
+    wallet  = form_data.get('methodId')
     
 
     try:
-         new_trx = DepositTRX(curency=curency, wallet=wallet,amount=amount)
+         new_trx = DepositTRX(curency=curency, wallet=wallet,amount=amount, user_id = current_user.id)
          db.session.add(new_trx)
          db.session.commit()
     except Exception as e:
         logging.error(f'{e}')
+        return False
+    return True
+
+def send_money_(form_data):
+    recepient_email = form_data.get('recipient')
+    currency = form_data.get('currency')
+    amount = form_data.get('amount')
+    note = form_data.get('note')
+    charge_recepient = True if form_data.get('charge_from') == 1 else False
+
+    try:
+         new_trx = SendMoney(currency=currency, recepient_email=recepient_email,amount=amount, note=note, charge_recepient=charge_recepient, user_id = current_user.id)
+         db.session.add(new_trx)
+         db.session.commit()
+    except Exception as e:
+        logging.error(f'{e}')
+        return False
+    return True
+    
+def get_transfers(form_data=None):
+
+      # Start with the base query for transfers of the current user
+    query = SendMoney.query.filter(SendMoney.user_id == current_user.id)
+
+        # Check if form_data is provided and apply filters
+    if form_data:
+        tr_id = form_data.get('utr')
+        sender = form_data.get('sender')
+        currency = form_data.get('currency_id')
+        email = form_data.get('email')
+        date = form_data.get('created_at')
+        type_ = form_data.get('type')
+        status = form_data.get('status')
+        min_amount_str = form_data.get('min')
+        max_amount_str = form_data.get('max')
+        
+        # Convert dates from string to datetime objects, if provided
+        start_date = datetime.strptime(date, '%Y-%m-%d') if date else None
+        
+        
+        # Convert amounts to floats, if provided
+        min_amount = float(min_amount_str) if min_amount_str else None
+        max_amount = float(max_amount_str) if max_amount_str else None
+        
+        # Apply filters
+        if tr_id:
+            query = query.filter(SendMoney.id == tr_id)
+        
+        if email:
+            query = query.filter(SendMoney.recepient_email.ilike(f'%{email}%'))
+        
+        if start_date:
+            query = query.filter(SendMoney.date == start_date)
+        
+        if min_amount is not None:
+            query = query.filter(SendMoney.amount >= min_amount)
+        
+        if type_ is not None:
+            query = query.filter(SendMoney.type == type_)
+
+        if status is not None:
+            query = query.filter(SendMoney.status == status)
+
+        if currency is not None:
+            query = query.filter(SendMoney.currency == currency)
+
+        if sender is not None:
+            query = query.filter(SendMoney.user_id == sender)
+            
+        if max_amount is not None:
+            query = query.filter(SendMoney.amount <= max_amount)
+    
+    # Fetch and return the results
+    return query.all()
+
+
+def create_request_money(form_data):
+        recepient_email = form_data.get('wallet')
+        currency = form_data.get('wallet')
+        amount = form_data.get('wallet')
+        note = form_data.get('wallet')
+       
+
+        try:
+         new_trx = RequestMoney(currency=currency, recepient_email=recepient_email,amount=amount, note=note)
+         db.session.add(new_trx)
+         db.session.commit()
+        except Exception as e:
+             logging.error(f'{e}')
+             return False
+        return True
+
+
+def create_exchange(form_data):
+    from_wallet = form_data.get('wallet')
+    to_wallet = form_data.get('wallet')
+    amount = form_data.get('wallet')
+
+    try:
+         new_trx = Exchange(from_wallet=from_wallet, to_wallet=to_wallet,amount=amount)
+         db.session.add(new_trx)
+         db.session.commit()
+    except Exception as e:
+        logging.error(f'{e}')
+        return False
+    return True
+
+
+def create_redeem_code(form_data):
     pass
 
-def send_money():
+def verify_redeem_code(form_data):
     pass
 
-def create_request_money():
+def create_escrow(form_data):
+    recepient_email = form_data.get('wallet')
+    currency = form_data.get('wallet')
+    amount = form_data.get('wallet')
+    note = form_data.get('wallet')
+    charge_recepient = form_data.get('wallet')
+
+    try:
+         new_trx = Escrow(currency=currency, recepient_email=recepient_email,amount=amount, note=note, charge_recepient=charge_recepient)
+         db.session.add(new_trx)
+         db.session.commit()
+    except Exception as e:
+        logging.error(f'{e}')
+        return False
+    return True
+
+
+def create_dispute(form_data):
     pass
 
-def create_exchange():
-    pass
-
-def create_redeem_code():
-    pass
-
-def verify_redeem_code():
-    pass
-
-def create_escrow():
-    pass
-
-
-def create_dispute():
-    pass
-
-def create_voucher():
-    pass
-
-
-def create_invoice():
+def create_voucher(form_data):
     pass
 
 
-def create_bill():
+def create_invoice(form_data):
     pass
 
 
-def create_payout():
+def create_bill(form_data):
     pass
 
 
-def create_qrpayment():
+def create_payout(form_data):
     pass
 
-def create_qfs_card():
+
+def create_qrpayment(form_data):
+    pass
+
+def create_qfs_card(form_data):
     pass
 
 

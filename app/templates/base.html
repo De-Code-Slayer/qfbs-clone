@@ -179,7 +179,19 @@
                             <div class="content"></div>
                         </div>
                     </div>
+                    
                 </form>
+                <div class="form--group mb-4">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                        <ul class='flashes'>
+                        {%  for category, message in messages  %}
+                        <li><a  class="btn btn-{{category}} btn-buy-now">{{ message }}</a></li>
+                        {% endfor %}
+                        </ul>
+                      {% endif %}
+                      {% endwith %}
+                </div>
 
                 <ul class="navbar-nav navbar-right">
 

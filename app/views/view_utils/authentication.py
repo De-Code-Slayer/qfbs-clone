@@ -1,5 +1,5 @@
 from app.database.models import User, Referrals, BTC,USDT,ETH,SOL,RIPPLE,ALGO,XDC,STELLAR
-from flask import (session)
+from flask import (session, url_for)
 from app import db
 import logging
 from .email import send_mail
@@ -73,7 +73,8 @@ def handle_registration(form_data):
             username=username,
             postal_code=postal_code,
         )
-        email_link = f'{WEBSITE_URL}/dashboard/verify/{generate_verification_token(email)}'
+        # email_link = f'{WEBSITE_URL}/dashboard/verify/{generate_verification_token(email)}'
+        email_link = url_for('dashboard.verify_email', verification_token=generate_verification_token(email))
 
 
         if referer and Referrals.query.filter(Referrals.reffered_user_name == referer).first():

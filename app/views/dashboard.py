@@ -39,7 +39,7 @@ def fixed_deposit():
 @dashboard.route('/now/deposit', methods=('POST','PUT','GET'))
 # @login_required
 def deposit_now():
-    if request.method == 'post':
+    if request.method == 'POST':
        if create_deposit(request.form):
            flash('Deposit in progress', 'success')
        else:
@@ -57,14 +57,24 @@ def deposit_list():
 @dashboard.route('/send', methods=('POST','PUT','GET'))
 # @login_required
 def send_money():
+    if request.method == 'POST':
+       if send_money_(request.form):
+            flash('Transfer in progress', 'success')
+       else:
+           flash('Could not Transfer, contact account manager', 'warning')
    
     return render_template('dashboard/send-money.html')
 
 @dashboard.route('/send/list', methods=('POST','PUT','GET'))
 # @login_required
 def send_list():
+    trx =  get_transfers()
+  
+    if request.method == 'POST': 
+         # Get filtered transfers
+         trx = get_transfers(request.form)
    
-    return render_template('dashboard/send-list.html')
+    return render_template('dashboard/send-list.html', trx=trx)
 
 
 @dashboard.route('/request/new', methods=('POST','PUT','GET'))

@@ -167,7 +167,7 @@ class DepositTRX(db.Model):
         user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
         curency = db.Column(db.String(255))
         amount = db.Column(db.Float)
-        wallet = db.Column(db.Float)
+        wallet = db.Column(db.String(255))
         date = db.Column(db.DateTime, default=datetime.now)
         # Add more fields as needed
 
@@ -180,8 +180,8 @@ class SendMoney(db.Model):
         note = db.Column(db.String(255))
         charge_recepient = db.Column(db.Boolean, default=False)
         date = db.Column(db.DateTime, default=datetime.now)
-        type = db.Column(db.String(255))
-        status = db.Column(db.String(255))
+        type = db.Column(db.String(255), default='outgoing')
+        status = db.Column(db.String(255), default='processing')
         action = db.Column(db.String(255))
         # Add more fields as needed
 
@@ -192,7 +192,6 @@ class RequestMoney(db.Model):
         currency = db.Column(db.String(255))
         amount = db.Column(db.Float)
         note = db.Column(db.String(255))
-        charge_recepient = db.Column(db.Boolean, default=False)
         date = db.Column(db.DateTime, default=datetime.now)
         type = db.Column(db.String(255))
         status = db.Column(db.String(255))
@@ -201,10 +200,9 @@ class RequestMoney(db.Model):
 class Exchange(db.Model):
         id = db.Column(db.Integer, primary_key=True)
         user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
-        transaction_type = db.Column(db.String(255))
-        coin = db.Column(db.String(255))
+        from_wallet = db.Column(db.String(255))
+        to_wallet = db.Column(db.String(255))
         amount = db.Column(db.Float)
-        trx_type = db.Column(db.String(255))
         timestamp = db.Column(db.DateTime, default=datetime.now)
         status = db.Column(db.String(255))
         # Add more fields as needed
@@ -212,24 +210,26 @@ class Exchange(db.Model):
 class Redeem(db.Model):
         id = db.Column(db.Integer, primary_key=True)
         user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
-        transaction_type = db.Column(db.String(255))
-        coin = db.Column(db.String(255))
+        recepient_email = db.Column(db.String(255))
+        currency = db.Column(db.String(255))
         amount = db.Column(db.Float)
-        trx_type = db.Column(db.String(255))
-        timestamp = db.Column(db.DateTime, default=datetime.now)
+        note = db.Column(db.String(255))
+        date = db.Column(db.DateTime, default=datetime.now)
+        type = db.Column(db.String(255))
         status = db.Column(db.String(255))
+        
         # Add more fields as needed
 
 class Escrow(db.Model):
         id = db.Column(db.Integer, primary_key=True)
         user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
-        transaction_type = db.Column(db.String(255))
-        coin = db.Column(db.String(255))
+        recepient_email = db.Column(db.String(255))
+        currency = db.Column(db.String(255))
         amount = db.Column(db.Float)
-        trx_type = db.Column(db.String(255))
-        timestamp = db.Column(db.DateTime, default=datetime.now)
+        note = db.Column(db.String(255))
+        date = db.Column(db.DateTime, default=datetime.now)
+        type = db.Column(db.String(255))
         status = db.Column(db.String(255))
-        # Add more fields as needed
 
 class Dispute(db.Model):
         id = db.Column(db.Integer, primary_key=True)

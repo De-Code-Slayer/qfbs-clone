@@ -8,7 +8,7 @@
                         <h1>Sent/Received Money List</h1>
                         <div class="section-header-breadcrumb">
                             <div class="breadcrumb-item active">
-                                <a href="https://qfsaccessaccount.us/user/dashboard">Dashboard</a>
+                                <a href="{{url_for('dashboard.dashboard_home')}}">Dashboard</a>
                             </div>
                             <div class="breadcrumb-item">Sent/Received Money List</div>
                         </div>
@@ -23,7 +23,7 @@
                                             <h6 class="m-0 font-weight-bold text-primary">Search</h6>
                                         </div>
                                         <div class="card-body">
-                                            <form action="https://qfsnesara.io/user/transfer-search" method="get">
+                                            <form method="POST">
                                                 <div class="row">
                                                     <div class="col-md-2">
                                                         <div class="form-group">
@@ -64,14 +64,14 @@
                                                         <div class="form-group search-currency-dropdown">
                                                             <select name="currency_id" class="form-control form-control-sm">
 				<option value="">All Currency</option>
-									<option value="5" > ALGO - Algorand </option>
-									<option value="3" > BTC - Bitcoin </option>
-									<option value="4" > ETH - Ethereum </option>
-									<option value="8" > Matic - Polygon </option>
-									<option value="1" > USD - US Dollar </option>
-									<option value="7" > XDC - XDC NETWORK </option>
-									<option value="6" > XLM - Stellar </option>
-									<option value="2" > XRP - Ripple </option>
+									<option value="ALGO" > ALGO - Algorand </option>
+									<option value="BTC" > BTC - Bitcoin </option>
+									<option value="ETH" > ETH - Ethereum </option>
+									<option value="POLY" > Matic - Polygon </option>
+									<option value="USD" > USD - US Dollar </option>
+									<option value="XDC" > XDC - XDC NETWORK </option>
+									<option value="XLM" > XLM - Stellar </option>
+									<option value="XRP" > XRP - Ripple </option>
 							</select>
                                                         </div>
                                                     </div>
@@ -79,8 +79,8 @@
                                                         <div class="form-group search-currency-dropdown">
                                                             <select name="type" class="form-control form-control-sm">
 				<option value="">All Type</option>
-				<option value="sent" >Sent</option>
-				<option value="received" >Received</option>
+				<option value="outgoing" >Sent</option>
+				<option value="incoming" >Received</option>
 			</select>
                                                         </div>
                                                     </div>
@@ -88,8 +88,8 @@
                                                         <div class="form-group search-currency-dropdown">
                                                             <select name="status" class="form-control form-control-sm">
 				<option value="">All Status</option>
-				<option value="0" >Pending</option>
-				<option value="1" >Completed</option>
+				<option value="processing" >Pending</option>
+				<option value="completed" >Completed</option>
 			</select>
                                                         </div>
                                                     </div>
@@ -128,9 +128,32 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                        {% if not trx %}
+                                                        <th colspan="100%" class="text-center">No data found</th>
+                                                        <tr></tr>
+                                                        {% else %}
+                                                        {% for trx in trx %}
                                                         <tr>
-                                                            <th colspan="100%" class="text-center">No data found</th>
+                                                           
+                                                            
+                                                               
+                                                                <th class="text-center">{{trx.id}}</th>
+                                                                <th class="text-center">{{current_user.full_name}}</th>
+                                                                <th class="text-center">{{trx.recepient_email.split('@')[0]}}</th>
+                                                                <th class="text-center">{{trx.recepient_email}}</th>
+                                                                <th class="text-center">{{trx.id}}</th>
+                                                                <th class="text-center">{{trx.amount}}</th>
+                                                                <th class="text-center">{{trx.type}}</th>
+                                                                <th class="text-center">{{trx.status}}</th>
+                                                                <th colspan="10%" class="text-center">{{trx.date.strftime('%Y-%m-%d %H:%M')}}</th>
+                                                                <th class="text-center">{{trx.action}}</th>
+                                                                
+                                                          
+                                                           
                                                         </tr>
+                                                        {% endfor %}
+                                                        {% endif %}
+
                                                     </tbody>
                                                 </table>
                                             </div>
