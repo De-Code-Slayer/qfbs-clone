@@ -53,7 +53,7 @@ class User(db.Model, UserMixin):
 
 
     
-    display_photo = db.Column(db.String(255), nullable=True)
+    display_photo = db.Column(db.String(255), nullable=True, default='https://www.gravatar.com/avatar/3aa90a79fc58869002a4530b5ef342f9?s=500&amp;d=mp')
     postal_code = db.Column(db.String(255), nullable=False)
     
     
@@ -193,7 +193,7 @@ class RequestMoney(db.Model):
         amount = db.Column(db.Float)
         note = db.Column(db.String(255))
         date = db.Column(db.DateTime, default=datetime.now)
-        type = db.Column(db.String(255))
+        type = db.Column(db.String(255), default='outgoing')
         status = db.Column(db.String(255))
         action = db.Column(db.String(255))
 

@@ -93,8 +93,9 @@ def all_request():
 @dashboard.route('/transaction/history', methods=('POST','PUT','GET'))
 # @login_required
 def transaction_history():
-   
-    return render_template('dashboard/transaction-history.html')
+    trx = get_trx()
+    print(trx)
+    return render_template('dashboard/transaction-history.html', trx=trx)
 
 
 

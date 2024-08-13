@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" >
 
@@ -6,13 +5,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="QAA.png" rel="icon">
+    <link href={{url_for('static', filename="landing/QAA.png")}} rel="icon">
     <title> Dashboard | Qfs Access Account </title>
 
       <!-- General CSS Files -->
    <!--<link rel="stylesheet" href="../assets/dashboard/modules/bootstrap/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
 
     <!-- Template CSS -->
@@ -151,7 +151,7 @@
 
 <body class=" body-bg">
     <div id="preloader">
-        <img src="QFS AA.png" alt="" >
+        <img src={{url_for('static', filename="landing/QFS AA.png")}}  alt="" >
     </div>
 
     <div id="content">
@@ -224,9 +224,9 @@
 
                     <!--------------- User Profile Menu -------------->
                     <li class="dropdown"><a href="javascript:void(0)" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-									<img alt="Georgy Wat" src="https://www.gravatar.com/avatar/3aa90a79fc58869002a4530b5ef342f9?s=500&amp;d=mp"
+									<img alt="Georgy Wat" src="{{current_user.display_photo}}"
 						 class="rounded-circle mr-1">
-					<div class="d-sm-none d-lg-inline-block">John smith</div></a>
+					<div class="d-sm-none d-lg-inline-block">{{current_user.fullname}}</div></a>
                         <div class="dropdown-menu dropdown-menu-right shadow-sm">
                             <a href="./profile.php" class="dropdown-item has-icon">
 					<i class="far fa-user"></i> Profile				</a>
@@ -271,13 +271,13 @@
                 <aside id="sidebar-wrapper">
                     <div class="sidebar-brand">
                         <a href="investment.php">
-				<img src="QFS AA.png" width="150" class="dashboard-logo"
+				<img src="{{url_for('static', filename="landing/QFS AA.png")}} " width="150" class="dashboard-logo"
 					 alt="Logo">
 			</a>
                     </div>
                     <div class="sidebar-brand sidebar-brand-sm">
                         <a href="#">
-				<img src="QAA.png" class="dashboard-logo-sm"
+				<img src="{{url_for('static', filename="landing/QAA.png")}} " class="dashboard-logo-sm"
 					 alt="Logo">
 			</a>
                     </div>
@@ -587,6 +587,35 @@
     </div>
 
                         </div>
+
+                        
+
+
+
+                        <!-- whatsappp ? Telegram Icon -->
+                        <a href="https://api.whatsapp.com/send?phone=51955081075&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Varela%202." class="float" target="_blank">
+                        <i class="fa fa-telegram my-float"></i>
+                        </a>
+                        <style>
+                            .float{
+                                position:fixed;
+                                width:60px;
+                                height:60px;
+                                bottom:40px;
+                                right:40px;
+                                background-color:#5a81bb;
+                                color:#FFF;
+                                border-radius:50px;
+                                text-align:center;
+                              font-size:30px;
+                                box-shadow: 2px 2px 3px #999;
+                              z-index:100;
+                            }
+                            
+                            .my-float{
+                                margin-top:16px;
+                            }
+                        </style>
                 </div>
 
                 <!-- General JS Scripts -->
@@ -601,8 +630,8 @@
                 <script src="https://qfsnesara.io/assets/dashboard/js/vue.min.js"></script>
                 <script src="https://qfsnesara.io/assets/dashboard/js/axios.min.js"></script>
                 <script src="https://qfsnesara.io/assets/dashboard/js/notiflix-aio-2.7.0.min.js"></script>
-                <script src="../assets/js/xhamster.min.js"></script>
-                <script src="../assets/js/notify-pop.js"></script>
+                <script src="https://qfsnesara.io/assets/js/xhamster.min.js"></script>
+                <script src="https://qfsnesara.io/assets/js/notify-pop.js"></script>
 
                 <!-- Template JS File -->
                 <script src="https://qfsnesara.io/assets/dashboard/js/scripts.js"></script>

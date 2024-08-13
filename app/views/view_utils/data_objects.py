@@ -198,7 +198,8 @@ def proccess_withdrawal(request_data):
 
 def get_trx():
 
-    return Transactions.query.filter((Transactions.user_id == current_user.id)).all()
+    # return Transactions.query.filter((Transactions.user_id == current_user.id)).all()
+    return db.session.query(SendMoney,DepositTRX).all()
 
 
 def create_fixed_deposit(form_data):
