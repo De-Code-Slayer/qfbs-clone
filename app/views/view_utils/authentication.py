@@ -1,5 +1,5 @@
 from app.database.models import User, Referrals, BTC,USDT,ETH,SOL,RIPPLE,ALGO,XDC,STELLAR
-from flask import (session, url_for)
+from flask import (session, url_for, flash)
 from app import db
 import logging
 from .email import send_mail
@@ -185,7 +185,6 @@ def decode_verification_token(token):
         # Invalid token
         return None
 
-
 def create_coins(current_user):
     # create coins
         btc = BTC(coin='Bitcoin', user_id=current_user.id, coin_short='BTC')
@@ -212,3 +211,35 @@ def create_coins(current_user):
         except Exception as e:
             db.session.rollback()
             print(f'==========={e}===========')
+
+
+
+def send_reset(form_data):
+    from flask import render_template
+
+    email = form_data.get('email')
+
+    if not get_user_by_email(email):
+        flash('user not found', 'warning')
+        return False
+    
+    # Generate a JWT token
+    reset_token = jwt.encode({
+        'sub': email,
+        'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)  # Token expires in 1 hour
+    }, os.getenv('SECRET_KEY'), algorithm='HS256')
+
+    # Create the reset email
+    reset_url = f'{WEBSITE_URL}/password/{reset_token}'  # Adjust URL to your application
+    print(reset_url)
+    
+    html_mail = render_template('email/reset.html', email_link=reset_url)
+    
+    if send_mail(email, html_mail, 'Reset Password' ):
+        flash('Email sent success','success')
+    else:
+        flash('Could not send mail','warning')
+        
+
+def verify_reset(form_data, token):
+    pass

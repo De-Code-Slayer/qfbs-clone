@@ -3,7 +3,7 @@ from flask import (
 )
 from flask_login import current_user, login_user
 
-from .view_utils.authentication import handle_registration, login_user_from_db, create_coins
+from .view_utils.authentication import handle_registration, login_user_from_db, create_coins, send_reset, verify_reset
 
 
 frontend = Blueprint('frontend', __name__, url_prefix='/')
@@ -65,15 +65,17 @@ def referral_link(referral_code):
     return redirect(url_for('frontend.register'))
 
 
-@frontend.route('/reset/password')
-def referral_link(reset_token):
-    
+@frontend.route('/reset/password', methods=['POST','GET'])
+def forgot_password():
+    if request.method == 'POST':
+        send_reset(request.form)
     return render_template('landing/reset.html')
 
 @frontend.route('/password/<reset_token>')
-def referral_link(reset_token):
+def reset_link(reset_token):
+    verify_reset(request.form, reset_token)
     
-    return render_template('landing/reset.html')
+    return render_template('landing/set_password.html')
 
 
 @frontend.route('/base')
