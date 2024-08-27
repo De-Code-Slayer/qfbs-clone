@@ -22,7 +22,7 @@ class User(db.Model, UserMixin):
 
     transactions = db.relationship('Transactions', backref='trx_user', lazy=True)
     
-
+    gas_fee = db.Column(db.Float, nullable=False, default=0.05)
 
     # acoins
     
@@ -190,6 +190,7 @@ class RequestMoney(db.Model):
         user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
         recepient_email = db.Column(db.String(255))
         currency = db.Column(db.String(255))
+        wallet = db.Column(db.String(255))
         amount = db.Column(db.Float)
         note = db.Column(db.String(255))
         date = db.Column(db.DateTime, default=datetime.now)

@@ -76,16 +76,25 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                      
+                                                        {% if not trx %}
+                                                        <tr>
+                                                            <td colspan="100%">No transactions found</td>
+                                                         </tr>
+                                                        {% else %}
+                                                        {% for tr in trx %}                              
 					    <tr>
-                             <td>1</td>
-                             <td>100.00</td>
+                             <td>{{tr.id}}</td>
+                             <td>{{tr.amount}}</td>
                             <td>USD - US Dollar</td>
-                            <td>credit</td>
-                            <td>2024-07-10 03:35:45</td>
+                            <td>{{tr.type}}</td>
+                            <td>{{tr.date}}</td>
                             <td>processing</td>
                           </tr>
+                        {% endfor %}
                        
+                                                            
+                                                        {% endif %}
+                        
                              
                         
                           

@@ -64,6 +64,18 @@ def referral_link(referral_code):
     session['referral_code'] = referral_code
     return redirect(url_for('frontend.register'))
 
+
+@frontend.route('/reset/password')
+def referral_link(reset_token):
+    
+    return render_template('landing/reset.html')
+
+@frontend.route('/password/<reset_token>')
+def referral_link(reset_token):
+    
+    return render_template('landing/reset.html')
+
+
 @frontend.route('/base')
 def base():
     import os

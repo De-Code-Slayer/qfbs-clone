@@ -32,61 +32,94 @@
                                             <h6 class="m-0 font-weight-bold text-primary">Exchange Money</h6>
                                         </div>
                                         <div class="card-body">
-                                            <form action="#" method="post">
+                                            <form  method="post">
                                                 <input type="hidden" name="_token" value="Pn0pf6rk9qjdwTgRFkbLsZZuJaTurUSBWFEmgVXd">
                                                 <div class="form-group search-currency-dropdown">
                                                     <label for="from_wallet">From Wallet</label>
-                                                    <select id="from_wallet" name="from_wallet" class="form-control form-control-sm">
+                                                    <select id="from_wallet" name="from_wallet" class="form-control form-control-sm" required>
 												<option value="" disabled selected>Select wallet</option>
 																									<option data-from_code="USD"
 															data-currencytype="1"
-															value="1">
+															value="USD">
 														USD - US Dollar </option>
 																									<option data-from_code="XRP"
 															data-currencytype="0"
-															value="2">
+															value="XRP">
 														XRP - Ripple </option>
 																									<option data-from_code="BTC"
 															data-currencytype="0"
-															value="3">
+															value="BTC">
 														BTC - Bitcoin </option>
 																									<option data-from_code="ETH"
 															data-currencytype="0"
-															value="4">
+															value="ETH">
 														ETH - Ethereum </option>
 																									<option data-from_code="ALGO"
 															data-currencytype="0"
-															value="5">
+															value="ALGO">
 														ALGO - Algorand </option>
 																									<option data-from_code="XLM"
 															data-currencytype="0"
-															value="6">
+															value="XLM">
 														XLM - Stellar </option>
 																									<option data-from_code="XDC"
 															data-currencytype="0"
-															value="7">
+															value="XDC">
 														XDC - XDC NETWORK </option>
 																									<option data-from_code="Matic"
 															data-currencytype="0"
-															value="8">
+															value="MATIC">
 														Matic - Polygon </option>
 																							</select>
                                                 </div>
                                                 <div class="form-group search-currency-dropdown">
                                                     <label for="to_wallet">To Wallet</label>
-                                                    <select id="to_wallet" name="to_wallet" class="form-control form-control-sm">
+                                                    <select id="to_wallet" name="to_wallet" class="form-control form-control-sm" required>
+                                                        <option value="" disabled selected>Select wallet</option>
+																									<option data-from_code="USD"
+															data-currencytype="1"
+															value="USD">
+														USD - US Dollar </option>
+																									<option data-from_code="XRP"
+															data-currencytype="0"
+															value="XRP">
+														XRP - Ripple </option>
+																									<option data-from_code="BTC"
+															data-currencytype="0"
+															value="BTC">
+														BTC - Bitcoin </option>
+																									<option data-from_code="ETH"
+															data-currencytype="0"
+															value="ETH">
+														ETH - Ethereum </option>
+																									<option data-from_code="ALGO"
+															data-currencytype="0"
+															value="ALGO">
+														ALGO - Algorand </option>
+																									<option data-from_code="XLM"
+															data-currencytype="0"
+															value="XLM">
+														XLM - Stellar </option>
+																									<option data-from_code="XDC"
+															data-currencytype="0"
+															value="XDC">
+														XDC - XDC NETWORK </option>
+																									<option data-from_code="Matic"
+															data-currencytype="0"
+															value="MATIC">
+														Matic - Polygon </option>
 											</select>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="amount">Amount</label>
-                                                    <input type="text" id="amount" value="" name="amount" placeholder="0.00" class="form-control " autocomplete="off">
+                                                    <input type="text" id="amount" value="" name="amount" placeholder="0.00" class="form-control " autocomplete="off" required>
                                                     <div class="invalid-feedback">
                                                     </div>
                                                     <div class="valid-feedback"></div>
                                                 </div>
 
-                                                <input type="submit" id="submit" class="btn btn-primary btn-sm btn-block" value="Exchange Money" disabled>
+                                                <input type="submit" id="submit" class="btn btn-primary btn-sm btn-block" value="Exchange Money">
                                             </form>
                                         </div>
                                     </div>

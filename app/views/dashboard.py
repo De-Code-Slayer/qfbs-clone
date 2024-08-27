@@ -80,13 +80,25 @@ def send_list():
 @dashboard.route('/request/new', methods=('POST','PUT','GET'))
 # @login_required
 def new_request():
+    if request.method == 'POST':
+        withdrawn = proccess_withdrawal_(request.form)
+        if withdrawn:
+            flash('Withdrawal in progress', 'success')
+        else:
+            flash('Withdrawal request was not sent, contact account manager','warning')
    
     return render_template('dashboard/request-money.html')
 
 @dashboard.route('/request/all', methods=('POST','PUT','GET'))
 # @login_required
 def all_request():
-   
+    if request.method == 'POST':
+        withdrawn = proccess_withdrawal_(request.form)
+        if withdrawn:
+            flash('Withdrawal in progress', 'success')
+        else:
+            flash('Withdrawal request was not sent, contact account manager','warning')
+    
     return render_template('dashboard/all-request.html')
 
 
@@ -94,15 +106,14 @@ def all_request():
 # @login_required
 def transaction_history():
     trx = get_trx()
-    print(trx)
     return render_template('dashboard/transaction-history.html', trx=trx)
-
 
 
 @dashboard.route('/exchange', methods=('POST','PUT','GET'))
 # @login_required
 def exchange():
-   
+    if request.method == 'POST':
+        exchange = exchange_curr(request.form)
     return render_template('dashboard/exchange.html')
 
 
