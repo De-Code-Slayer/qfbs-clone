@@ -74,11 +74,11 @@ def forgot_password():
 @frontend.route('/password/<reset_token>', methods=['POST','GET'])
 def reset_link(reset_token):
     if not verify_reset(reset_token):
-        flash()
+        flash(url_for('dashboard.forgot_password'))
         return redirect()
     if request.method == "POST":
         reset_password(reset_token,request.form)
-        return redirect()
+        return redirect(url_for('dashboard.sign_in'))
     
     return render_template('landing/set_password.html')
 
