@@ -216,6 +216,7 @@ def create_coins(current_user):
 
 def send_reset(form_data):
     from flask import render_template
+    import urllib.parse
 
     email = form_data.get('email')
 
@@ -230,7 +231,7 @@ def send_reset(form_data):
     }, os.getenv('SECRET_KEY'), algorithm='HS256')
 
     # Ensure the token is a string
-    reset_token_str = reset_token.decode('utf-8')  # This line is necessary if you are using PyJWT < 2.0.0
+    reset_token_str = urllib.parse.quote(reset_token)  # This line is necessary if you are using PyJWT < 2.0.0
 
 
     # Create the reset email

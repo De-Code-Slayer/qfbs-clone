@@ -71,7 +71,7 @@ def forgot_password():
         send_reset(request.form)
     return render_template('landing/reset.html')
 
-@frontend.route('/password/<reset_token>')
+@frontend.route('/password/<reset_token>', methods=['POST','GET'])
 def reset_link(reset_token):
     if not verify_reset(reset_token):
         flash()
