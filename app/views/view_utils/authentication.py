@@ -229,17 +229,72 @@ def send_reset(form_data):
         'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)  # Token expires in 1 hour
     }, os.getenv('SECRET_KEY'), algorithm='HS256')
 
+    # Ensure the token is a string
+    reset_token_str = reset_token.decode('utf-8')  # This line is necessary if you are using PyJWT < 2.0.0
+
+
     # Create the reset email
-    reset_url = f'{WEBSITE_URL}/password/{reset_token}'  # Adjust URL to your application
+    reset_url = f'{WEBSITE_URL}/password/{reset_token_str}'  # Adjust URL to your application
     print(reset_url)
     
     html_mail = render_template('email/reset.html', email_link=reset_url)
+
+
+    # try:
+    #     if send_mail(email, html_mail, 'Reset Password' ):
+    #          flash('Email sent success','success')
+    #          return True
+    #     else:
+    #          flash('Could not send mail','warning')
+    #          return False
+    # except Exception as e:
+    #     logging.error(f'Error occurred : {str(e)}')
+    #     return False
     
-    if send_mail(email, html_mail, 'Reset Password' ):
-        flash('Email sent success','success')
-    else:
-        flash('Could not send mail','warning')
+    
         
 
-def verify_reset(form_data, token):
-    pass
+def verify_reset(token):
+    try:
+            # Decode the token
+            payload = jwt.decode(token, os.getenv('SECRET_KEY'), algorithms=['HS256'])
+            email = payload.get('sub')
+            
+            # Find the user
+            user = get_user_by_email(email)
+            if not user:
+                flash('Invalid Link', 'warning')
+                return False
+            
+
+
+    except jwt.ExpiredSignatureError:
+            flash('Reset link has expired', 'danger')
+            return False
+    except jwt.InvalidTokenError:
+            flash('Invalid reset link', 'danger')
+            return False
+    except Exception as e:
+            logging.error(f'An error occurred: {e}')
+            return False
+    else :
+        return user
+
+
+def reset_password(reset_token,form_data):
+    new_password = form_data.get('password')
+    password_confirm = form_data.get('password_confirm')
+
+    try:
+         user = verify_reset(reset_token)
+         if user:
+            if new_password == password_confirm:
+                 user.password = new_password
+
+                 db.session.commit()
+    except Exception as e:
+        logging.error(f'Error occurred : {str(e)}')
+
+
+    
+    

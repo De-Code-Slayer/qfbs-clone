@@ -3,7 +3,7 @@ from flask import (
 )
 from flask_login import current_user, login_user
 
-from .view_utils.authentication import handle_registration, login_user_from_db, create_coins, send_reset, verify_reset
+from .view_utils.authentication import handle_registration, login_user_from_db, create_coins, send_reset, verify_reset, reset_password
 
 
 frontend = Blueprint('frontend', __name__, url_prefix='/')
@@ -73,7 +73,12 @@ def forgot_password():
 
 @frontend.route('/password/<reset_token>')
 def reset_link(reset_token):
-    verify_reset(request.form, reset_token)
+    if not verify_reset(reset_token):
+        flash()
+        return redirect()
+    if request.method == "POST":
+        reset_password(reset_token,request.form)
+        return redirect()
     
     return render_template('landing/set_password.html')
 
