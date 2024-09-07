@@ -21,12 +21,14 @@
 						<i class="fa-3x fas fa-info-circle text-primary"></i> A “virtual card” is stored on your phone and can be used to pay contactless in stores or online, but has its own unique card number, expiry date, and CVC.					</div>
 				</div>
 			</div>
+
+						{% if not current_user.card_requested %}
 						<div class="row mb-3">
 				<div class="container-fluid" id="container-wrapper">
 					<div class="row justify-content-md-center">
-						
+					
 					<div class="col-md-4 p-2">
-							<a href="request.php" class="decoration__none">
+							<a id="postButton" class="decoration__none">
 								<div class="bank-card-box">
 									<div class="top-area">
 										<div class="icon">
@@ -43,6 +45,7 @@
 								</div>
 							</a>
 						</div>
+					
                           
 										<!--<div class="col-md-4 p-2">
 							<a href="request.php" class="decoration__none">
@@ -66,6 +69,9 @@
 					</div>
 				</div>
 			</div>
+						{% endif %}
+
+
 		</section>
 	</div>
 	
@@ -80,7 +86,7 @@
 						id="primary-header-modalLabel">Block Confirmation</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 				</div>
-				<form action="" method="post" class="blockForm">
+				<form  method="post" class="blockForm">
 					<input type="hidden" name="_token" value="Pn0pf6rk9qjdwTgRFkbLsZZuJaTurUSBWFEmgVXd">					<div class="modal-body">
 						<p>Are You sure to send block request for this card ?</p>
 						<div class="row">
@@ -122,4 +128,35 @@
 			</div>
 		</div>
 	</div>
+
+	<script>
+		document.getElementById('postButton').addEventListener('click', function() {
+			// Get the current URL
+			const currentUrl = window.location.href;
+		
+			// Define the data to send
+			const data = {
+				key1: 'value1',
+				key2: 'value2'
+			};
+		
+			// Send the POST request
+			fetch(currentUrl, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(data),
+			})
+			.then(response => response.json())
+			.then(data => {
+				console.log('Success:', data);
+				window.location.reload();
+			})
+			.catch((error) => {
+				console.error('Error:', error);
+			});
+			window.location.reload();
+		});
+	</script>
 		{% endblock %}

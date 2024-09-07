@@ -296,7 +296,7 @@ def exchange_curr(request_data):
     # create transaction record
 
     try:
-        trx = Exchange(user_id=current_user.id, from_wallet=_from_wallet, to_wallet=_to_wallet, amount=amount, status='success')
+        trx = Exchange(user_id=current_user.id, from_wallet=_from_wallet, to_wallet=_to_wallet, charge=gas_fee, exchange_rate=exchange_rate, amount=amount, status='success')
         db.session.add(trx)
         #db.session.close()
     except Exception as e:
@@ -461,7 +461,7 @@ def create_exchange(form_data):
     amount = form_data.get('wallet')
 
     try:
-         new_trx = Exchange(from_wallet=from_wallet, to_wallet=to_wallet,amount=amount)
+         new_trx = Exchange(from_wallet=from_wallet ,to_wallet=to_wallet,amount=amount)
          db.session.add(new_trx)
          db.session.commit()
     except Exception as e:
@@ -469,12 +469,129 @@ def create_exchange(form_data):
         return False
     return True
 
+def generate_redeem_code(currency, amount, note, charge_receiver):
+    import hashlib
+    import random
+
+     # Map wallet codes to model classes
+    wallet_classes = {
+        'BTC': BTC,
+        'SOL': SOL,
+        'ETH': ETH,
+        'XRP': RIPPLE,
+        'USD': USDT,
+        'ALGO': ALGO,
+        'XLM': STELLAR,
+        'XDC': XDC,
+        'MATIC': POLY
+    }
+    wallet = wallet_classes[currency]
+
+    # confirm if amount is available in balance
+    currency_wallet = wallet.query.filter_by(user_id=current_user.id).first()
+    if currency_wallet.amount < amount:
+        flash('Insufficient fund', 'info')
+        return False
+
+    # generate code
+    unique_string = f"{currency}-{amount}-{note}-{charge_receiver}-{random.randint(1000, 9999)}"
+    hash_object = hashlib.sha256(unique_string.encode())
+    redeem_code = hash_object.hexdigest()[:12].upper()
+
+    # deduct amount from balance
+    currency_wallet.amount -= amount
+
+    # create record in db
+    redeem_code_store = {
+        'user_id':current_user.id,
+        'charge_receiver':charge_receiver,
+        'redeem_code': redeem_code,
+        'currency': currency,
+        'amount': amount,
+        'note': note,
+        'status': False
+    }
+    try:
+        trx = Transactions(user_id=current_user.id, currency=redeem_code_store['currency'], amount=amount, transaction_type='reedem debit', status='success')
+        db.session.add(trx)
+        new_redeem = Redeem(**redeem_code_store)
+        db.session.add(new_redeem)
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        logging.error(f'{e}')
+        flash('there was an error generating your redeem code, contact support', 'warning')
+        return False
+    return redeem_code
+
 
 def create_redeem_code(form_data):
-    pass
+    currency = form_data.get("currency")
+    amount = int(form_data.get("amount"))
+    note = form_data.get("note")
+    charge_receiver = form_data.get("charge_from")
+
+    # create code
+    code = generate_redeem_code(currency, amount, note, charge_receiver)
+    return code
 
 def verify_redeem_code(form_data):
-    pass
+    redeem_code = form_data.get('redeemCode')
+    # Find the redeem code in the database
+    redeem_record = Redeem.query.filter_by(redeem_code=redeem_code, status=False).first()
+    
+    if not redeem_record:
+        flash('Invalid or already redeemed code.', 'danger')
+        return False
+
+    # Retrieve the wallet class based on the currency
+    wallet_classes = {
+        'BTC': BTC,
+        'SOL': SOL,
+        'ETH': ETH,
+        'XRP': RIPPLE,
+        'USD': USDT,
+        'ALGO': ALGO,
+        'XLM': STELLAR,
+        'XDC': XDC,
+        'MATIC': POLY
+    }
+    wallet = wallet_classes[redeem_record.currency]
+
+    # Confirm if the current user is the charge receiver
+    # if redeem_record.charge_receiver != user_id:
+    #     flash('You are not authorized to redeem this code.', 'danger')
+    #     return False
+
+    # Update the status of the redeem code to redeemed
+    try:
+        redeem_record.status = True
+        
+        
+        # Find the receiver's wallet and credit the amount
+        receiver_wallet = wallet.query.filter_by(user_id=current_user.id).first()
+        if not receiver_wallet:
+            flash(' wallet not found for redeem.', 'danger')
+            return False
+        
+        receiver_wallet.amount += redeem_record.amount
+
+        trx = Transactions(user_id=current_user.id, currency=redeem_record.currency, amount=redeem_record.amount, transaction_type='reedem credit', status='success')
+        db.session.add(trx)
+
+
+        db.session.commit()
+      
+
+    except Exception as e:
+        db.session.rollback()
+        logging.error(f'Error redeeming code: {e}')
+        flash('There was an error redeeming your code, contact support.', 'warning')
+        return False
+
+    flash(f'Redeemed {redeem_record.amount} {redeem_record.currency}. successfully!', 'success')
+    return True
+    
 
 def create_escrow(form_data):
     recepient_email = form_data.get('wallet')
@@ -515,8 +632,30 @@ def create_payout(form_data):
 def create_qrpayment(form_data):
     pass
 
-def create_qfs_card(form_data):
-    pass
+def create_qfs_card():
+    import os
+    
+    if not current_user.card_requested == True:
+        # send email to site owner for card request
+        message = f'{current_user.full_name} has requested for an ATM Card'
+        subject =  f'ATM Card Request from {current_user.full_name}'
+        mail_address = os.getenv('EMAIL_ADDRESS')
+
+        # send email to site owner
+        emailed = True #send_mail(mail_address, message,subject)
+        if emailed:
+            current_user.card_requested = True
+            db.session.commit()
+
+            flash('Card requested', 'success')
+        else:
+            flash('There was a problem completing your card request at the moment, Try again later', 'warning')
+            
+        return emailed
+    flash('Already requested a card', 'info')
+    return
+
+    
 
 
 

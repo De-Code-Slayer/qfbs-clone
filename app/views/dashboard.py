@@ -129,13 +129,20 @@ def exchange_all():
 @dashboard.route('/redeem', methods=('POST','PUT','GET'))
 # @login_required
 def redeem():
-    return render_template('dashboard/all-redeem.html')
+    if request.method == 'POST':
+         code = create_redeem_code(request.form)
+         return render_template('dashboard/redeem.html', code=code)
+    return render_template('dashboard/redeem.html')
 
 
 
 @dashboard.route('/redeem/code', methods=('POST','PUT','GET'))
 # @login_required
 def redeem_code():
+    if request.method == 'POST':
+        verify_redeem_code(request.form)
+        
+
    
     return render_template('dashboard/redeem-code.html')
 
@@ -169,6 +176,8 @@ def pay_qr():
 @dashboard.route('/card', methods=('POST','PUT','GET'))
 # @login_required
 def card():
+    if request.method == 'POST':
+        create_qfs_card()
    
     return render_template('dashboard/qfs-card.html')
 
@@ -196,11 +205,29 @@ def kyc():
    
     return render_template('dashboard/kyc.html')
 
-@dashboard.route('/bill/list', methods=('POST','PUT','GET'))
+@dashboard.route('/bill', methods=('POST','PUT','GET'))
 # @login_required
 def bill():
    
+    return render_template('dashboard/bill.html')
+
+@dashboard.route('/bill/list', methods=('POST','PUT','GET'))
+# @login_required
+def bill_list():
+   
     return render_template('dashboard/bill-list.html')
+
+@dashboard.route('/payout', methods=('POST','PUT','GET'))
+# @login_required
+def payout():
+   
+    return render_template('dashboard/payout.html')
+
+@dashboard.route('/payout/list', methods=('POST','PUT','GET'))
+# @login_required
+def payout_list():
+   
+    return render_template('dashboard/payout-list.html')
 
 
 

@@ -31,45 +31,45 @@
 								<h6 class="m-0 font-weight-bold text-primary">Generate Redeem Code</h6>
 							</div>
 							<div class="card-body">
-								<form action="#" method="post">
+								<form  method="post">
 									<input type="hidden" name="_token" value="Pn0pf6rk9qjdwTgRFkbLsZZuJaTurUSBWFEmgVXd">									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group search-currency-dropdown">
 												<label for="currency">Currency</label>
 												<select id="currency" name="currency"
 														class="form-control ">
-																											<option value="1"
-																data-currency="USD"
-																data-currencytype="1">
-															USD - US Dollar</option>
-																											<option value="2"
-																data-currency="XRP"
-																data-currencytype="0">
-															XRP - Ripple</option>
-																											<option value="3"
-																data-currency="BTC"
-																data-currencytype="0">
-															BTC - Bitcoin</option>
-																											<option value="4"
-																data-currency="ETH"
-																data-currencytype="0">
-															ETH - Ethereum</option>
-																											<option value="5"
-																data-currency="ALGO"
-																data-currencytype="0">
-															ALGO - Algorand</option>
-																											<option value="6"
-																data-currency="XLM"
-																data-currencytype="0">
-															XLM - Stellar</option>
-																											<option value="7"
-																data-currency="XDC"
-																data-currencytype="0">
-															XDC - XDC NETWORK</option>
-																											<option value="8"
-																data-currency="Matic"
-																data-currencytype="0">
-															Matic - Polygon</option>
+														<option data-from_code="USD"
+														data-currencytype="1"
+														value="USD">
+													USD - US Dollar </option>
+																								<option data-from_code="XRP"
+														data-currencytype="0"
+														value="XRP">
+													XRP - Ripple </option>
+																								<option data-from_code="BTC"
+														data-currencytype="0"
+														value="BTC">
+													BTC - Bitcoin </option>
+																								<option data-from_code="ETH"
+														data-currencytype="0"
+														value="ETH">
+													ETH - Ethereum </option>
+																								<option data-from_code="ALGO"
+														data-currencytype="0"
+														value="ALGO">
+													ALGO - Algorand </option>
+																								<option data-from_code="XLM"
+														data-currencytype="0"
+														value="XLM">
+													XLM - Stellar </option>
+																								<option data-from_code="XDC"
+														data-currencytype="0"
+														value="XDC">
+													XDC - XDC NETWORK </option>
+																								<option data-from_code="Matic"
+														data-currencytype="0"
+														value="MATIC">
+													Matic - Polygon </option>
 																									</select>
 												<div class="invalid-feedback">
 																									</div>
@@ -102,7 +102,7 @@
 										<textarea name="note" rows="5" class="form-control form-control-sm"></textarea>
 									</div>
 									<button type="submit" id="submit" class="btn btn-primary btn-sm btn-block"
-											disabled>Generate</button>
+											>Generate</button>
 								</form>
 							</div>
 						</div>
@@ -112,7 +112,11 @@
 							<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 								<h6 class="m-0 font-weight-bold text-primary">Details</h6>
 							</div>
-							<div class="card-body showCharge"></div>
+							<div class="card-body showCharge">
+								{% if code %}
+									<sup>This is your reedeme code: {{code}}</sup>
+								{% endif %}
+							</div>
 						</div>
 					</div>
 				</div>

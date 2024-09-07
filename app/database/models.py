@@ -50,6 +50,7 @@ class User(db.Model, UserMixin):
     # verifications
     confirmed = db.Column(db.Boolean, nullable=False, default=False)
     verified  = db.Column(db.Boolean, nullable=False, default=False) 
+    card_requested  = db.Column(db.Boolean, nullable=False, default=False) 
 
 
     
@@ -204,6 +205,8 @@ class Exchange(db.Model):
         from_wallet = db.Column(db.String(255))
         to_wallet = db.Column(db.String(255))
         amount = db.Column(db.Float)
+        exchange_rate = db.Column(db.Float)
+        charge = db.Column(db.Float)
         timestamp = db.Column(db.DateTime, default=datetime.now)
         status = db.Column(db.String(255))
         # Add more fields as needed
@@ -212,12 +215,15 @@ class Redeem(db.Model):
         id = db.Column(db.Integer, primary_key=True)
         user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
         recepient_email = db.Column(db.String(255))
+        redeem_code = db.Column(db.String(255))
         currency = db.Column(db.String(255))
+        charge = db.Column(db.Float)
+        charge_receiver = db.Column(db.Boolean)
         amount = db.Column(db.Float)
         note = db.Column(db.String(255))
         date = db.Column(db.DateTime, default=datetime.now)
         type = db.Column(db.String(255))
-        status = db.Column(db.String(255))
+        status = db.Column(db.String(255), default='not reedemed')
         
         # Add more fields as needed
 
