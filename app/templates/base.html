@@ -224,16 +224,16 @@
 
                     <!--------------- User Profile Menu -------------->
                     <li class="dropdown"><a href="javascript:void(0)" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-									<img alt="Georgy Wat" src="{{current_user.display_photo}}"
+									<img alt="{{current_user.user_name}}" src="{{current_user.display_photo}}"
 						 class="rounded-circle mr-1">
 					<div class="d-sm-none d-lg-inline-block">{{current_user.fullname}}</div></a>
                         <div class="dropdown-menu dropdown-menu-right shadow-sm">
-                            <a href="./profile.php" class="dropdown-item has-icon">
+                            <!-- <a href="./profile.php" class="dropdown-item has-icon">
 					<i class="far fa-user"></i> Profile				</a>
                             <a href="./qr-code.php" class="dropdown-item has-icon">
-						<i class="fas fa-qrcode"></i> QR Code					</a>
+						<i class="fas fa-qrcode"></i> QR Code					</a> -->
 
-                            <a href="../../../user/password/reset.php" class="dropdown-item has-icon">
+                            <a href="{{url_for('frontend.forgot_password')}}" class="dropdown-item has-icon">
 					<i class="fas fa-unlock-alt"></i> Change Password				</a>
                             <div class="dropdown-divider"></div>
                             <a href="javascript:void(0)" type="button" class="dropdown-item has-icon text-danger" data-toggle="modal" data-target="#logoutModal">
@@ -504,8 +504,13 @@
                                 </li>
                             </ul>
                         </li>
+                        <li class="">
+                            <a class="nav-link" href="{{url_for('dashboard.med_bed')}}"><i
+								class="fas fa-bed text-danger"></i>
+							<span>Med Bed</span></a>
+                        </li>
 
-                        <li class="dropdown ">
+                        <!-- <li class="dropdown ">
                             <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
 						<i class="fas fa-list-ul text-info"></i> <span>More</span>
 					</a>
@@ -521,9 +526,9 @@
                                 <li class="">
                                 <a class="nav-link" href="twostep-security.php">
 								2FA Security							</a>
-                                  <!--<a class="nav-link" href="#">
+                                  <a class="nav-link" href="#">
 								2FA Security							</a>
-                                </li>-->
+                                </li>
                                 <li class="">
                                     <a class="nav-link" href="create.php">
 								Security PIN							</a>
@@ -550,7 +555,7 @@
 								Setting							</a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> -->
                     </ul>
 
                     <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
@@ -769,36 +774,7 @@
                 <script type="text/javascript" src="https://qfsnesara.io/assets/dashboard/js/moment.min.js"></script>
                 <script type="text/javascript" src="https://qfsnesara.io/assets/dashboard/js/daterangepicker.min.js"></script>
                 <script src="https://qfsnesara.io/assets/dashboard/js/qrjs2.min.js"></script>
-                <script type="module">
-                    import {initializeApp} from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"; import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-messaging.js"; const firebaseConfig = { apiKey: "Your_API Key",
-                    authDomain: "appSecret", projectId: "Project_Id", storageBucket: "Storage_Bucket", messagingSenderId: "Sender_Id", appId: "App_Id", measurementId: "Measurement_Id" }; const app = initializeApp(firebaseConfig); const messaging = getMessaging(app);
-                    if ('serviceWorker' in navigator) { navigator.serviceWorker.register('' + `/firebase-messaging-sw.js`, {scope: './'}).then(function (registration) { requestPermissionAndGenerateToken(registration); } ).catch(function (error) { }); } else { } onMessage(messaging,
-                    (payload) => { if (payload.data.foreground || parseInt(payload.data.foreground) == 1) { const title = payload.notification.title; const options = { body: payload.notification.body, icon: payload.notification.icon, }; new Notification(title, options);
-                    } }); function requestPermissionAndGenerateToken(registration) { document.addEventListener("click", function (event) { if (event.target.id == 'allow-notification') { Notification.requestPermission().then((permission) => { if (permission === 'granted')
-                    { getToken(messaging, { serviceWorkerRegistration: registration, vapidKey: "Your_Vapid Key" }) .then((token) => { $.ajax({ url: "https://qfsnesara.io/user/save-token", method: "post", data: { token: token, }, success: function (res) { } }); window.newApp.notificationPermission
-                    = 'granted'; }); } else { window.newApp.notificationPermission = 'denied'; } }); } }); }
-                </script>
-                <script>
-                    window.newApp = new Vue({
-                        el: "#firebase-app",
-                        data: {
-                            user_foreground: '',
-                            user_background: '',
-                            notificationPermission: Notification.permission,
-                            is_notification_skipped: sessionStorage.getItem('is_notification_skipped') == '1'
-                        },
-                        mounted() {
-                            this.user_foreground = "0";
-                            this.user_background = "0";
-                        },
-                        methods: {
-                            skipNotification() {
-                                sessionStorage.setItem('is_notification_skipped', '1');
-                                this.is_notification_skipped = true;
-                            }
-                        }
-                    });
-                </script>
+              
         
 
 

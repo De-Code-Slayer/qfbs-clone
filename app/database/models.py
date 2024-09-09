@@ -37,6 +37,7 @@ class User(db.Model, UserMixin):
     poly = db.relationship('POLY', uselist=False, backref='poly_cn', lazy=True)
     fix_d = db.relationship('Fixed_DepositTRX', uselist=False, backref='fix_d_tr', lazy=True)
     dep_trx = db.relationship('DepositTRX', uselist=False, backref='d_tr', lazy=True)
+    medbed_orders = db.relationship('MedBedOrders', uselist=False, backref='medbed_ord', lazy=True)
     
 
 
@@ -314,3 +315,21 @@ class Payout(db.Model):
         timestamp = db.Column(db.DateTime, default=datetime.now)
         status = db.Column(db.String(255))
         # Add more fields as needed
+
+
+class MedBed(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        regenerative_price = db.Column(db.Float)
+        holographic_price = db.Column(db.Float)
+        reverse_aging_price = db.Column(db.Float)
+        trx_type = db.Column(db.String(255))
+        # Add more fields as needed
+
+class MedBedOrders(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+        med_bed = db.Column(db.String(255))
+        medbed_price =  db.Column(db.Float)
+        deposit =  db.Column(db.String(), default='confirming')
+        # Add more fields as needed
+

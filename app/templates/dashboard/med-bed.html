@@ -1,0 +1,195 @@
+
+{% extends 'base.html'%}
+
+{% block body %}
+<style>
+    .square-image {
+        width: 50%; /* Set the width */
+        height: 50%; /* Set the height to be the same as the width */
+        display: block; /* Make the image a block element */
+        margin-left: auto; /* Center the image horizontally */
+        margin-right: auto; /* Center the image horizontally */
+      }
+</style>
+<div id="app">
+    <div class="main-content">
+       <section class="section">
+           <div class="section-header">
+               <h1>MEDBED</h1>
+               <div class="section-header-breadcrumb">
+                   <div class="breadcrumb-item active">
+                       <a href="">Dashboard</a>
+                   </div>
+                   <div class="breadcrumb-item">MEDBED</div>
+               </div>
+           </div>
+           <!------ alert ------>
+           <div class="row mb-3">
+               <div class="container-fluid" id="container-wrapper">
+                   <div class="row justify-content-md-center">
+                       <div class="col-md-6">
+                           <div class="card mb-4 card-primary shadow">
+                               <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                   <h6 class="m-0 font-weight-bold text-primary">MEDBED</h6>
+                               </div>
+                               <div class="card-body payout">
+
+                                   <form  method="post">
+                                       <input type="hidden" name="_token" value="Pn0pf6rk9qjdwTgRFkbLsZZuJaTurUSBWFEmgVXd">
+                                       <div class="row">
+                                           <div class="col-md-12">
+                                               <div class="bill-categories">
+                                                   <div class="row g-4">
+                                                       <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                                                           <span class="tag-item">
+                                                     <input type="radio" value="holographic" class="btn-check"
+                                                            name="category"
+                                                            id="bill1" autocomplete="off" checked/>
+                                                     <label class="btn btn-primary" for="bill1">
+                                                        <img
+                                                            src="{{url_for('static', filename="landing/images/hospital-bed-3d-render-icon-illustration-with-transparent-background-health-and-medical-png.webp")}}"
+                                                            alt="holographic"/>
+                                                        <p style="font-size: 10px;">Holographic <br/> Medbed</p>
+                                                     </label>
+                                                  </span>
+                                                       </div>
+                                                       <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                                                           <span class="tag-item">
+                                                     <input type="radio" value="regenerative" class="btn-check"
+                                                            name="category"
+                                                            id="bill2" autocomplete="off"/>
+                                                     <label class="btn btn-primary" for="bill2">
+                                                        <img
+                                                            src="{{url_for('static', filename="landing/images/OIP.jpg")}}"
+                                                            alt="regenerative"/>
+                                                        <p style="font-size: 10px;">Regenerative <br/> Medbed</p>
+                                                     </label>
+                                                  </span>
+                                                       </div>
+                                                       <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                                                           <span class="tag-item">
+                                                     <input type="radio" value="reverse" class="btn-check"
+                                                            name="category"
+                                                            id="bill3" autocomplete="off"/>
+                                                     <label class="btn btn-primary" for="bill3">
+                                                        <img
+                                                            src="{{url_for('static', filename="landing/images/depositphotos_441613894-stock-illustration-hospital-patient-icon-isometric-style.jpg")}}"
+                                                            width="100"
+                                                            alt="reverse"/>
+                                                        <p style="font-size: 10px;">Reverse <br/> Aging</p>
+                                                     </label>
+                                                  </span>
+                                                       </div>
+                                                       
+                                                   </div>
+                                               </div>
+                                           </div>
+                                       </div>
+                                       <div class="row">
+                                           <div class="col-md-12">
+                                               <div class="form-group img-input-div ">
+                                                  
+                                                   <span class="btn btn-success btn-file">
+                                                    <span
+                                                        class="fileinput-new"> Upload Payment Receipt</span>
+                                                <input type="file" id="from_wallet" required name="receipt" class="form-control form-control-sm"/>
+                                                </span>
+                                                  
+                                                                                                   
+                                               </div>
+                                           </div>
+                                           
+                                       </div>
+                                       <h6>Pay in Installments</h6>
+                                           <ul>
+                                              <li>You can pay in Installments</li>
+                                             
+                  
+                                           </ul>
+                                       <button type="submit" id="submit" class="btn btn-primary btn-sm btn-block" >Continue</button>
+
+
+                                           <h5>Payment Wallet Address USDT(BEP20)</h5>
+                                       <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group img-input-div ">
+                                               
+                                                <img class="square-image"
+                                                            src="{{url_for('static', filename="landing/images/medbed_wallet.jpg")}}"
+                                                            alt="holographic"/>
+
+                                                <sup>
+                                                    WALLET ADDRESS: 0x2BF600b1BBbE54ccD96AC7E0a23BB05d5f9FdCcA
+                                                </sup>
+                                               
+                                                                                                
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                   </form>
+                               </div>
+                           </div>
+                       </div>
+                       <div class="col-md-6">
+                           <div class="card mb-4 card-primary shadow">
+                               <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                   <h6 class="m-0 font-weight-bold text-primary">Details</h6>
+                               </div>
+                               <div class="card-body showCharge ">
+                                <h5>ALL YOU NEED TO KNOW ABOUT MEDBED AND HOW TO ACCESS IT. </h5>
+                                
+                                <p>medbeds (an abbreviation of "medical bed" or "meditation bed") are secret beds that can miraculously heal humans and extend life. The plausibility of such devices is pseudoscience.
+                                    Videos and podcasts about medbeds have become popular on the far-right corners of Telegram, Discord, and Rumble; from major researchers there are at least three types of medbeds, located in secret military tunnels: a “holographic medbed,” which can diagnose and cure any sickness;[2] a medbed that can regenerate missing limbs in minutes; and a third that can reverse aging.
+                                   </p>
+                                   <h6>HOW TO GAIN ACCESS TO A MEDBED/BIOHEALING</h6>
+                                 <ul>
+                                    <li>You need to have a Qfs account </li>
+                                    <li>Place a pre-order for the type of medbed required</li>
+        
+                                 </ul>
+
+                                 <h6>HOW TO PLACE A PRE ORDER</h6>
+                                 <ul>
+                                    <li>Pay to Qr Code/ address below (USDT BEP20) </li>
+                                    <li>Select type of Medbed</li>
+                                    <li>Upload Receipt</li>
+                                    <li> Wait for confirmation Email</li>
+        
+                                 </ul>
+                                
+                                 <h6>PRICES</h6>
+                                
+                                <ol>
+                                    <li>Holographic medbed (${{medbed.holographic_price}}) </li>
+                                    <li>Regenerative medbed (${{medbed.regenerative_price}}) </li>
+                                    <li>Reverse Aging (${{medbed.reverse_aging_price}})</li>
+                                </ol>
+                                
+                               
+                                
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </section>
+   </div>
+
+            
+  
+<div class="popup pop-one"><i class="fa fa-check-circle" id="pop-check"></i> <span id="full-name"></span> from <span
+   id="country-name"></span> just <span id="payment-action"></span> <span id="deposited-withdrew"></span> <span
+   id="full-amount"></span>
+</div>
+
+<div class="popup pop-two"><i class="fa fa-check-circle" id="pop-check"></i> <span id="full_name"></span> from <span
+       id="country_name"></span> just <span id="action-type"></span>
+</div>
+
+   </div>
+</div>
+   {% endblock %}
+
+

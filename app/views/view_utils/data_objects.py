@@ -154,7 +154,7 @@ def proccess_withdrawal_(request_data):
     mail_address = os.getenv('EMAIL_ADDRESS')
 
     # send email to site owner
-    emailed = True #send_mail(mail_address, message,subject)
+    emailed = send_mail(mail_address, message,subject)
 
     # create transaction record
     try:
@@ -192,7 +192,7 @@ def proccess_withdrawal(request_data):
     mail_address = os.getenv('EMAIL_ADDRESS')
 
     # send email to site owner
-    emailed = True #send_mail(mail_address, message,subject)
+    emailed = send_mail(mail_address, message,subject)
 
     # create transaction record
     try:
@@ -642,7 +642,7 @@ def create_qfs_card():
         mail_address = os.getenv('EMAIL_ADDRESS')
 
         # send email to site owner
-        emailed = True #send_mail(mail_address, message,subject)
+        emailed = send_mail(mail_address, message,subject)
         if emailed:
             current_user.card_requested = True
             db.session.commit()
@@ -657,9 +657,23 @@ def create_qfs_card():
 
     
 
-
-
-
+def get_medbed():
+    return MedBed.query.first()
+    
+def order_medbed(form_data):
+    from ...utils.helpers import send_medbed
+    medbed_type = form_data.form.get('category')
+    amount = form_data.form.get('amount')
+    
+    if send_medbed(form_data):
+        print(send_medbed(form_data))
+        # create order
+        new_order = MedBedOrders(user_id=current_user.id, medbed_price=0.00, med_bed=medbed_type, deposit=amount)
+        db.session.add(new_order)
+        db.session.commit()
+        flash('Receipt Submitted, Under verification', 'info')
+        return
+    
 
 def query_combined_transactions():
     from sqlalchemy import literal

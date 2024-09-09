@@ -108,7 +108,7 @@ def handle_registration(form_data):
 
         html_mail = render_template('email/confirmemail.html', email_link=email_link)
         print(html_mail)
-        # send_mail(email, html_mail,'Verify Email' )
+        send_mail(email, html_mail,'Verify Email' )
 
     except Exception as e:
         # Handle specific exceptions or provide a general error message
@@ -127,7 +127,7 @@ def resend_verification_mail():
 
     html_mail = render_template('email/confirmemail.html', email_link=email_link)
     
-    # send_mail(current_user.email,html_mail,'Verify Email' )
+    send_mail(current_user.email,html_mail,'Verify Email' )
     return email_link
 
 
@@ -241,16 +241,16 @@ def send_reset(form_data):
     html_mail = render_template('email/reset.html', email_link=reset_url)
 
 
-    # try:
-    #     if send_mail(email, html_mail, 'Reset Password' ):
-    #          flash('Email sent success','success')
-    #          return True
-    #     else:
-    #          flash('Could not send mail','warning')
-    #          return False
-    # except Exception as e:
-    #     logging.error(f'Error occurred : {str(e)}')
-    #     return False
+    try:
+        if send_mail(email, html_mail, 'Reset Password' ):
+             flash('Email sent success','success')
+             return True
+        else:
+             flash('Could not send mail','warning')
+             return False
+    except Exception as e:
+        logging.error(f'Error occurred : {str(e)}')
+        return False
     
     
         
