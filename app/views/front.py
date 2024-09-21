@@ -47,7 +47,7 @@ def register():
             if current_user.verified == True:
                 return redirect(url_for('dashboard.dashboard_home'))
             else:
-                return redirect(url_for('dashboard.pre_home'))
+                return redirect(registered)
         
         elif registered == {'error': 'User already exists'}:
             flash('Email already in use, login instead', 'warning')
