@@ -172,6 +172,7 @@ def generate_verification_token(user_id):
         "exp": datetime.datetime.utcnow() + datetime.timedelta(seconds=int(EXPIRATION_TIME))
     }
     print(payload)
+    send_mail(current_user.email,payload["code"],'Verify Email OTP' )
     return jwt.encode(payload, SECRET_KEY, algorithm="HS256")
 
 def decode_verification_token(token):
