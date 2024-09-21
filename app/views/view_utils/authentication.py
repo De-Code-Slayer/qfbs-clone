@@ -108,7 +108,7 @@ def handle_registration(form_data):
 
         html_mail = render_template('email/confirmemail.html', email_link=email_link)
         print(html_mail)
-        send_mail(email, html_mail,'Verify Email' )
+        #send_mail(email, html_mail,'Verify Email' )
 
     except Exception as e:
         # Handle specific exceptions or provide a general error message
