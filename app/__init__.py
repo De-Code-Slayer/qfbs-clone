@@ -23,7 +23,7 @@ load_dotenv()
 db = SQLAlchemy()
 
 # Modify the drivername to match SQLAlchemy's PostgreSQL dialect
-# heroku_database_url = os.getenv('DATABASE_URL').replace("postgres://", "postgresql://")
+heroku_database_url = os.getenv('DATABASE_URL').replace("postgres://", "postgresql://")
 
 # Create a URL object from the Heroku database URL
 # parsed_url = make_url(heroku_database_url)
@@ -48,8 +48,8 @@ def create_app(test_config=None):
 
     # upload folder
     app.config['UPLOAD_FOLDER'] = UPLOADS_PATH
-    app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///project.db' #os.getenv('SQLALCHEMY_DATABASE_URI')
-    # app.config["SQLALCHEMY_DATABASE_URI"] = heroku_database_url
+    # app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///project.db' #os.getenv('SQLALCHEMY_DATABASE_URI')
+    app.config["SQLALCHEMY_DATABASE_URI"] = heroku_database_url
     app.config['SQLALCHEMY_POOL_RECYCLE'] = 299 # Recycle connections every 30 seconds
     app.config['SQLALCHEMY_POOL_SIZE'] = 100  # Maximum number of connections to keep in the pool
     app.config['SQLALCHEMY_POOL_TIMEOUT'] = 299  # Timeout for acquiring a connection from the pool
