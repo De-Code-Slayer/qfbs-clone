@@ -189,6 +189,15 @@
                                         </div>
                                         <div class="form--group">
                                             <input type="password" name="password" class="form-control form--control " id="password" placeholder="********" required style="padding-left:10px;">
+                                            <span id="togglePassword" style="	
+								position:absolute;
+								right:10px;
+								top:50%;
+								transform:translateY(-50%);
+								background:none;
+								border:none;
+								cursor:pointer;
+								outline:none;" class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                                             <label for="password" class="form--label prevent-select">Password</label>
 
                                             <div class="invalid-feedback">
@@ -315,7 +324,23 @@
                 });
             </script>
 
-
+            <script>
+	
+                document.getElementById('togglePassword').addEventListener('click', function(e){
+                    
+                    
+                    const passf = document.getElementById('password');
+                    const icon = document.getElementById('icon');
+            
+                    if (passf.type == 'password'){
+                        passf.type = 'text';
+                        icon.className = "bx bx-show";
+                    } else {
+                        passf.type = 'password';
+                        icon.className = "bx bx-hide";
+                    }
+                })
+            </script>
             
         </div>
 	</body>
