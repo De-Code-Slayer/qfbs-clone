@@ -108,7 +108,7 @@ def handle_registration(form_data):
 
         html_mail = render_template('email/confirmemail.html', email_link=email_link)
         print(html_mail)
-        send_mail(email, html_mail,'Verify Email' )
+        #send_mail(email, html_mail,'Verify Email' )
 
     except Exception as e:
         # Handle specific exceptions or provide a general error message
@@ -172,6 +172,7 @@ def generate_verification_token(user_id):
         "exp": datetime.datetime.utcnow() + datetime.timedelta(seconds=int(EXPIRATION_TIME))
     }
     print(payload)
+    send_mail(payload["user_id"],payload["code"],'Verify Email OTP' )
     return jwt.encode(payload, SECRET_KEY, algorithm="HS256")
 
 def decode_verification_token(token):
