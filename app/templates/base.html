@@ -16,8 +16,8 @@
 
 
     <!-- Template CSS -->
-    <link rel="stylesheet" href="https://qfsaccessaccount.net/dashboard/assets/dashboard/css/style.css">
-    <link rel="stylesheet" href="https://qfsaccessaccount.net/dashboard/assets/dashboard/css/components.css">
+    <link rel="stylesheet" href={{url_for('static', filename="landing/assets/css/components.css")}}>
+    <link rel="stylesheet" href={{url_for('static', filename="landing/assets/css/style.css")}}">
     <style>
          .pop-one{
             top: 20%;
@@ -257,10 +257,10 @@
                             Are you sure you want to logout? </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                            <a href="https://qfsaccessaccount.us/user/logout" type="button" class="btn btn-primary" onclick="event.preventDefault();
+                            <a href="href={{url_for('dashboard.sign_out')}}" type="button" class="btn btn-primary" onclick="event.preventDefault();
 			document.getElementById('logout-form').submit();">Logout</a>
 
-                            <form id="logout-form" action="../../../user/incs/log_out.php" method="POST" class="d-none">
+                            <form id="logout-form"  method="POST" class="d-none">
                                 <input type="hidden" name="_token" value="xbegwQlCSk72J9sKURD5zLNTbR0du6Retz0xphju"> </form>
                         </div>
                     </div>
@@ -270,7 +270,7 @@
                      <div class="main-sidebar sidebar-style-2 shadow-sm">
                 <aside id="sidebar-wrapper">
                     <div class="sidebar-brand">
-                        <a href="investment.php">
+                        <a href="">
 				<img src="{{url_for('static', filename="landing/QFS AA.png")}} " width="150" class="dashboard-logo"
 					 alt="Logo">
 			</a>
