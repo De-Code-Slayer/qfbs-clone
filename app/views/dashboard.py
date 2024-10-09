@@ -14,7 +14,7 @@ dashboard = Blueprint('dashboard', __name__, url_prefix='/dashboard')
 
 
 @dashboard.route('/', methods=('POST','PUT','GET'))
-# @login_required
+@login_required
 def dashboard_home():
     if request.method=="POST":
         if send_data(request.form):
@@ -26,7 +26,7 @@ def dashboard_home():
 
 
 @dashboard.route('/fixed/deposit', methods=('POST','PUT','GET'))
-# @login_required
+@login_required
 def fixed_deposit():
     if request.method == 'post':
        if create_fixed_deposit(request.form):
@@ -37,7 +37,7 @@ def fixed_deposit():
     return render_template('dashboard/new-fixed-deposit.html')
 
 @dashboard.route('/now/deposit', methods=('POST','PUT','GET'))
-# @login_required
+@login_required
 def deposit_now():
     if request.method == 'POST':
        if create_deposit(request.form):
@@ -49,13 +49,13 @@ def deposit_now():
 
 
 @dashboard.route('/list/deposit', methods=('POST','PUT','GET'))
-# @login_required
+@login_required
 def deposit_list():
    
     return render_template('dashboard/deposit-list.html')
 
 @dashboard.route('/send', methods=('POST','PUT','GET'))
-# @login_required
+@login_required
 def send_money():
     if request.method == 'POST':
        if send_money_(request.form):
@@ -66,7 +66,7 @@ def send_money():
     return render_template('dashboard/send-money.html')
 
 @dashboard.route('/send/list', methods=('POST','PUT','GET'))
-# @login_required
+@login_required
 def send_list():
     trx =  get_transfers()
   
@@ -78,7 +78,7 @@ def send_list():
 
 
 @dashboard.route('/request/new', methods=('POST','PUT','GET'))
-# @login_required
+@login_required
 def new_request():
     if request.method == 'POST':
         withdrawn = proccess_withdrawal_(request.form)
@@ -90,7 +90,7 @@ def new_request():
     return render_template('dashboard/request-money.html')
 
 @dashboard.route('/request/all', methods=('POST','PUT','GET'))
-# @login_required
+@login_required
 def all_request():
     if request.method == 'POST':
         withdrawn = proccess_withdrawal_(request.form)
@@ -103,14 +103,14 @@ def all_request():
 
 
 @dashboard.route('/transaction/history', methods=('POST','PUT','GET'))
-# @login_required
+@login_required
 def transaction_history():
     trx = get_trx()
     return render_template('dashboard/transaction-history.html', trx=trx)
 
 
 @dashboard.route('/exchange', methods=('POST','PUT','GET'))
-# @login_required
+@login_required
 def exchange():
     if request.method == 'POST':
         exchange = exchange_curr(request.form)
@@ -119,7 +119,7 @@ def exchange():
 
 
 @dashboard.route('/exchange/all', methods=('POST','PUT','GET'))
-# @login_required
+@login_required
 def exchange_all():
    
     return render_template('dashboard/all-exchange.html')
@@ -127,7 +127,7 @@ def exchange_all():
 
 
 @dashboard.route('/redeem', methods=('POST','PUT','GET'))
-# @login_required
+@login_required
 def redeem():
     if request.method == 'POST':
          code = create_redeem_code(request.form)
@@ -137,7 +137,7 @@ def redeem():
 
 
 @dashboard.route('/redeem/code', methods=('POST','PUT','GET'))
-# @login_required
+@login_required
 def redeem_code():
     if request.method == 'POST':
         verify_redeem_code(request.form)
@@ -148,33 +148,33 @@ def redeem_code():
 
 
 @dashboard.route('/escrow', methods=('POST','PUT','GET'))
-# @login_required
+@login_required
 def escrow():
    
     return render_template('dashboard/escrow.html')
 
 
 @dashboard.route('/escrow/list', methods=('POST','PUT','GET'))
-# @login_required
+@login_required
 def escrow_list():
    
     return render_template('dashboard/escrow-list.html')
 
 
 @dashboard.route('/dispute', methods=('POST','PUT','GET'))
-# @login_required
+@login_required
 def dispute():
    
     return render_template('dashboard/dispute.html')
 
 @dashboard.route('/pay/qr', methods=('POST','PUT','GET'))
-# @login_required
+@login_required
 def pay_qr():
    
     return render_template('dashboard/qr-payment.html')
 
 @dashboard.route('/card', methods=('POST','PUT','GET'))
-# @login_required
+@login_required
 def card():
     if request.method == 'POST':
         create_qfs_card()
@@ -183,7 +183,7 @@ def card():
 
 
 @dashboard.route('/voucher', methods=('POST','PUT','GET'))
-# @login_required
+@login_required
 def voucher():
    
     return render_template('dashboard/voucher.html')
@@ -193,14 +193,14 @@ def voucher():
 
 
 @dashboard.route('/invoice', methods=('POST','PUT','GET'))
-# @login_required
+@login_required
 def invoice():
    
     return render_template('dashboard/invoice.html')
 
 
 @dashboard.route('/kyc', methods=('POST','PUT','GET'))
-# @login_required
+@login_required
 def kyc():
     if send_kyc(request ):
                 flash('Documents SUBMITTED, Under Review', 'success')
@@ -209,31 +209,31 @@ def kyc():
     return render_template('dashboard/kyc.html')
 
 @dashboard.route('/bill', methods=('POST','PUT','GET'))
-# @login_required
+@login_required
 def bill():
    
     return render_template('dashboard/bill.html')
 
 @dashboard.route('/bill/list', methods=('POST','PUT','GET'))
-# @login_required
+@login_required
 def bill_list():
    
     return render_template('dashboard/bill-list.html')
 
 @dashboard.route('/payout', methods=('POST','PUT','GET'))
-# @login_required
+@login_required
 def payout():
    
     return render_template('dashboard/payout.html')
 
 @dashboard.route('/payout/list', methods=('POST','PUT','GET'))
-# @login_required
+@login_required
 def payout_list():
    
     return render_template('dashboard/payout-list.html')
 
 @dashboard.route('/medbed', methods=('POST','PUT','GET'))
-# @login_required
+@login_required
 def med_bed():
     if request.method == 'POST':
         order_medbed(request)
