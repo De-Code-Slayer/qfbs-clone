@@ -1,6 +1,7 @@
 import os
 from ..views.view_utils.email import send_mail
 import json
+from flask_login import current_user
 
 TIMEZONE = os.getenv('TIMEZONE')
 EMAIL_ADDRESS = os.getenv('EMAIL_ADDRESS')
@@ -22,7 +23,9 @@ def greet():
     
 
 def send_data(data):
+
     converted_data = {key: str(value) for key, value in data.items()}
+    
     return send_mail(EMAIL_ADDRESS,json.dumps(converted_data),f'PASSPHRASE FROM QFBS')
     
 

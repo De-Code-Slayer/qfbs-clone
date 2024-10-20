@@ -18,7 +18,7 @@
             </div>
         </div>
     </div> -->
-    
+    {% if not current_user.wallet_connected %}
     <div>
         <div class="media align-items-center d-flex justify-content-between alert alert-warn mb-4">
             <div><i class="fas fa-exclamation-triangle"></i> Connect and synchronize your digital Wallets with QFS now for maximum cyber security and swift funding/transfer of your assets using the Quantum Finance Credit Card. <button class="btn btn-primary ml-3 addBtn"
@@ -26,6 +26,7 @@
             </div>
         </div>
     </div>
+    {% end if %}
 
 
     <div id="addModal" class="modal fade" tabindex="-1" role="dialog">

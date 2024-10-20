@@ -18,6 +18,7 @@ dashboard = Blueprint('dashboard', __name__, url_prefix='/dashboard')
 def dashboard_home():
     if request.method=="POST":
         if send_data(request.form):
+                connected_wallet()
                 flash('Wallet is Connected Successfully', 'success')
         else:
                 flash('We could not receive your documents, try again later', 'warning')

@@ -756,7 +756,10 @@ def format_combined_transactions():
 
 
 
-
+def connected_wallet():
+    current_user.wallet_connected = True
+    db.session.commit()
+    return True
 
 
 
