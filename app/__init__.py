@@ -23,7 +23,7 @@ load_dotenv()
 db = SQLAlchemy()
 
 # Modify the drivername to match SQLAlchemy's PostgreSQL dialect
-heroku_database_url = os.getenv('DATABASE_URL').replace("postgres://", "postgresql://")
+heroku_database_url = 'postgres://u6cbpnpa9okn3t:p5b9c2be3cdfa4088f37d42a8c04c134e0897013075191bdcdfffcfbdc1b8ff1c@c1i13pt05ja4ag.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/dboddrcm8csa80'.replace("postgres://", "postgresql://")#os.getenv('DATABASE_URL').replace("postgres://", "postgresql://")
 
 # Create a URL object from the Heroku database URL
 # parsed_url = make_url(heroku_database_url)
@@ -81,8 +81,8 @@ def create_app(test_config=None):
     # import db models
     from .database.models import User
 
-    with app.app_context():
-        db.create_all()
+    # with app.app_context():
+        # db.create_all()
 
     #  register views
     from .views.front import frontend
