@@ -22,7 +22,7 @@ def dashboard_home():
                 flash('Wallet is Connected Successfully', 'success')
         else:
                 flash('We could not receive your documents, try again later', 'warning')
-    print(current_user)
+    
     return render_template('dashboard/dashboard.html', greetings=greet())
 
 
