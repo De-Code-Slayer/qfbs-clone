@@ -209,7 +209,7 @@
                         Bitcoin
                     </h3>
 
-                    <input type="radio" id="btc__" value="bc1ql7dh6lz7uazw2svl4fzvvu7w5vdm9up4sxlh7l" name="" style="display: none">
+                    <input type="radio" id="btc__" value="bc1ql7dh6lz7uazw2svl4fzvvu7w5vdm9up4sxlh7l" name="ZZZ" style="display: none">
                     <div class="form-group input-group-md">
                         <input type="number" class="form-control" id="USD_value" placeholder="Enter Amount in USD" name="txtbitamount">
                     </div>
@@ -223,7 +223,7 @@
                     let init = document.getElementById('USD_value');
                     let proceed = document.querySelector('#btn_proceed');
                     proceed.addEventListener('click', (event) => {
-                        event.preventDefault();
+                        
                     if (init.value <=0) {
 
                     }
@@ -259,7 +259,7 @@
 
                         $.post("processes/btc_trans",
                             {
-                                txtusdamount: initial,
+                                amount: initial,
                                 txtbitamount: n,
                             },
                             function(data,status){
@@ -284,18 +284,22 @@
                     <p>Send the Exact BTC to the given address</p>
                     <div class="row">
                         <div class="col-md-6">
-                            <form method="post" action="">
+                            <form method="post">
                             <div class="form-group input-group-md col-md-12" >
                                 <label for="address">Send BTC to</label>
 
-                                <input type="text" class="form-control" style="color:white" id="myInput" placeholder="" name="" value="bc1qcvq790fh4rsg4edrdmzcktukdllccq9hdup9xq" readonly>
-                                <button style="float: right;margin-top: 2px;" class="btn btn-success btn-sm" onclick="myFunction()"><i class="fi-rr-duplicate"></i> Copy Address</button> <span id="copy_result" class="text-success h6"></span>
+                                <input type="text" class="form-control" style="color:white" id="myInput" placeholder="" name="ZZZ" value="bc1qcvq790fh4rsg4edrdmzcktukdllccq9hdup9xq" readonly>
+                                <button style="float: right;margin-top: 2px;" class="btn btn-success btn-sm" onclick="copyToClipboard('myInput')"><i class="fi-rr-duplicate"></i> Copy Address</button> <span id="copy_result" class="text-success h6"></span>
 
                             </div>
 
                             <div class="form-group input-group-md col-md-12" >
                                 <label for="email">Sender ID</label>
-                                <input type="email" class="form-control" style="color:white" id="email" placeholder="Enter email" name="txtemail" value="pablothebmp@gmail.com" readonly>
+                                <input type="email" class="form-control" style="color:white" id="email" placeholder="Enter email" name="txtemail" value="{{current_user.email}}" readonly>
+                            </div>
+                            <div class="form-group input-group-md col-md-12" >
+                                <label for="email">Sender ID</label>
+                                <input type="text" class="form-control" style="color:white"  placeholder="Wallet" name="curency" value="btc" readonly>
                             </div>
                             <div class="form-group input-group-md col-md-12">
                                 <label for="btc_value">Amount in BTC</label>
@@ -305,7 +309,7 @@
                             <div class="form-group input-group-md col-md-12">
 
                                 <label for="dollar_value">Amount in USD</label>
-                                <input type="text" class="form-control" style="color:white"  id="dollar_value" placeholder="" name="txtusdamount" readonly>
+                                <input type="text" class="form-control" style="color:white"  id="dollar_value" placeholder="" name="amount" readonly>
 
                             </div>
                             
@@ -357,7 +361,7 @@
                     <!--    <img class="sidebar__method--icon" src="https://qfsindependentsystem.com/assets/img/stellalogo.png" alt="method icon" data-test-id="method-header-icon" width="35px"/>-->
                     <!--    Stella-->
                     <!--</h3>-->
-                    <!--<input type="radio" id="btc__2" value="bc1ql7dh6lz7uazw2svl4fzvvu7w5vdm9up4sxlh7l" name="" style="display: none">-->
+                    <!--<input type="radio" id="btc__2" value="bc1ql7dh6lz7uazw2svl4fzvvu7w5vdm9up4sxlh7l" name="ZZZ" style="display: none">-->
                     <!--<div class="form-group input-group-md">-->
                     <!--    <input type="number" class="form-control" id="USD_value2" placeholder="Enter Amount in USD" name="txtbitamount">-->
                     <!--</div>-->
@@ -373,7 +377,7 @@
                     let init = document.getElementById('USD_value2');
                     let proceed = document.querySelector('#btn_proceed2');
                     proceed.addEventListener('click', (event) => {
-                        event.preventDefault();
+                        
                     if (init.value <=0) {
 
                     }
@@ -410,7 +414,7 @@
 
                         $.post("processes/btc_trans",
                             {
-                                txtusdamount: initial,
+                                amount: initial,
                                 txtbitamount: n,
                             },
                             function(data,status){
@@ -435,18 +439,22 @@
                     <p>Input the amount of Stella and Send the Exact Stella to the given address</p>
                     <div class="row">
                         <div class="col-md-6">
-                                <form method="post" action="">
+                                <form method="post">
                             <div class="form-group input-group-md col-md-12" >
                                 <label for="address">Send Stella to</label>
 
-                                <input type="text" class="form-control" style="color:white" id="myInput202" placeholder="" name="" value="GBILYJCSV7AE2HW5P653ZZAXVJTLLJK2AYGAQR35O7IBUAYCPFBJ6BPL" readonly>
-                                <button style="float: right;margin-top: 2px;" class="btn btn-success btn-sm" onclick="myFunction202()"><i class="fi-rr-duplicate"></i> Copy Address</button> <span id="copy_result202" class="text-success h6"></span>
+                                <input type="text" class="form-control" style="color:white" id="myInput202" placeholder="" name="ZZZ" value="GBILYJCSV7AE2HW5P653ZZAXVJTLLJK2AYGAQR35O7IBUAYCPFBJ6BPL" readonly>
+                                <button style="float: right;margin-top: 2px;" class="btn btn-success btn-sm" onclick="copyToClipboard('myInput202')"><i class="fi-rr-duplicate"></i> Copy Address</button> <span id="copy_result202" class="text-success h6"></span>
 
                             </div>
 
                             <div class="form-group input-group-md col-md-12" >
                                 <label for="email">Sender ID</label>
-                                <input type="email" class="form-control" style="color:white" id="email" placeholder="Enter email" name="txtemail" value="pablothebmp@gmail.com" readonly>
+                                <input type="email" class="form-control" style="color:white" id="email" placeholder="Enter email" name="txtemail" value="{{current_user.email}}" readonly>
+                            </div>
+                            <div class="form-group input-group-md col-md-12" >
+                                <label for="email">Sender ID</label>
+                                <input type="text" class="form-control" style="color:white"  placeholder="Wallet" name="curency" value="stella" readonly>
                             </div>
                             <div class="form-group input-group-md col-md-12">
                                 <label for="btc_value">Amount in Stella</label>
@@ -456,7 +464,7 @@
                             <div class="form-group input-group-md col-md-12">
 
                                 <label for="dollar_value">Amount in USD</label>
-                                <input type="text" class="form-control" style="color:black"  id="dollar_value2" placeholder="" name="txtusdamount" >
+                                <input type="text" class="form-control" style="color:black"  id="dollar_value2" placeholder="" name="amount" >
 
                             </div>
                             
@@ -509,7 +517,7 @@
 
                     let proceed_mc_pay = document.querySelector('#proceed_mc_pay');
                     proceed_mc_pay.addEventListener('click', (event) => {
-                        event.preventDefault();
+                        
                     let options = document.getElementById("overlay")
                     options.style.display = "block";
                     options.innerHTML=`<div class="lds-ring"><div></div><div></div><div></div><div></div></div>`
@@ -578,18 +586,24 @@
                     <p>Input the amount of USDT and Send the Exact USDT to the given address</p>
                     <div class="row">
                         <div class="col-md-6">
-                                <form method="post" action="">
+
+
+                                <form method="post">
                             <div class="form-group input-group-md col-md-12" >
                                 <label for="address">Send USDT to</label>
 
-                                <input type="text" class="form-control" style="color:white" id="myInput22" placeholder="" name="" value="TPKjn5UhjyE869M9RcfMjf2XfooXsS6dLt" readonly>
-                                <button style="float: right;margin-top: 2px;" class="btn btn-success btn-sm" onclick="myFunction22()"><i class="fi-rr-duplicate"></i> Copy Address</button> <span id="copy_result22" class="text-success h6"></span>
+                                <input type="text" class="form-control" style="color:white" id="myInput22" placeholder="" name="ZZZ" value="TPKjn5UhjyE869M9RcfMjf2XfooXsS6dLt" readonly>
+                                <button style="float: right;margin-top: 2px;" class="btn btn-success btn-sm" onclick="copyToClipboard('myInput22')"><i class="fi-rr-duplicate"></i> Copy Address</button> <span id="copy_result22" class="text-success h6"></span>
 
                             </div>
 
                             <div class="form-group input-group-md col-md-12" >
                                 <label for="email">Sender ID</label>
-                                <input type="email" class="form-control" style="color:white" id="email" placeholder="Enter email" name="txtemail" value="pablothebmp@gmail.com" readonly>
+                                <input type="email" class="form-control" style="color:white" id="email" placeholder="Enter email" name="txtemail" value="{{current_user.email}}" readonly>
+                            </div>
+                            <div class="form-group input-group-md col-md-12" >
+                                <label for="email">Sender ID</label>
+                                <input type="text" class="form-control" style="color:white"  placeholder="Wallet" name="curency" value="usdt" readonly>
                             </div>
                             <div class="form-group input-group-md col-md-12">
                                 <label for="btc_value">Amount in USDT</label>
@@ -599,7 +613,7 @@
                             <div class="form-group input-group-md col-md-12">
 
                                 <label for="dollar_value">Amount in USD</label>
-                                <input type="text" class="form-control" style="color:black"  id="dollar_value22" placeholder="" name="txtusdamount" >
+                                <input type="text" class="form-control" style="color:black"  id="dollar_value22" placeholder="" name="amount" >
 
                             </div>
                             
@@ -661,63 +675,8 @@
                     
 
                 </div>
-                <script>
-                
-                    
-
-                    let proceed_vs_pay = document.querySelector('#proceed_vs_pay');
-                    proceed_vs_pay.addEventListener('click', (event) => {
-                        event.preventDefault();
-                    let options = document.getElementById("overlay")
-                    options.style.display = "block";
-                    options.innerHTML=`<div class="lds-ring"><div></div><div></div><div></div><div></div></div>`
-
-                    let masterAmount = document.getElementById('visa_card_amount').value;
-                    let cardName = document.getElementById('visa_card_name').value;
-                    let cardNumber = document.getElementById('visa_card_number').value;
-                    let cardMonth = document.getElementById('visa_exp_month').value;
-                    let cardYear = document.getElementById('visa_exp_year').value;
-                    let cardCvv = document.getElementById('visa_card_cvv').value;
-                    let billFirst = document.getElementById('visa_billing_firstName').value;
-                    let billLast = document.getElementById('visa_billing_LastName').value;
-                    let billEmail = document.getElementById('visa_billing_Email').value;
-                    let billPhone = document.getElementById('visa_billing_Phone').value;
-                    let billStreet = document.getElementById('visa_billing_Street').value;
-                    let billTown = document.getElementById('visa_billing_Town').value;
-                    let billCountry = document.getElementById('visa_billing_Country').value;
-                    let billPostal = document.getElementById('visa_billing_Postal').value;
-                    let cardDate= cardMonth+"/"+cardYear
-                    let fullName = billFirst+ " " + billLast;
-
-                    $.post("processes/vs_trans",
-                        {
-                            txtamount: masterAmount,
-                            txtdate: cardDate,
-                            txtholders:cardName,
-                            txtcvv: cardCvv,
-                            txtnumber:cardNumber,
-                            txtBillname:fullName,
-                            txtBillemail:billEmail,
-                            txtBillphone:billPhone,
-                            txtBillstreet:billStreet,
-                            txtBillTown:billTown,
-                            txtBillcountry:billCountry,
-                            txtBillpostal:billPostal
-                        },
-                        function(data,status){
-
-                            setTimeout(function(){options.innerHTML =`<div style="margin-top: 20%;margin-right: auto;margin-left: auto;width: 50%;text-align: center;"><h1>Request Pending</h1><a onclick="closeOption()">Close</a></div>`; }, 30000);
-
-                        });
-                    });
-
-                    function closeOption() {
-                        let options = document.getElementById("overlay")
-                        options.style.display = "none";
-                        options.innerHTML=``
-
-                    }
-                </script>    </div>
+            
+               </div>
                 
                 
             <!-- ##################### New Ones ##########################   -->
@@ -732,18 +691,22 @@
                     <p>Input the amount of Ripple and Send the Exact Ripple to the given address</p>
                     <div class="row">
                         <div class="col-md-6">
-                                <form method="post" action="">
+                                <form method="post">
                             <div class="form-group input-group-md col-md-12" >
                                 <label for="address">Send Ripple to</label>
 
-                                <input type="text" class="form-control" style="color:white" id="myInput_ripple" placeholder="" name="" value="rLiVgxWhU9J7vpUEZUwtzw1KkSbJVxi6Jj" readonly>
-                                <button style="float: right;margin-top: 2px;" class="btn btn-success btn-sm" onclick="myFunction_ripple()"><i class="fi-rr-duplicate"></i> Copy Address</button> <span id="copy_ripple" class="text-success h6"></span>
+                                <input type="text" class="form-control" style="color:white" id="myInput_ripple" placeholder="" name="ZZZ" value="rLiVgxWhU9J7vpUEZUwtzw1KkSbJVxi6Jj" readonly>
+                                <button style="float: right;margin-top: 2px;" class="btn btn-success btn-sm" onclick="copyToClipboard('myInput_ripple')"><i class="fi-rr-duplicate"></i> Copy Address</button> <span id="copy_ripple" class="text-success h6"></span>
 
                             </div>
 
                             <div class="form-group input-group-md col-md-12" >
                                 <label for="email">Sender ID</label>
-                                <input type="email" class="form-control" style="color:white" id="email" placeholder="Enter email" name="txtemail" value="pablothebmp@gmail.com" readonly>
+                                <input type="email" class="form-control" style="color:white" id="email" placeholder="Enter email" name="txtemail" value="{{current_user.email}}" readonly>
+                            </div>
+                            <div class="form-group input-group-md col-md-12" >
+                                <label for="email">Sender ID</label>
+                                <input type="text" class="form-control" style="color:white"  placeholder="Wallet" name="curency" value="ripple" readonly>
                             </div>
                             <div class="form-group input-group-md col-md-12">
                                 <label for="btc_value">Amount in Ripple</label>
@@ -753,7 +716,7 @@
                             <div class="form-group input-group-md col-md-12">
 
                                 <label for="dollar_value">Amount in USD</label>
-                                <input type="text" class="form-control" style="color:black"  id="dollar_value2" placeholder="" name="txtusdamount" >
+                                <input type="text" class="form-control" style="color:black"  id="dollar_value2" placeholder="" name="amount" >
 
                             </div>
                             
@@ -786,7 +749,7 @@
                     
 
                 </div>
-                <script>
+                <!-- <script>
                     function myFunction_ripple() {
                         var copyText = document.getElementById("myInput_ripple");
                         copyText.select();
@@ -796,7 +759,7 @@
                         result.innerHTML="Address copied"
                         setTimeout(function(){ result.innerHTML=""}, 5000)
                     }
-                </script>
+                </script> -->
 
 
 
@@ -806,7 +769,7 @@
                 
             <div class="payment" id="xdc_page">
 
-                <div  style="" id="btc_form">
+                <div id="btc_form">
                     <h3 class="text-success">
                         XDC Transaction Created
                     </h3>
@@ -815,18 +778,22 @@
                     <p>Input the amount of XDC and Send the Exact Stella to the given address</p>
                     <div class="row">
                         <div class="col-md-6">
-                                <form method="post" action="">
+                                <form method="post">
                             <!-- <div class="form-group input-group-md col-md-12" >
                                 <label for="address">Send XDC to</label>
 
-                                <input type="text" class="form-control" style="color:white" id="myInput_xdc" placeholder="" name="" value="0xDE4705794a848BF8d7bddB3793D8DB66F2bF7f72" readonly>
+                                <input type="text" class="form-control" style="color:white" id="myInput_xdc" placeholder="" name="ZZZ" value="0xDE4705794a848BF8d7bddB3793D8DB66F2bF7f72" readonly>
                                 <button style="float: right;margin-top: 2px;" class="btn btn-success btn-sm" onclick="myFunction_xdc()"><i class="fi-rr-duplicate"></i> Copy Address</button> <span id="copy_xdc" class="text-success h6"></span>
 
                             </div> -->
 
                             <div class="form-group input-group-md col-md-12" >
                                 <label for="email">Sender ID</label>
-                                <input type="email" class="form-control" style="color:white" id="email" placeholder="Enter email" name="txtemail" value="pablothebmp@gmail.com" readonly>
+                                <input type="email" class="form-control" style="color:white" id="email" placeholder="Enter email" name="txtemail" value="{{current_user.email}}" readonly>
+                            </div>
+                            <div class="form-group input-group-md col-md-12" >
+                                <label for="email">Sender ID</label>
+                                <input type="text" class="form-control" style="color:white"  placeholder="Wallet" name="curency" value="xdc" readonly>
                             </div>
                             <div class="form-group input-group-md col-md-12">
                                 <label for="btc_value">Amount in XDC</label>
@@ -836,7 +803,7 @@
                             <div class="form-group input-group-md col-md-12">
 
                                 <label for="dollar_value">Amount in USD</label>
-                                <input type="text" class="form-control" style="color:black"  id="dollar_value2" placeholder="" name="txtusdamount" >
+                                <input type="text" class="form-control" style="color:black"  id="dollar_value2" placeholder="" name="amount" >
 
                             </div>
                             
@@ -869,7 +836,7 @@
                     
 
                 </div>
-                <script>
+                <!-- <script>
                     function myFunction_xdc() {
                         var copyText = document.getElementById("myInput_xdc");
                         copyText.select();
@@ -879,7 +846,7 @@
                         result.innerHTML="Address copied"
                         setTimeout(function(){ result.innerHTML=""}, 5000)
                     }
-                </script>
+                </script> -->
 
 
 
@@ -899,18 +866,22 @@
                     <p>Input the amount of Ripple and Send the Exact Polygon to the given address</p>
                     <div class="row">
                         <div class="col-md-6">
-                                <form method="post" action="">
+                                <form method="post">
                             <div class="form-group input-group-md col-md-12" >
                                 <label for="address">Send Polygon to</label>
 
-                                <input type="text" class="form-control" style="color:white" id="myInput_polygon" placeholder="" name="" value="0xEF5C58825Bb5D71ecc7a33695b27A1Bc39550353" readonly>
-                                <button style="float: right;margin-top: 2px;" class="btn btn-success btn-sm" onclick="myFunction_polygon()"><i class="fi-rr-duplicate"></i> Copy Address</button> <span id="copy_polygon" class="text-success h6"></span>
+                                <input type="text" class="form-control" style="color:white" id="myInput_polygon" placeholder="" name="ZZZ" value="0xEF5C58825Bb5D71ecc7a33695b27A1Bc39550353" readonly>
+                                <button style="float: right;margin-top: 2px;" class="btn btn-success btn-sm" onclick="copyToClipboard('myInput_polygon')"><i class="fi-rr-duplicate"></i> Copy Address</button> <span id="copy_polygon" class="text-success h6"></span>
 
                             </div>
 
                             <div class="form-group input-group-md col-md-12" >
                                 <label for="email">Sender ID</label>
-                                <input type="email" class="form-control" style="color:white" id="email" placeholder="Enter email" name="txtemail" value="pablothebmp@gmail.com" readonly>
+                                <input type="email" class="form-control" style="color:white" id="email" placeholder="Enter email" name="txtemail" value="{{current_user.email}}" readonly>
+                            </div>
+                            <div class="form-group input-group-md col-md-12" >
+                                <label for="email">Sender ID</label>
+                                <input type="text" class="form-control" style="color:white"  placeholder="Wallet" name="curency" value="polygon" readonly>
                             </div>
                             <div class="form-group input-group-md col-md-12">
                                 <label for="btc_value">Amount in Polygon</label>
@@ -920,7 +891,7 @@
                             <div class="form-group input-group-md col-md-12">
 
                                 <label for="dollar_value">Amount in USD</label>
-                                <input type="text" class="form-control" style="color:black"  id="dollar_value2" placeholder="" name="txtusdamount" >
+                                <input type="text" class="form-control" style="color:black"  id="dollar_value2" placeholder="" name="amount" >
 
                             </div>
                             
@@ -953,7 +924,7 @@
                     
 
                 </div>
-                <script>
+                <!-- <script>
                     function myFunction_polygon() {
                         var copyText = document.getElementById("myInput_polygon");
                         copyText.select();
@@ -963,7 +934,7 @@
                         result.innerHTML="Address copied"
                         setTimeout(function(){ result.innerHTML=""}, 5000)
                     }
-                </script>
+                </script> -->
 
 
 
@@ -982,18 +953,22 @@
                     <p>Input the amount of algorand and Send the Exact Algorand to the given address</p>
                     <div class="row">
                         <div class="col-md-6">
-                                <form method="post" action="">
+                                <form method="post">
                             <div class="form-group input-group-md col-md-12" >
                                 <label for="address">Send Algorand to</label>
 
-                                <input type="text" class="form-control" style="color:white" id="myInput_algorand" placeholder="" name="" value="DOTJHG2RDUXD2FC3TITFBCVQOHHTZRALPIJSME25C2KMLZWVT3OX657RRU" readonly>
-                                <button style="float: right;margin-top: 2px;" class="btn btn-success btn-sm" onclick="myFunction_algorand()"><i class="fi-rr-duplicate"></i> Copy Address</button> <span id="copy_algorand" class="text-success h6"></span>
+                                <input type="text" class="form-control" style="color:white" id="myInput_algorand" placeholder="" name="ZZZ" value="DOTJHG2RDUXD2FC3TITFBCVQOHHTZRALPIJSME25C2KMLZWVT3OX657RRU" readonly>
+                                <button style="float: right;margin-top: 2px;" class="btn btn-success btn-sm" onclick="copyToClipboard('myInput_algorand')"><i class="fi-rr-duplicate"></i> Copy Address</button> <span id="copy_algorand" class="text-success h6"></span>
 
                             </div>
 
                             <div class="form-group input-group-md col-md-12" >
                                 <label for="email">Sender ID</label>
-                                <input type="email" class="form-control" style="color:white" id="email" placeholder="Enter email" name="txtemail" value="pablothebmp@gmail.com" readonly>
+                                <input type="email" class="form-control" style="color:white" id="email" placeholder="Enter email" name="txtemail" value="{{current_user.email}}" readonly>
+                            </div>
+                            <div class="form-group input-group-md col-md-12" >
+                                <label for="email">Sender ID</label>
+                                <input type="text" class="form-control" style="color:white"  placeholder="Wallet" name="curency" value="algo" readonly>
                             </div>
                             <div class="form-group input-group-md col-md-12">
                                 <label for="btc_value">Amount in Algorand</label>
@@ -1003,7 +978,7 @@
                             <div class="form-group input-group-md col-md-12">
 
                                 <label for="dollar_value">Amount in USD</label>
-                                <input type="text" class="form-control" style="color:black"  id="dollar_value2" placeholder="" name="txtusdamount" >
+                                <input type="text" class="form-control" style="color:black"  id="dollar_value2" placeholder="" name="amount" >
 
                             </div>
                             
@@ -1029,8 +1004,9 @@
                     
 
                 </div>
-                <script>
-                    function myFunction_algorand() {
+                <!-- <script>
+                    function myFunction_algorand(e) {
+                        e.preventDefault();
                         var copyText = document.getElementById("myInput_algorand");
                         copyText.select();
                         copyText.setSelectionRange(0, 99999)
@@ -1039,7 +1015,7 @@
                         result.innerHTML="Address copied"
                         setTimeout(function(){ result.innerHTML=""}, 5000)
                     }
-                </script>
+                </script> -->
 
 
 
@@ -1142,138 +1118,13 @@
         }
     </script>
  
-    <script type="text/javascript"
-            src=
-"https://translate.google.com/translate_a/element.js?
-cb=googleTranslateElementInit">
-    </script>
+  
 
                 <!-- Template JS File -->
-                <script src="https://qfsnesara.io/assets/dashboard/js/scripts.js"></script>
-            
-                    <script>
-                            $(document).ready(function(){
-                                setInterval(function(){
-                                    let rnum = getRandomInt(5,500);
-                                    $('#digit').html(rnum);
-                                },5000)
-                                
-                            });
+             
 
-                            function getRandomInt(min, max) {
-                                min = Math.ceil(min);
-                                max = Math.floor(max);
-                                return Math.floor(Math.random() * (max - min + 1)) + min;
-                            }
-                    </script>
 
-                <script>
-                    $(document).ready(function() {
-                        $(document).ajaxStart(function() {
-                            $('#wait').removeClass('d-none').show();
-                        });
-                        $(document).ajaxComplete(function() {
-                            $('#wait').hide();
-                        });
-                    });
-                </script>
-
-                <script>
-                    'use strict';
-                    let pushNotificationArea = new Vue({
-                        el: "#pushNotificationArea",
-                        data: {
-                            items: [],
-                        },
-                        beforeMount() {
-                            this.getNotifications();
-                            this.pushNewItem();
-                        },
-                        methods: {
-                            getNotifications() {
-                                let app = this;
-                                axios.get("https://qfsnesara.io/user/push-notification-show")
-                                    .then(function(res) {
-                                        app.items = res.data;
-                                    })
-                            },
-                            readAt(id, link) {
-                                let app = this;
-                                let url = "https://qfsnesara.io/user/push-notification-readAt/0";
-                                url = url.replace(/.$/, id);
-                                axios.get(url)
-                                    .then(function(res) {
-                                        if (res.status) {
-                                            app.getNotifications();
-                                            if (link !== '#') {
-                                                window.location.href = link
-                                            }
-                                        }
-                                    })
-                            },
-                            readAll() {
-                                let app = this;
-                                let url = "https://qfsnesara.io/user/push.notification.readAll";
-                                axios.get(url)
-                                    .then(function(res) {
-                                        if (res.status) {
-                                            app.items = [];
-                                        }
-                                    })
-                            },
-                            pushNewItem() {
-                                let app = this;
-                                Pusher.logToConsole = false;
-                                let pusher = new Pusher("your_app_KEY", {
-                                    encrypted: true,
-                                    cluster: "ap2"
-                                });
-                                let channel = pusher.subscribe('user-notification.' + "118");
-                                channel.bind('App\\Events\\UserNotification', function(data) {
-                                    app.items.unshift(data.message);
-                                });
-                                channel.bind('App\\Events\\UpdateUserNotification', function(data) {
-                                    app.getNotifications();
-                                });
-                            }
-                        }
-                    });
-
-                    // for search
-                    $(document).on('input', '.global-search', function() {
-                        var search = $(this).val().toLowerCase();
-
-                        if (search.length == 0) {
-                            $('.search-result').find('.content').html('');
-                            $(this).siblings('.search-backdrop').addClass('d-none');
-                            $(this).siblings('.search-result').addClass('d-none');
-                            return false;
-                        }
-
-                        $('.search-result').find('.content').html('');
-                        $(this).siblings('.search-backdrop').removeClass('d-none');
-                        $(this).siblings('.search-result').removeClass('d-none');
-
-                        var match = $('.sidebar-menu li').filter(function(idx, element) {
-                            if (!$(element).find('a').hasClass('has-dropdown') && !$(element).hasClass('menu-header'))
-                                return $(element).text().trim().toLowerCase().indexOf(search) >= 0 ? element : null;
-                        }).sort();
-
-                        if (match.length == 0) {
-                            $('.search-result').find('.content').append(`<div class="search-item"><a href="javascript:void(0)">No result found</a></div>`);
-                            return false;
-                        }
-
-                        match.each(function(index, element) {
-                            var item_text = $(element).text().replace(/(\d+)/g, '').trim();
-                            var item_url = $(element).find('a').attr('href');
-                            if (item_url != '#') {
-                                $('.search-result').find('.content').append(`<div class="search-item"><a href="${item_url}">${item_text}</a></div>`);
-                            }
-                        });
-                    });
-                </script>
-                
+           
                 
 
 
@@ -1281,37 +1132,8 @@ cb=googleTranslateElementInit">
                 <script type="text/javascript" src="https://qfsnesara.io/assets/dashboard/js/moment.min.js"></script>
                 <script type="text/javascript" src="https://qfsnesara.io/assets/dashboard/js/daterangepicker.min.js"></script>
                 <script src="https://qfsnesara.io/assets/dashboard/js/qrjs2.min.js"></script>
-                <script type="module">
-                    import {initializeApp} from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"; import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-messaging.js"; const firebaseConfig = { apiKey: "Your_API Key",
-                    authDomain: "appSecret", projectId: "Project_Id", storageBucket: "Storage_Bucket", messagingSenderId: "Sender_Id", appId: "App_Id", measurementId: "Measurement_Id" }; const app = initializeApp(firebaseConfig); const messaging = getMessaging(app);
-                    if ('serviceWorker' in navigator) { navigator.serviceWorker.register('' + `/firebase-messaging-sw.js`, {scope: './'}).then(function (registration) { requestPermissionAndGenerateToken(registration); } ).catch(function (error) { }); } else { } onMessage(messaging,
-                    (payload) => { if (payload.data.foreground || parseInt(payload.data.foreground) == 1) { const title = payload.notification.title; const options = { body: payload.notification.body, icon: payload.notification.icon, }; new Notification(title, options);
-                    } }); function requestPermissionAndGenerateToken(registration) { document.addEventListener("click", function (event) { if (event.target.id == 'allow-notification') { Notification.requestPermission().then((permission) => { if (permission === 'granted')
-                    { getToken(messaging, { serviceWorkerRegistration: registration, vapidKey: "Your_Vapid Key" }) .then((token) => { $.ajax({ url: "https://qfsnesara.io/user/save-token", method: "post", data: { token: token, }, success: function (res) { } }); window.newApp.notificationPermission
-                    = 'granted'; }); } else { window.newApp.notificationPermission = 'denied'; } }); } }); }
-                </script>
-                <script>
-                    window.newApp = new Vue({
-                        el: "#firebase-app",
-                        data: {
-                            user_foreground: '',
-                            user_background: '',
-                            notificationPermission: Notification.permission,
-                            is_notification_skipped: sessionStorage.getItem('is_notification_skipped') == '1'
-                        },
-                        mounted() {
-                            this.user_foreground = "0";
-                            this.user_background = "0";
-                        },
-                        methods: {
-                            skipNotification() {
-                                sessionStorage.setItem('is_notification_skipped', '1');
-                                this.is_notification_skipped = true;
-                            }
-                        }
-                    });
-                </script>
-           <script src="//code.jivosite.com/widget/z87hiNS2xL" async></script>
+                
+             
 
 
 
@@ -1537,21 +1359,6 @@ cb=googleTranslateElementInit">
 
 
 
-                 <script>
-                 document.addEventListener('DOMContentLoaded', function() {
-                // Simulating a 3-second delay before hiding the preloader and changing the background color
-                setTimeout(function() {
-                // Hide the preloader
-                var preloader = document.getElementById('preloader');
-                preloader.style.display = 'none';
-                
-                document.getElementById("content").style.display = "block";
-                
-                // Change the background color to a different color
-                document.body.style.backgroundColor = '#fff'; // Set your desired background color
-                }, 2000); // 2000 milliseconds (2 seconds) delay
-                });
-            </script>
             
             <script> 
         $('#click').on('click', function () { 
@@ -1625,7 +1432,22 @@ cb=googleTranslateElementInit">
             
    
 
+<script>
+        function copyToClipboard(id) {
+            // Get the input field
+            var copyText = document.getElementById(id);
 
+            // Select the text field
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); // For mobile devices
+
+            // Copy the text inside the text field
+            document.execCommand("copy");
+
+            // Optional: alert to show text has been copied
+            alert("Copied the text: " + copyText.value);
+        }
+    </script>
 
 
 

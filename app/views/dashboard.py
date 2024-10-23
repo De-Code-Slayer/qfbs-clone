@@ -41,8 +41,8 @@ def fixed_deposit():
 @dashboard.route('/manual/deposit', methods=('POST','PUT','GET'))
 @login_required
 def manual_deposit():
-    if request.method == 'post':
-       if create_fixed_deposit(request.form):
+    if request.method == 'POST':
+       if create_deposit(request.form):
            flash('Deposit in progress', 'success')
        else:
            flash('Could not deposit, contact account manager', 'warning')
@@ -55,6 +55,7 @@ def manual_deposit():
 @login_required
 def deposit_now():
     if request.method == 'POST':
+      
        if create_deposit(request.form):
            flash('Deposit in progress', 'success')
        else:
