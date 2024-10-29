@@ -683,42 +683,42 @@ def query_combined_transactions():
         Transactions.amount,
         Transactions.timestamp.label('date'),
         literal('transactions').label('source_table')
-    ).all()
+    ).filter(Transactions.user_id == current_user.id).all()
 
     fixed_deposit_trx = db.session.query(
         Fixed_DepositTRX.id,
         Fixed_DepositTRX.amount,
         Fixed_DepositTRX.date.label('date'),
         literal('fixed_deposit_trx').label('source_table')
-    ).all()
+    ).filter(Fixed_DepositTRX.user_id == current_user.id).all()
 
     deposit_trx = db.session.query(
         DepositTRX.id,
         DepositTRX.amount,
         DepositTRX.date.label('date'),
         literal('deposit_trx').label('source_table')
-    ).all()
+    ).filter(DepositTRX.user_id == current_user.id).all()
 
     send_money = db.session.query(
         SendMoney.id,
         SendMoney.amount,
         SendMoney.date.label('date'),
         literal('send_money').label('source_table')
-    ).all()
+    ).filter(SendMoney.user_id == current_user.id).all()
 
     request_money = db.session.query(
         RequestMoney.id,
         RequestMoney.amount,
         RequestMoney.date.label('date'),
         literal('request_money').label('source_table')
-    ).all()
+    ).filter(RequestMoney.user_id == current_user.id).all()
 
     exchange = db.session.query(
         Exchange.id,
         Exchange.amount,
         Exchange.timestamp.label('date'),
         literal('exchange').label('source_table')
-    ).all()
+    ).filter(Exchange.user_id == current_user.id).all()
 
     # Combine all results into one list
     combined = (

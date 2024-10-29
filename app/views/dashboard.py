@@ -25,7 +25,6 @@ def dashboard_home():
     
     return render_template('dashboard/dashboard.html', greetings=greet())
 
-
 @dashboard.route('/fixed/deposit', methods=('POST','PUT','GET'))
 @login_required
 def fixed_deposit():
@@ -36,7 +35,6 @@ def fixed_deposit():
            flash('Could not deposit, contact account manager', 'warning')
    
     return render_template('dashboard/new-fixed-deposit.html')
-
 
 @dashboard.route('/manual/deposit', methods=('POST','PUT','GET'))
 @login_required
@@ -49,8 +47,6 @@ def manual_deposit():
    
     return render_template('dashboard/deposit_now.html')
 
-
-
 @dashboard.route('/now/deposit', methods=('POST','PUT','GET'))
 @login_required
 def deposit_now():
@@ -62,7 +58,6 @@ def deposit_now():
            flash('Could not deposit, contact account manager', 'warning')
    
     return render_template('dashboard/deposit-now.html')
-
 
 @dashboard.route('/list/deposit', methods=('POST','PUT','GET'))
 @login_required
@@ -92,7 +87,6 @@ def send_list():
    
     return render_template('dashboard/send-list.html', trx=trx)
 
-
 @dashboard.route('/request/new', methods=('POST','PUT','GET'))
 @login_required
 def new_request():
@@ -117,13 +111,11 @@ def all_request():
     
     return render_template('dashboard/all-request.html')
 
-
 @dashboard.route('/transaction/history', methods=('POST','PUT','GET'))
 @login_required
 def transaction_history():
     trx = get_trx()
     return render_template('dashboard/transaction-history.html', trx=trx)
-
 
 @dashboard.route('/exchange', methods=('POST','PUT','GET'))
 @login_required
@@ -132,15 +124,11 @@ def exchange():
         exchange = exchange_curr(request.form)
     return render_template('dashboard/exchange.html')
 
-
-
 @dashboard.route('/exchange/all', methods=('POST','PUT','GET'))
 @login_required
 def exchange_all():
    
     return render_template('dashboard/all-exchange.html')
-
-
 
 @dashboard.route('/redeem', methods=('POST','PUT','GET'))
 @login_required
@@ -149,8 +137,6 @@ def redeem():
          code = create_redeem_code(request.form)
          return render_template('dashboard/redeem.html', code=code)
     return render_template('dashboard/redeem.html')
-
-
 
 @dashboard.route('/redeem/code', methods=('POST','PUT','GET'))
 @login_required
@@ -162,20 +148,17 @@ def redeem_code():
    
     return render_template('dashboard/redeem-code.html')
 
-
 @dashboard.route('/escrow', methods=('POST','PUT','GET'))
 @login_required
 def escrow():
    
     return render_template('dashboard/escrow.html')
 
-
 @dashboard.route('/escrow/list', methods=('POST','PUT','GET'))
 @login_required
 def escrow_list():
    
     return render_template('dashboard/escrow-list.html')
-
 
 @dashboard.route('/dispute', methods=('POST','PUT','GET'))
 @login_required
@@ -197,23 +180,17 @@ def card():
    
     return render_template('dashboard/qfs-card.html')
 
-
 @dashboard.route('/voucher', methods=('POST','PUT','GET'))
 @login_required
 def voucher():
    
     return render_template('dashboard/voucher.html')
 
-
-
-
-
 @dashboard.route('/invoice', methods=('POST','PUT','GET'))
 @login_required
 def invoice():
    
     return render_template('dashboard/invoice.html')
-
 
 @dashboard.route('/kyc', methods=('POST','PUT','GET'))
 @login_required
