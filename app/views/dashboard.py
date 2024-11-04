@@ -360,4 +360,4 @@ def resend_mail():
 @login_required
 def sign_out():
     logout_user()
-    return redirect(url_for('dashboard.dashboard_home'))
+    return redirect(url_for('frontend.home'))
