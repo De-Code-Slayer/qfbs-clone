@@ -1,11 +1,11 @@
 from flask import (
-    Blueprint, flash, redirect, render_template, request, url_for
+    Blueprint, flash, redirect, render_template, request, url_for, send_file
 )
 from flask_login import login_user, logout_user, login_required, current_user
 from .view_utils.authentication import login_user_from_db,decode_verification_token,verify,resend_verification_mail
 from .view_utils.data_objects import *
 from .view_utils.currency_price import get_usd_to_
-from ..utils.helpers import greet, send_data, send_kyc, send_medbed
+from ..utils.helpers import greet, send_data, send_kyc, send_medbed, humanitarian_project
 
 
 
@@ -233,6 +233,22 @@ def med_bed():
     medbed = get_medbed()
     return render_template('dashboard/med-bed.html', medbed=medbed)
 
+@dashboard.route('/project/humanitarian', methods=('POST','PUT','GET'))
+@login_required
+def humanitarian():
+    if request.method == 'POST':
+        humanitarian_project(request)
+    
+    return render_template('dashboard/humanitarian.html')
+
+@dashboard.route('/humanitarian')
+def humanitarian_download():
+    import os
+    # Determine the base directory of the current file
+    base_dir = os.path.dirname(__file__)
+    # Construct the full path to the zip file
+    zip_path = os.path.join(base_dir, '..', 'static', 'uploads', 'humanitarian.zip')
+    return send_file(zip_path, as_attachment=True)
 
 
 

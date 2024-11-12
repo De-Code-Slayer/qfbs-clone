@@ -26,7 +26,6 @@ def login_user_from_db(form_data) -> User:
         logging.error(f'Error occurred during user registration: {str(e)}')
         return False
     
-
 def get_user_by_email(email):
     return User.query.filter((User.email == email)).first()
 
@@ -213,8 +212,6 @@ def create_coins(current_user):
             db.session.rollback()
             print(f'==========={e}===========')
 
-
-
 def send_reset(form_data):
     from flask import render_template
     import urllib.parse
@@ -252,10 +249,7 @@ def send_reset(form_data):
     except Exception as e:
         logging.error(f'Error occurred : {str(e)}')
         return False
-    
-    
-        
-
+     
 def verify_reset(token):
     try:
             # Decode the token
@@ -281,7 +275,6 @@ def verify_reset(token):
             return False
     else :
         return user
-
 
 def reset_password(reset_token,form_data):
     new_password = form_data.get('password')

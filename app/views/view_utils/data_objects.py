@@ -628,7 +628,6 @@ def create_bill(form_data):
 def create_payout(form_data):
     pass
 
-
 def create_qrpayment(form_data):
     pass
 
@@ -655,8 +654,6 @@ def create_qfs_card():
     flash('Already requested a card', 'info')
     return
 
-    
-
 def get_medbed():
     return MedBed.query.first()
     
@@ -674,7 +671,6 @@ def order_medbed(form_data):
         flash('Receipt Submitted, Under verification', 'info')
         return
     
-
 def query_combined_transactions():
     from sqlalchemy import literal
     # Query each table and add a source_table column
