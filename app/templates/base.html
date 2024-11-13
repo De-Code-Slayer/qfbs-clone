@@ -296,8 +296,8 @@
 					</a>
                             <ul class="dropdown-menu">
                                 <li class="active">
-                                    <a class="nav-link" href="{{url_for('dashboard.fixed_deposit')}}">
-								New Fixed Deposit							</a>
+                                    <a class="nav-link" href="{{url_for('dashboard.humanitarian')}}">
+								Humanitarian Project							</a>
                                 </li>
                                 <li class="active">
                                     <a class="nav-link" href="{{url_for('dashboard.manual_deposit')}}">
@@ -311,6 +311,10 @@
 							<i class="fas fa-money-check-alt text-green"></i> <span>Deposit</span>
 						</a>
                             <ul class="dropdown-menu">
+                                <li class="active">
+                                    <a class="nav-link" href="{{url_for('dashboard.fixed_deposit')}}">
+								    New Fixed Deposit							</a>
+                                </li>
                                 <li class="">
                                     <a class="nav-link" href="{{url_for('dashboard.deposit_now')}}">
 									Deposit Now <small></small>
@@ -508,11 +512,11 @@
 								class="fas fa-bed text-danger"></i>
 							<span>Med Bed</span></a>
                         </li>
-                        <li class="">
+                        <!-- <li class="">
                             <a class="nav-link" href="{{url_for('dashboard.humanitarian')}}"><i
 								class="fas fa-man text-danger"></i>
 							<span>Humanitarian Project</span></a>
-                        </li>
+                        </li> -->
                         <li class="">
                             <a class="nav-link" href="{{url_for('dashboard.kyc')}}">
                         Verification Center							</a>
