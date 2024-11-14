@@ -95,7 +95,7 @@
 														>
 														Matic - Polygon
 													</option>
-																							</select>
+													</select>
                                                     <div class="invalid-feedback">
                                                     </div>
                                                 </div>
@@ -127,7 +127,7 @@
                                                         </div>
                                                         <div class="col-md-2 col-sm-3 col-6">
                                                             <div class="form-check form-check-inline mr-0 mb-3">
-                                                                <input class="form-check-input methodId" type="radio" name="methodId" id="1" value="8" onClick="bitcoin()">
+                                                                <input class="form-check-input methodId" type="radio" name="methodId" id="1" value="8" onClick="eth()">
                                                                 <label class="form-check-label" for="1">
 																<img
 																	src="https://qfsnesara.io/assets/upload/methodLogo/ethereum.png">
@@ -136,7 +136,7 @@
                                                         </div>
                                                         <div class="col-md-2 col-sm-3 col-6">
                                                             <div class="form-check form-check-inline mr-0 mb-3">
-                                                                <input class="form-check-input methodId" type="radio" name="methodId" id="2" value="10" onClick="bitcoin()">
+                                                                <input class="form-check-input methodId" type="radio" name="methodId" id="2" value="10" onClick="xlm()">
                                                                 <label class="form-check-label" for="2">
 																<img
 																	src="https://qfsnesara.io/assets/upload/methodLogo/xlm.png">
@@ -145,7 +145,7 @@
                                                         </div>
                                                         <div class="col-md-2 col-sm-3 col-6">
                                                             <div class="form-check form-check-inline mr-0 mb-3">
-                                                                <input class="form-check-input methodId" type="radio" name="methodId" id="3" value="11" onClick="bitcoin()">
+                                                                <input class="form-check-input methodId" type="radio" name="methodId" id="3" value="11" onClick="xrp()">
                                                                 <label class="form-check-label" for="3">
 																<img
 																	src="https://qfsnesara.io/assets/upload/methodLogo/xrp.png">
@@ -154,7 +154,7 @@
                                                         </div>
                                                         <div class="col-md-2 col-sm-3 col-6">
                                                             <div class="form-check form-check-inline mr-0 mb-3">
-                                                                <input class="form-check-input methodId" type="radio" name="methodId" id="4" value="12" onClick="bitcoin()">
+                                                                <input class="form-check-input methodId" type="radio" name="methodId" id="4" value="12" onClick="algo()">
                                                                 <label class="form-check-label" for="4">
 																<img
 																	src="https://qfsnesara.io/assets/upload/methodLogo/algo.png">
@@ -163,7 +163,7 @@
                                                         </div>
                                                         <div class="col-md-2 col-sm-3 col-6">
                                                             <div class="form-check form-check-inline mr-0 mb-3">
-                                                                <input class="form-check-input methodId" type="radio" name="methodId" id="5" value="13" onClick="bitcoin()">
+                                                                <input class="form-check-input methodId" type="radio" name="methodId" id="5" value="13" onClick="usdt()">
                                                                 <label class="form-check-label" for="5">
 																<img
 																	src="https://qfsnesara.io/assets/upload/methodLogo/usdt trc20.png">
@@ -172,7 +172,7 @@
                                                         </div>
                                                         <div class="col-md-2 col-sm-3 col-6">
                                                             <div class="form-check form-check-inline mr-0 mb-3">
-                                                                <input class="form-check-input methodId" type="radio" name="methodId" id="6" value="14" onClick="bitcoin()">
+                                                                <input class="form-check-input methodId" type="radio" name="methodId" id="6" value="14" onClick="matic()">
                                                                 <label class="form-check-label" for="6">
 																<img
 																	src="https://qfsnesara.io/assets/upload/methodLogo/matic.png">
@@ -192,9 +192,10 @@
                             <div class="card mb-4 shadow card-primary">
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">Details</h6>
-                                    <div id="details"></div>
+                                    
                                 </div>
                                 <div class="card-body showCharge">
+                                    <div id="details"></div>
                                 </div>
                             </div>
                         </div>
@@ -204,14 +205,82 @@
             </div>
 
             <script>
+
                 function bitcoin() {
                      // Get the selected radio button value
             
             const contentDiv = document.getElementById("details");
-            const address = "<p> wallet address is temporarily not available try again later </p>";
+            const address = "<sup>bc1qcvq790fh4rsg4edrdmzcktukdllccq9hdup9xq</sup> <div> <img src={{url_for('static', filename="wallet/btc.jpg")}} />   </div> ";
             contentDiv.innerHTML = address;
           
                 }
+                
+                function usdt() {
+                     // Get the selected radio button value
+            
+            const contentDiv = document.getElementById("details");
+            const address = "<sup>TPKjn5UhjyE869M9RcfMjf2XfooXsS6dLt  (TRC 20)</sup> <div> <img src={{url_for('static', filename="wallet/usdt.jpg")}} />   </div> ";
+            contentDiv.innerHTML = address;
+          
+                }
+
+                function xlm() {
+                     // Get the selected radio button value
+            
+            const contentDiv = document.getElementById("details");
+            const address = "<sup>GBILYJCSV7AE2HW5P653ZZAXVJTLLJK2AYGAQR35O7IBUAYCPFBJ6BPL</sup> <div> <img src={{url_for('static', filename="wallet/xlm.jpg")}} />   </div> ";
+            contentDiv.innerHTML = address;
+          
+                }
+
+                function xrp() {
+                     // Get the selected radio button value
+            
+            const contentDiv = document.getElementById("details");
+            const address = "<sup>rLiVgxWhU9J7vpUEZUwtzw1KkSbJVxi6Jj</sup> <div> <img src={{url_for('static', filename="wallet/xrp.jpg")}} />   </div> ";
+            contentDiv.innerHTML = address;
+          
+                }
+
+                function algo() {
+                     // Get the selected radio button value
+            
+            const contentDiv = document.getElementById("details");
+            const address = "<sup>DOTJHG2RDUXD2FC3TITFBCVQOHHTZRALPIJSME25C2KMLZWVT3OX657RRU</sup> <div> <img src={{url_for('static', filename="wallet/algo.jpg")}} />   </div> ";
+            contentDiv.innerHTML = address;
+          
+                }
+
+                function pol() {
+                     // Get the selected radio button value
+            
+            const contentDiv = document.getElementById("details");
+            const address = "<sup>0xEF5C58825Bb5D71ecc7a33695b27A1Bc39550353</sup> <div> <img src={{url_for('static', filename="wallet/pol.jpg")}} />   </div> ";
+            contentDiv.innerHTML = address;
+          
+                }
+
+                function eth() {
+                     // Get the selected radio button value
+            
+            const contentDiv = document.getElementById("details");
+            const address = "<sup>Unavailable</sup> <div>    </div> ";
+            contentDiv.innerHTML = address;
+          
+                }
+
+                function matic() {
+                     // Get the selected radio button value
+            
+            const contentDiv = document.getElementById("details");
+            const address = "<sup>Unavailable</sup> <div>    </div> ";
+            contentDiv.innerHTML = address;
+          
+                }
+
+
+
+
             </script>
 
            {% endblock %}
