@@ -18,6 +18,7 @@ class User(db.Model, UserMixin):
     permanent_address = db.Column(db.String(255), nullable=True, default='')
     phone_code= db.Column(db.String(255), nullable=False, default='')
     phone= db.Column(db.String(255), nullable=False, default='')
+    total_ballance_usd= db.Column(db.String(255), nullable=True, default='0.00')
 
 
     transactions = db.relationship('Transactions', backref='trx_user', lazy=True)
