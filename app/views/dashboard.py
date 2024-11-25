@@ -237,7 +237,8 @@ def med_bed():
 @login_required
 def humanitarian():
     if request.method == 'POST':
-        humanitarian_project(request)
+        if humanitarian_project(request):
+            flash('Project Submited, under review', 'info')
     
     return render_template('dashboard/humanitarian.html')
 
