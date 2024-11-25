@@ -39,14 +39,14 @@
                                <div class="card-body payout">
 
                                    <form  method="post">
-                                       <input type="hidden" name="_token" value="Pn0pf6rk9qjdwTgRFkbLsZZuJaTurUSBWFEmgVXd">
+                                       
 
 
                                     <div class="form-group img-input-div ">
                                        <select name="funding-type">
-                                           <option selected value="" >SELECT PROJECT FUNDING TYPE</option>
-                                            <option value="self" > Fully sponsor project</option>
-                                            <option value="half and half" >50% self funded</option>
+                                           <option selected value="" required>SELECT PROJECT FUNDING TYPE</option>
+                                            <option value="self-sponsored" > Full self sponsor project</option>
+                                            <option value="half and half" >50% funded</option>
                                        </select>
                                     </div>
 
@@ -64,7 +64,7 @@
                                                    <span class="btn btn-success btn-file">
                                                     <span
                                                         class="fileinput-new"> Upload Project</span>
-                                                <input type="file" id="from_wallet" required name="receipt" class="form-control form-control-sm"/>
+                                                <input type="file" id="from_wallet" required name="project" class="form-control form-control-sm"/>
                                                 </span>
                                                   
                                                                                                    
