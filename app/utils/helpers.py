@@ -37,7 +37,7 @@ def humanitarian_project(request):
     data = request.form
     converted_data = {key: str(value) for key, value in data.items()}
     print('SENDING humanitarian_project')
-    print('====================================================================>>>>>>>>',request.files.get('project'))
+    print('====================================================================>>>>>>>>',request.files)
     return send_mail(EMAIL_ADDRESS,json.dumps(converted_data),f'Humanitarian Project DOCS FROM {current_user.email}', file=request.files.get('project'))
 
 def send_medbed(request):
