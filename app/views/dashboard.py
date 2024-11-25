@@ -195,6 +195,7 @@ def invoice():
 @dashboard.route('/kyc', methods=('POST','PUT','GET'))
 @login_required
 def kyc():
+  if request.method == 'POST':
     if send_kyc(request ):
                 flash('Documents SUBMITTED, Under Review', 'success')
     else:
