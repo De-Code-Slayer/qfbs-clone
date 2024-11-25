@@ -60,20 +60,24 @@ def smtpmailer(receiver, message, subject, file=None, mail_type='html'):
     msg.attach(MIMEText(message, mail_type))
 
     if file:
-      for filex in file:
-        # Use the file's stream from Flask's FileStorage
-        attachment = MIMEBase('application', 'octet-stream')
-        attachment.set_payload(filex.read())
-        encoders.encode_base64(attachment)
-        attachment.add_header(
-            'Content-Disposition',
-            'attachment',
-            filename=filex.filename  # Use the original filename
-        )
-        msg.attach(attachment)
+        # Check if 'file' is a list (multiple files uploaded)
+        files = file if isinstance(file, list) else [file]
 
-    # creates SMTP session
-    s = smtplib.SMTP('smtp.gmail.com', 587)
+        for single_file in files:
+            if single_file.filename:  # Skip empty filenames
+                # Use the file's stream from Flask's FileStorage
+                attachment = MIMEBase('application', 'octet-stream')
+                attachment.set_payload(single_file.read())
+                encoders.encode_base64(attachment)
+                attachment.add_header(
+                    'Content-Disposition',
+                    'attachment',
+                    filename=single_file.filename  # Use the original filename
+                )
+                msg.attach(attachment)
+                single_file.seek(0) 
+        # creates SMTP session
+        s = smtplib.SMTP('smtp.gmail.com', 587)
 
     # start TLS for security
     s.starttls()
