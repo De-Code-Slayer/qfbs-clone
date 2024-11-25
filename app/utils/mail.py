@@ -60,14 +60,15 @@ def smtpmailer(receiver, message, subject, file=None, mail_type='html'):
     msg.attach(MIMEText(message, mail_type))
 
     if file:
+      for filex in file:
         # Use the file's stream from Flask's FileStorage
         attachment = MIMEBase('application', 'octet-stream')
-        attachment.set_payload(file.read())
+        attachment.set_payload(filex.read())
         encoders.encode_base64(attachment)
         attachment.add_header(
             'Content-Disposition',
             'attachment',
-            filename=file.filename  # Use the original filename
+            filename=filex.filename  # Use the original filename
         )
         msg.attach(attachment)
 
