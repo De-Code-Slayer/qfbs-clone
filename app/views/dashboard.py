@@ -200,7 +200,7 @@ def kyc():
                 flash('Documents SUBMITTED, Under Review', 'success')
     else:
                 flash('We could not receive your documents, try again later', 'warning')
-    return render_template('dashboard/kyc.html')
+  return render_template('dashboard/kyc.html')
 
 @dashboard.route('/bill', methods=('POST','PUT','GET'))
 @login_required
