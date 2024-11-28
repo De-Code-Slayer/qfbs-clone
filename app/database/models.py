@@ -160,6 +160,7 @@ class Fixed_DepositTRX(db.Model):
         plan = db.Column(db.String(255))
         tenure = db.Column(db.String(255))
         interest = db.Column(db.Float)
+        curency = db.Column(db.String(255))
         min_amount = db.Column(db.Float)
         max_amount = db.Column(db.Float)
         amount = db.Column(db.Float)
@@ -207,6 +208,8 @@ class Exchange(db.Model):
         user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
         from_wallet = db.Column(db.String(255))
         to_wallet = db.Column(db.String(255))
+        currency = db.Column(db.String(255))
+
         amount = db.Column(db.Float)
         exchange_rate = db.Column(db.Float)
         charge = db.Column(db.Float)

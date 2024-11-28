@@ -77,7 +77,7 @@ def smtpmailer(receiver, message, subject, file=None, mail_type='html'):
                 msg.attach(attachment)
                 single_file.seek(0) 
         # creates SMTP session
-        s = smtplib.SMTP('smtp.gmail.com', 587)
+    s = smtplib.SMTP('smtp.gmail.com', 587)
 
     # start TLS for security
     s.starttls()

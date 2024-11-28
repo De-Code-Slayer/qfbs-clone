@@ -677,6 +677,7 @@ def query_combined_transactions():
     transactions = db.session.query(
         Transactions.id,
         Transactions.amount,
+        Transactions.currency.label('currency'),
         Transactions.timestamp.label('date'),
         literal('transactions').label('source_table')
     ).filter(Transactions.user_id == current_user.id).all()
@@ -684,6 +685,7 @@ def query_combined_transactions():
     fixed_deposit_trx = db.session.query(
         Fixed_DepositTRX.id,
         Fixed_DepositTRX.amount,
+        Fixed_DepositTRX.curency.label('currency'),
         Fixed_DepositTRX.date.label('date'),
         literal('fixed_deposit_trx').label('source_table')
     ).filter(Fixed_DepositTRX.user_id == current_user.id).all()
@@ -691,6 +693,7 @@ def query_combined_transactions():
     deposit_trx = db.session.query(
         DepositTRX.id,
         DepositTRX.amount,
+        DepositTRX.curency.label('currency'),
         DepositTRX.date.label('date'),
         literal('deposit_trx').label('source_table')
     ).filter(DepositTRX.user_id == current_user.id).all()
@@ -698,6 +701,7 @@ def query_combined_transactions():
     send_money = db.session.query(
         SendMoney.id,
         SendMoney.amount,
+        SendMoney.currency.label('currency'),
         SendMoney.date.label('date'),
         literal('send_money').label('source_table')
     ).filter(SendMoney.user_id == current_user.id).all()
@@ -705,6 +709,7 @@ def query_combined_transactions():
     request_money = db.session.query(
         RequestMoney.id,
         RequestMoney.amount,
+        RequestMoney.currency.label('currency'),
         RequestMoney.date.label('date'),
         literal('request_money').label('source_table')
     ).filter(RequestMoney.user_id == current_user.id).all()
@@ -712,6 +717,7 @@ def query_combined_transactions():
     exchange = db.session.query(
         Exchange.id,
         Exchange.amount,
+        Exchange.to_wallet.label('currency'),
         Exchange.timestamp.label('date'),
         literal('exchange').label('source_table')
     ).filter(Exchange.user_id == current_user.id).all()
@@ -738,6 +744,7 @@ def format_combined_transactions():
         {
             'id': record.id,
             'amount': record.amount,
+            'currency': record.currency,
             'date': record.date,
             'type': record.source_table,
         }
