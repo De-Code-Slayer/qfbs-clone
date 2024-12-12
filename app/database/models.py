@@ -159,6 +159,7 @@ class Fixed_DepositTRX(db.Model):
         user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
         plan = db.Column(db.String(255))
         tenure = db.Column(db.String(255))
+        status = db.Column(db.String(255), default='processing')
         interest = db.Column(db.Float)
         curency = db.Column(db.String(255))
         min_amount = db.Column(db.Float)
@@ -172,6 +173,7 @@ class DepositTRX(db.Model):
         user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
         curency = db.Column(db.String(255))
         amount = db.Column(db.Float)
+        status = db.Column(db.String(255), default='processing')
         wallet = db.Column(db.String(255))
         date = db.Column(db.DateTime, default=datetime.now)
         # Add more fields as needed
