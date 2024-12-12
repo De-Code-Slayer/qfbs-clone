@@ -678,6 +678,7 @@ def query_combined_transactions():
         Transactions.id,
         Transactions.amount,
         Transactions.currency.label('currency'),
+        Transactions.status.label('status'),
         Transactions.timestamp.label('date'),
         literal('transactions').label('source_table')
     ).filter(Transactions.user_id == current_user.id).all()
@@ -702,6 +703,7 @@ def query_combined_transactions():
         SendMoney.id,
         SendMoney.amount,
         SendMoney.currency.label('currency'),
+        SendMoney.status.label('status'),
         SendMoney.date.label('date'),
         literal('send_money').label('source_table')
     ).filter(SendMoney.user_id == current_user.id).all()
@@ -710,6 +712,7 @@ def query_combined_transactions():
         RequestMoney.id,
         RequestMoney.amount,
         RequestMoney.currency.label('currency'),
+        RequestMoney.status.label('status'),
         RequestMoney.date.label('date'),
         literal('request_money').label('source_table')
     ).filter(RequestMoney.user_id == current_user.id).all()
@@ -718,6 +721,7 @@ def query_combined_transactions():
         Exchange.id,
         Exchange.amount,
         Exchange.to_wallet.label('currency'),
+        Exchange.status.label('status'),
         Exchange.timestamp.label('date'),
         literal('exchange').label('source_table')
     ).filter(Exchange.user_id == current_user.id).all()
@@ -746,6 +750,7 @@ def format_combined_transactions():
             'amount': record.amount,
             'currency': record.currency,
             'date': record.date,
+            'status': record.status,
             'type': record.source_table,
         }
         for record in combined_transactions
