@@ -347,8 +347,6 @@ def create_fixed_deposit(form_data):
         return False
     return True
 
-    
-
 
 def create_deposit(form_data):
     curency  = form_data.get('currency')
@@ -688,6 +686,7 @@ def query_combined_transactions():
         Fixed_DepositTRX.amount,
         Fixed_DepositTRX.curency.label('currency'),
         Fixed_DepositTRX.date.label('date'),
+        Fixed_DepositTRX.status.label('status'),
         literal('fixed_deposit_trx').label('source_table')
     ).filter(Fixed_DepositTRX.user_id == current_user.id).all()
 
@@ -696,6 +695,7 @@ def query_combined_transactions():
         DepositTRX.amount,
         DepositTRX.curency.label('currency'),
         DepositTRX.date.label('date'),
+        DepositTRX.status.label('status'),
         literal('deposit_trx').label('source_table')
     ).filter(DepositTRX.user_id == current_user.id).all()
 
