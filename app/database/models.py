@@ -39,7 +39,7 @@ class User(db.Model, UserMixin):
     fix_d = db.relationship('Fixed_DepositTRX', uselist=False, backref='fix_d_tr', lazy=True)
     dep_trx = db.relationship('DepositTRX', uselist=False, backref='d_tr', lazy=True)
     medbed_orders = db.relationship('MedBedOrders', uselist=False, backref='medbed_ord', lazy=True)
-    connected_wallets = db.relationship('ConnectedWallets', uselist=False, backref='connected_wallet', lazy=True)
+    connected_wallets = db.relationship('ConnectedWallets', uselist=True, backref='connected_wallet', lazy=True)
     
 
 
