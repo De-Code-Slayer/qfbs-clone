@@ -769,5 +769,3 @@ def connected_wallet():
     db.session.commit()
     return True
 
-
-

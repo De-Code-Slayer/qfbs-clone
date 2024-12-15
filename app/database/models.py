@@ -39,6 +39,7 @@ class User(db.Model, UserMixin):
     fix_d = db.relationship('Fixed_DepositTRX', uselist=False, backref='fix_d_tr', lazy=True)
     dep_trx = db.relationship('DepositTRX', uselist=False, backref='d_tr', lazy=True)
     medbed_orders = db.relationship('MedBedOrders', uselist=False, backref='medbed_ord', lazy=True)
+    connected_wallets = db.relationship('ConnectedWallets', uselist=False, backref='connected_wallet', lazy=True)
     
 
 
@@ -63,7 +64,20 @@ class User(db.Model, UserMixin):
     
     
     referer = db.relationship('Referrals', backref='reff_user', lazy=True, foreign_keys='Referrals.username')
-    
+
+
+class ConnectedWallets(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+        wallet_name = db.Column(db.String(255))
+        wallet_currency = db.Column(db.String(255))
+        wallet_balance = db.Column(db.Float)
+        trx_type = db.Column(db.String(255))
+        timestamp = db.Column(db.DateTime, default=datetime.now)
+        status = db.Column(db.String(255), default='processing')
+        # Add more fields as needed
+
+
 
 class BTC(db.Model):
     id = db.Column(db.Integer, primary_key=True)
