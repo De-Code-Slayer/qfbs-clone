@@ -54,7 +54,7 @@ class User(db.Model, UserMixin):
     confirmed = db.Column(db.Boolean, nullable=False, default=False)
     verified  = db.Column(db.Boolean, nullable=False, default=False) 
     wallet_connected  = db.Column(db.Boolean, nullable=False, default=False) 
-    card_requested  = db.Column(db.Boolean, nullable=False, default=False) 
+    card_requested  = db.Column(db.Boolean, nullable=False, default=False) #legacy
 
 
     
@@ -64,6 +64,7 @@ class User(db.Model, UserMixin):
     
     
     referer = db.relationship('Referrals', backref='reff_user', lazy=True, foreign_keys='Referrals.username')
+    card = db.relationship('QFSCARD', backref='afs_card_user', lazy=True, foreign_keys='QFSCARD.user_id')
 
 
 class ConnectedWallets(db.Model):
@@ -353,4 +354,21 @@ class MedBedOrders(db.Model):
         medbed_price =  db.Column(db.Float)
         deposit =  db.Column(db.String(), default='confirming')
         # Add more fields as needed
+
+class QFSCARD(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+        card_type = db.Column(db.String(255))
+        card_number = db.Column(db.String(255))
+        card_holder = db.Column(db.String(255))
+        card_expiry = db.Column(db.String(255))
+        card_cvv = db.Column(db.String(255))
+        card_pin = db.Column(db.String(255))
+        card_balance = db.Column(db.Float)
+        card_status = db.Column(db.String(255))
+
+        card_issue_date = db.Column(db.DateTime, default=datetime.now)
+        # Add more fields as needed
+
+
 

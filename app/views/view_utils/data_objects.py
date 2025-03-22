@@ -1,4 +1,4 @@
-from app.database.models import User, Transactions
+from app.database.models import User, Transactions, QFSCARD
 from sqlalchemy import and_
 from werkzeug.utils import secure_filename
 from .email import send_mail
@@ -629,16 +629,24 @@ def create_payout(form_data):
 def create_qrpayment(form_data):
     pass
 
-def create_qfs_card():
+def create_qfs_card(type_):
     import os
     
-    if not current_user.card_requested == True:
+    if not current_user.card_requested:
         # send email to site owner for card request
         message = f'{current_user.full_name} has requested for an ATM Card'
         subject =  f'ATM Card Request from {current_user.full_name}'
         mail_address = os.getenv('EMAIL_ADDRESS')
 
+        # get type of card requested
+        card_type = type_.upper()
+        # generate card details
+        card_details = create_card_details(card_type)
+        # create card record
+        new_card = QFSCARD(user_id=current_user.id, **card_details)
+        db.session.add(new_card)
         # send email to site owner
+
         emailed = send_mail(mail_address, message,subject)
         if emailed:
             current_user.card_requested = True
@@ -762,7 +770,74 @@ def format_combined_transactions():
 # for transaction in formatted_transactions:
 #     print(transaction)
 
+def generate_card_number(prefix_list, length):
+    import random
+    """
+        Generates a valid card number using the Luhn algorithm.
+        :param prefix_list: List of possible starting digits
+        :param length: Total length of the card number
+        :return: A valid card number as a string
+        """
+    prefix = random.choice(prefix_list)  # Pick a random prefix from the list
+    card_number = [int(x) for x in str(prefix)]
 
+    while len(card_number) < (length - 1):  # Generate remaining digits except the last one
+        digit = random.randint(0, 9)
+        card_number.append(digit)
+
+    # Luhn algorithm to calculate the last digit
+    def luhn_checksum(card_number):
+        def digits_of(n):
+            return [int(d) for d in str(n)]
+        
+        digits = digits_of(card_number)
+        odd_digits = digits[-1::-2]
+        even_digits = digits[-2::-2]
+        checksum = sum(odd_digits)
+        
+        for d in even_digits:
+            checksum += sum(digits_of(d * 2))
+        
+        return checksum % 10
+
+    checksum = luhn_checksum(card_number)
+    card_number.append((10 - checksum) % 10)  # Append the last digit
+
+    return ''.join(map(str, card_number))
+
+def create_card_details(type_):
+    import random
+    """
+    Generates card details based on the type.
+    :param type_: The type of card (VISA, MASTERCARD, VERVE, etc.)
+    :return: Dictionary containing card details
+    """
+    if type_ == 'VISA':
+        card_number = generate_card_number(["4"], 16)
+    elif type_ == 'MASTERCARD':
+        card_number = generate_card_number(["51", "52", "53", "54", "55"], 16)
+    elif type_ == 'VERVE':
+        card_number = generate_card_number(["5061", "5062", "5063", "5078"], 19)
+    else:
+        raise ValueError("Unsupported card type")
+
+    # Generate expiry date: one year from now
+    current_year = datetime.now().year
+    expiry_year = (current_year + 1) % 100  # Get last two digits of the year
+    expiry_month = f"{datetime.now().month:02d}"  # Keep the current month
+    expiry_date = f"{expiry_month}/{expiry_year}"
+
+    details = {
+        'user_id': current_user.id,  # Ensure `current_user` is defined
+        'card_type': type_,
+        'card_holder': current_user.full_name,
+        'card_number': card_number,
+        'card_expiry': expiry_date,  # Now dynamically generated
+        'card_cvv': str(random.randint(100, 999)),  # Generate a random 3-digit CVV
+        'card_balance': 0.00,
+        'card_status': 'active',
+    }
+    return details
 
 def connected_wallet():
     current_user.wallet_connected = True
