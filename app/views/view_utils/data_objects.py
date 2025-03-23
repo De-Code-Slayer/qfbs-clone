@@ -652,7 +652,7 @@ def create_qfs_card(form_data):
             # current_user.card_requested = True
             db.session.commit()
 
-            flash('Card requested', 'success')
+            flash('Card Created Successfully', 'success')
         else:
             flash('There was a problem completing your card request at the moment, Try again later', 'warning')
             
