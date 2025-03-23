@@ -28,7 +28,7 @@
 					<div class="row justify-content-md-center">
 					
 					<div class="col-md-4 p-2">
-							<a id="postButton" class="decoration__none">
+							<!-- <a id="postButton" class="decoration__none">
 								<div class="bank-card-box">
 									<div class="top-area">
 										<div class="icon">
@@ -43,9 +43,32 @@
 										</div>
 									</div>
 								</div>
-							</a>
+							</a> -->
+
+							<form  method="post" class="blockForm">
+								<div class="form-control">
+									<select name="type" id="">
+										<option selected disabled>Choose Virtual Card Type</option>
+										<option value="VISA">VISA</option>
+										<option value="MASTERCARD">MASTERCARD</option>
+										<option value="VERVE">VERVE</option>
+									</select>
+								</div>
+								<div class="form-control">
+									<button type="submit" class="btn btn-dark">Create Card</button>
+									
+								</div>
+							</form>
+
+
 						</div>
 					
+
+						<div class="col-md-4 p-2">
+							
+							<!-- card div here -->
+
+						</div>
                           
 										<!--<div class="col-md-4 p-2">
 							<a href="request.php" class="decoration__none">
@@ -129,7 +152,7 @@
 		</div>
 	</div>
 
-	<script>
+	<!-- <script>
 		document.getElementById('postButton').addEventListener('click', function() {
 			// Get the current URL
 			const currentUrl = window.location.href;
@@ -158,5 +181,6 @@
 			});
 			window.location.reload();
 		});
-	</script>
+	</script> -->
+
 		{% endblock %}

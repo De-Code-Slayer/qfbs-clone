@@ -649,7 +649,7 @@ def create_qfs_card(type_):
 
         emailed = send_mail(mail_address, message,subject)
         if emailed:
-            current_user.card_requested = True
+            # current_user.card_requested = True
             db.session.commit()
 
             flash('Card requested', 'success')
