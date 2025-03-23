@@ -643,7 +643,7 @@ def create_qfs_card(form_data):
         # generate card details
         card_details = create_card_details(card_type)
         # create card record
-        new_card = QFSCARD(user_id=current_user.id, **card_details)
+        new_card = QFSCARD(**card_details)
         db.session.add(new_card)
         # send email to site owner
 
