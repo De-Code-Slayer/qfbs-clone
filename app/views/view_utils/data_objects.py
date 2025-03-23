@@ -639,7 +639,7 @@ def create_qfs_card(form_data):
         mail_address = os.getenv('EMAIL_ADDRESS')
 
         # get type of card requested
-        card_type = type_.upper()
+        card_type = _type.upper()
         # generate card details
         card_details = create_card_details(card_type)
         # create card record
