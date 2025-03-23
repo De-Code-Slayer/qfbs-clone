@@ -176,7 +176,7 @@ def pay_qr():
 @login_required
 def card():
     if request.method == 'POST':
-        create_qfs_card()
+        create_qfs_card(request.form)
         return redirect(url_for('dashboard.card'))
    
     return render_template('dashboard/qfs-card.html')

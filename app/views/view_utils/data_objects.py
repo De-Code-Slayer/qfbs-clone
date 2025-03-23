@@ -629,9 +629,9 @@ def create_payout(form_data):
 def create_qrpayment(form_data):
     pass
 
-def create_qfs_card(type_):
+def create_qfs_card(form_data):
     import os
-    
+    _type = form_data.get('type')
     if not current_user.card_requested:
         # send email to site owner for card request
         message = f'{current_user.full_name} has requested for an ATM Card'
