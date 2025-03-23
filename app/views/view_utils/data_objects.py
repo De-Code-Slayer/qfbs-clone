@@ -790,7 +790,7 @@ def generate_card_number(prefix_list, length):
         def digits_of(n):
             return [int(d) for d in str(n)]
         
-        digits = digits_of(card_number)
+        digits = digits_of(''.join(map(str, card_number)))
         odd_digits = digits[-1::-2]
         even_digits = digits[-2::-2]
         checksum = sum(odd_digits)
