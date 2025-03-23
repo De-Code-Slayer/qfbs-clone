@@ -53,7 +53,7 @@ class User(db.Model, UserMixin):
     # verifications
     confirmed = db.Column(db.Boolean, nullable=False, default=False)
     verified  = db.Column(db.Boolean, nullable=False, default=False) 
-    wallet_connected  = db.Column(db.Boolean, nullable=False, default=False) 
+    wallet_connected  = db.Column(db.Boolean, nullable=True, default=False) 
     card_requested  = db.Column(db.Boolean, nullable=False, default=False) #legacy
 
 
