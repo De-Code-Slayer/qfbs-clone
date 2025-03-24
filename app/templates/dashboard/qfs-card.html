@@ -272,11 +272,11 @@
 												</div>
 											</div>
 											<div class="back" style="background-image: linear-gradient(45deg, #000000, #050505);">
-												<img src="https://i.ibb.co/PYss3yv/map.png" class="map-img">
+												<!-- <img src="https://i.ibb.co/PYss3yv/map.png" class="map-img"> -->
 												<div class="bar"></div>
 												<div class="row card-cvv">
 													<div>
-														<img src="https://i.ibb.co/S6JG8px/pattern.png">
+														<!-- <img src="https://i.ibb.co/S6JG8px/pattern.png"> -->
 													</div>
 													<p>xxx</p>
 												</div>
@@ -285,7 +285,16 @@
 												</div>
 												<div class="row signature">
 													<p>CUSTOMER SIGNATURE</p>
-													<img src="{{ url_for('static', filename='cards/' + card.card_type.lower() + '.png') }}" width="80px">
+													{% if card.card_type == 'MASTERCARD' %}
+														
+													<img src="{{url_for('static', filename='cards/master.png')}}" width="80px">
+													{% elif card.card_type == 'VISA' %}
+													<img src="{{url_for('static', filename='cards/visa.png')}}" width="80px">
+													{% elif card.card_type == 'VERVE' %}
+													
+													<img src="{{url_for('static', filename='cards/verve.png')}}" width="80px">
+													{% endif %}
+													
 												</div>
 											</div>
 										</div>
