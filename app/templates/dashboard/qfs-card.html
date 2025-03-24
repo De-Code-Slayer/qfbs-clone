@@ -281,10 +281,10 @@
 													<p>{{ card.card_cvv}}</p>
 												</div>
 												<div class="row card-text">
-													<p>Get a {{ card.card_type|capitalize }} card to be able to remit funds</p>
+													<!-- <p>Get a {{ card.card_type|capitalize }} card to be able to remit funds</p> -->
 												</div>
 												<div class="row signature">
-													<p>CUSTOMER SIGNATURE</p>
+													<p>{{current_user.fullname | capitalize}}</p>
 													{% if card.card_type == 'MASTERCARD' %}
 														
 													<img src="{{url_for('static', filename='cards/master.png')}}" width="80px">
