@@ -3,6 +3,137 @@
 {% extends 'base.html'%}
 
 {% block body %}
+
+<!-- virtual card -->
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=josefin+Sans:wght@400;500;600;700&display=swap');
+
+
+
+.container {
+    min-height: 100%;
+    min-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding:0;
+}
+
+.card-container {
+    width: 100%;
+    max-width: 400px; /* Adjust max width as desired */
+    aspect-ratio: 1.6; /* Maintain aspect ratio (width/height = 1.6 for a card) */
+    perspective: 1000px;
+}
+
+.card {
+    width: 100%;
+    height: 300px;
+    color: #fff;
+    cursor: pointer;
+    perspective: 1000px;
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 1s;
+    transform-style: preserve-3d;
+}
+
+.front, .back {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(45deg, #0045c7, #ff2c7d);
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 20px 30px;
+    border-radius: 15px;
+    overflow: hidden;
+    z-index: 1;
+    backface-visibility: hidden;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.map-img {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.3;
+    z-index: -1;
+}
+
+.card-no {
+    font-size: 32px;
+    margin-top: 60px;
+}
+
+.card-holder {
+    font-size: 12px;
+    margin-top: 40px;
+}
+
+.name {
+    font-size: 22px;
+    margin-top: 20px;
+}
+
+.bar {
+    background: #222;
+    margin-left: -30px;
+    margin-right: -30px;
+    height: 60px;
+    margin-top: 10px;
+}
+
+.card-cvv {
+    margin-top: 20px;
+}
+
+.card-cvv div {
+    flex: 1;
+}
+
+.card-cvv img {
+    width: 100%;
+    display: block;
+    line-height: 0;
+}
+
+.card-cvv p {
+    background: #fff;
+    color: #000;
+    font-size: 22px;
+    padding: 10px 20px;
+}
+
+.card-text {
+    margin-top: 30px;
+    font-size: 12px;
+}
+
+.signature {
+    margin-top: 30px;
+}
+
+.back {
+    transform: rotateY(180deg);
+}
+
+.card:hover .card-inner {
+    transform: rotateY(-180deg);
+}
+</style>
+
+
  		<div class="main-content">
 		<section class="section">
 			<div class="section-header">
@@ -92,6 +223,370 @@
 				</div>
 						</div>
 						{% endif %}
+
+
+						<!-- display card divs -->
+						<div class="row mb-3">
+							<div class="container-fluid" id="container-wrapper">
+								<div class="row justify-content-md-center">
+									<div class="col-md-4 p-2">
+											
+				  <!-- master card -->
+				         
+					<center>    
+					   
+							<div class="col-lg-4 col-md-12">
+							<div class="cal-base-box calbas-on-575px" id="dashboard_calculator">
+							  <form class="mb-0 ng-untouched ng-pristine ng-valid" method="post" name="calculatorform" id="calculatorform" data-gtm-form-interact-id="0">
+								  
+							  <div class="cal-head">
+									  <span class="cal-head-title">
+										<b>Master Card</b> 
+									  </span>
+								  </div>
+									 
+								  <!-- <input type="hidden" name="name" value="Master"> -->
+								  <input type="hidden" name="card_type" value="Master">
+								 
+								 
+								  {% if current_user.card.card_type == 'MASTERCARD' %}
+								 
+			
+								
+								<div class="card-container">
+									<div class="card">
+										<div class="card-inner">
+											<div style="background-image: linear-gradient(45deg, #000000, #050505);" class="front">
+												<!-- <img src="https://i.ibb.co/PYss3yv/map.png" class="map-img"> -->
+												<div class="row">
+													<img src="https://i.ibb.co/G9pDnYJ/chip.png" width="60px">
+													<img src="{{url_for('static', filename='cards/master.png')}}" width="60px">
+												</div>
+												<div class="row card-no">
+													<p>xxxx xxxx xxxx xxxx</p>
+												</div>
+												<div class="row card-holder">
+													<p>CARD HOLDER NAME</p>
+													<p>VALID TILL</p>
+												</div>
+												<!-- <div class="row name">
+													<p>JOE ALISON</p>
+													<p>10 / 25</p>
+												</div> -->
+											</div>
+											<div style="background-image: linear-gradient(45deg, #000000, #050505);"  class="back">
+												<img src="https://i.ibb.co/PYss3yv/map.png" class="map-img">
+												<div class="bar"></div>
+												<div class="row card-cvv">
+													<div>
+														<img src="https://i.ibb.co/S6JG8px/pattern.png">
+													</div>
+													<p>xxx</p>
+												</div>
+												<div class="row card-text">
+													<p>Get a master card to be able to remit funds</p>
+												</div>
+												<div class="row signature">
+													<p>CUSTOMER SIGNATURE</p>
+													<img src="https://i.ibb.co/WHZ3nRJ/visa.png" width="80px">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								{% endif %}
+			
+								{% if current_user.card.card_type == 'MASTERCARD' %}
+								<div class="fee-box-base mb-3">
+												  <ul>
+													  <li class="mb-2 text-left">
+														  
+														  <span class="fee-l-text"> Card Activation Cost
+					  
+														  </span>
+														  
+														  <span class="fee-r-text">  <b>USD
+					  
+														  </b> <b id="trxCurrency"> 
+					  
+														  </b>
+														  </span>
+													  </li><li class="mb-2 text-left">
+															  <span class="fee-l-text"> Card Fee per transaction
+					  
+															  </span>
+															  <span  class="fee-r-text">  <b>  USD
+					  
+															  </b>
+															  </span>
+														  </li>
+														  <li class="text-left">
+															  <span class="fee-l-text"> Card Transaction Limit
+					  
+															  </span>
+															  <span class="fee-r-text" id="payableBal">  <b id="payableBalUsd">  
+																USD
+															  </b>
+															  </span>
+														  </li>
+														  <li class="text-left">
+															  <span class="fee-l-text"> Card status
+					  
+															  </span>
+															  <span class="fee-r-text" id="payableBal">  <b id="payableBalUsd">  
+																
+															  </b>
+															  </span>
+														  </li>
+														  </ul>
+								</div>
+								{% endif %}
+			
+														  
+								</form>    
+								</div>
+							 </div>
+						  
+					</center>
+				 
+			
+				  
+				  <!-- visa card  -->
+				  <div  class="main-content container-fluid">        
+					<center>    
+						<div  class="col-lg-4 col-md-12">
+							<div class="cal-base-box calbas-on-575px" id="dashboard_calculator">
+							  <form class="mb-0 ng-untouched ng-pristine ng-valid" method="post" name="calculatorform" id="calculatorform" data-gtm-form-interact-id="0">
+								  
+							  <div class="cal-head">
+									  <span class="cal-head-title">
+										<b>Visa Card</b> 
+									  </span>
+								  </div>
+										
+								  <input type="hidden" name="card_type" value="Visa">
+			
+								  {% if current_user.card.card_type == 'VISA' %}
+								 
+			
+								
+								<div class="card-container">
+									<div class="card">
+										<div class="card-inner">
+											<div class="front">
+												<img src="https://i.ibb.co/PYss3yv/map.png" class="map-img">
+												<div class="row">
+													<img src="https://i.ibb.co/G9pDnYJ/chip.png" width="60px">
+													<img src="https://i.ibb.co/WHZ3nRJ/visa.png" width="60px">
+												</div>
+												<div class="row card-no">
+													<p>xxxx xxxx xxxx xxxx</p>
+												</div>
+												<div class="row card-holder">
+													<p>CARD HOLDER NAME</p>
+													<p>VALID TILL</p>
+												</div>
+												<!-- <div class="row name">
+													<p>JOE ALISON</p>
+													<p>10 / 25</p>
+												</div> -->
+											</div>
+											<div class="back">
+												<img src="https://i.ibb.co/PYss3yv/map.png" class="map-img">
+												<div class="bar"></div>
+												<div class="row card-cvv">
+													<div>
+														<img src="https://i.ibb.co/S6JG8px/pattern.png">
+													</div>
+													<p>xxx</p>
+												</div>
+												<div class="row card-text">
+													<p>Get a master card to be able to remit funds</p>
+												</div>
+												<div class="row signature">
+													<p>CUSTOMER SIGNATURE</p>
+													<img src="https://i.ibb.co/WHZ3nRJ/visa.png" width="80px">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								{% endif %}
+			
+								{% if current_user.card.card_type == 'MASTERCARD' %}
+								<div class="fee-box-base mb-3">
+												  <ul>
+													  <li class="mb-2 text-left">
+														  
+														  <span class="fee-l-text"> Card Activation Cost
+					  
+														  </span>
+														  
+														  <span class="fee-r-text"> <b>USD
+					  
+														  </b> <b id="trxCurrency"> 
+					  
+														  </b>
+														  </span>
+													  </li><li class="mb-2 text-left">
+															  <span class="fee-l-text"> Card Fee per transaction
+					  
+															  </span>
+															  <span  class="fee-r-text">  <b>  USD
+					  
+															  </b>
+															  </span>
+														  </li><li class="text-left">
+															  <span class="fee-l-text"> Card Transaction Limit
+					  
+															  </span>
+															  <span class="fee-r-text" id="payableBal">  <b id="payableBalUsd">  
+																USD
+															  </b>
+															  </span>
+														  </li>
+														  <li class="text-left">
+															<span class="fee-l-text"> Card status
+					
+															</span>
+															<span class="fee-r-text" id="payableBal"> <b id="payableBalUsd">  
+															  
+															</b>
+															</span>
+														</li>
+														  </ul>
+								</div>
+								{% endif %}
+			
+														  
+								</form>      
+								</div>
+						  </div>
+					</center>
+				  </div>
+			
+				  <!-- Discover card -->
+				  <div  class="main-content container-fluid">        
+					<center>    
+						<div  class="col-lg-4 col-md-12">
+							<div class="cal-base-box calbas-on-575px" id="dashboard_calculator">
+							  <form class="mb-0 ng-untouched ng-pristine ng-valid" method="post" name="calculatorform" id="calculatorform" data-gtm-form-interact-id="0">
+								  
+							  <div class="cal-head">
+									  <span class="cal-head-title">
+										<b>VERVE</b> 
+									  </span>
+								  </div>
+										   
+								  <input type="hidden" name="card_type" value="Discover">
+			
+								  {% if current_user.card.card_type == 'VERVE' %}
+								
+								<div class="card-container">
+									<div class="card">
+										<div class="card-inner">
+											<div style="background-image: linear-gradient(45deg, #767676, #050505);" class="front">
+												<!-- <img src="https://i.ibb.co/PYss3yv/map.png" class="map-img"> -->
+												<div class="row">
+													<img src="https://i.ibb.co/G9pDnYJ/chip.png" width="60px">
+													<img src="{{url_for('static', filename='cards/discover.png')}}" width="60px">
+												</div>
+												<div class="row card-no">
+													<p>xxxx xxxx xxxx xxxx</p>
+												</div>
+												<div class="row card-holder">
+													<p>CARD HOLDER NAME</p>
+													<p>VALID TILL</p>
+												</div>
+												<!-- <div class="row name">
+													<p>JOE ALISON</p>
+													<p>10 / 25</p>
+												</div> -->
+											</div>
+											<div style="background-image: linear-gradient(45deg, #767676, #050505);"  class="back">
+												<img src="https://i.ibb.co/PYss3yv/map.png" class="map-img">
+												<div class="bar"></div>
+												<div class="row card-cvv">
+													<div>
+														<img src="https://i.ibb.co/S6JG8px/pattern.png">
+													</div>
+													<p>xxx</p>
+												</div>
+												<div class="row card-text">
+													<p>Get a master card to be able to remit funds</p>
+												</div>
+												<div class="row signature">
+													<p>CUSTOMER SIGNATURE</p>
+													<img src={{url_for('static', filename='cards/discover.png')}} width="80px">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								{% endif %}
+			
+								{% if current_user.card.card_type == 'VERVE' %}
+								<div class="fee-box-base mb-3">
+												  <ul>
+													  <li class="mb-2 text-left">
+														  
+														  <span class="fee-l-text"> Card Activation Cost
+					  
+														  </span>
+														  
+														  <span class="fee-r-text">  <b>USD
+					  
+														  </b> <b id="trxCurrency"> 
+					  
+														  </b>
+														  </span>
+													  </li><li class="mb-2 text-left">
+															  <span class="fee-l-text"> Card Fee per transaction
+					  
+															  </span>
+															  <span  class="fee-r-text"> <b>  USD
+					  
+															  </b>
+															  </span>
+														  </li><li class="text-left">
+															  <span class="fee-l-text"> Card Transaction Limit
+					  
+															  </span>
+															  <span class="fee-r-text" id="payableBal">  <b id="payableBalUsd">  
+																USD
+															  </b>
+															  </span>
+														  </li>
+														  <li class="text-left">
+															<span class="fee-l-text"> Card status
+					
+															</span>
+															<span class="fee-r-text" id="payableBal"><b id="payableBalUsd">  
+															  
+															</b>
+															</span>
+														</li>
+														  </ul>
+								</div>
+								{% endif %}
+			
+														
+								</form>    
+								</div>
+						  </div>
+					</center>
+				  </div>
+				
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+
+
+
+
 
 
 		</section>

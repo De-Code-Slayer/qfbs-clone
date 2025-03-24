@@ -66,7 +66,6 @@ class User(db.Model, UserMixin):
     referer = db.relationship('Referrals', backref='reff_user', lazy=True, foreign_keys='Referrals.username')
     card = db.relationship('QFSCARD', backref='afs_card_user', lazy=True, foreign_keys='QFSCARD.user_id')
 
-
 class ConnectedWallets(db.Model):
         id = db.Column(db.Integer, primary_key=True)
         user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
@@ -77,8 +76,6 @@ class ConnectedWallets(db.Model):
         timestamp = db.Column(db.DateTime, default=datetime.now)
         status = db.Column(db.String(255), default='processing')
         # Add more fields as needed
-
-
 
 class BTC(db.Model):
     id = db.Column(db.Integer, primary_key=True)
