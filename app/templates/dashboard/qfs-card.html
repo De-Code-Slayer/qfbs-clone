@@ -252,7 +252,7 @@
 										<div class="card-inner">
 											<div class="front" style="background-image: linear-gradient(45deg, #000000, #050505);">
 												<div class="row">
-													<img src="https://i.ibb.co/G9pDnYJ/chip.png" width="60px">
+													<img src={{url_for('static', filename='cards/master.png')}} width="60px">
 													{% if card.card_type == 'MASTERCARD' %}
 														
 													<img src="{{url_for('static', filename='cards/master.png')}}" width="60px">
