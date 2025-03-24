@@ -267,7 +267,7 @@
 													<p>{{ card.card_number[:4] }} {{ card.card_number[4:8] }} {{ card.card_number[8:12] }} {{ card.card_number[12:16] }}</p>
 												</div>
 												<div class="row card-holder">
-													<p>{{ current_user.fullname }}</p>
+													<p>{{ current_user.full_name }}</p>
 													<p>{{ card.card_expiry}}</p>
 												</div>
 											</div>
@@ -284,7 +284,7 @@
 													<!-- <p>Get a {{ card.card_type|capitalize }} card to be able to remit funds</p> -->
 												</div>
 												<div class="row signature">
-													<p>{{current_user.fullname | capitalize}}</p>
+													<p>{{current_user.full_name | capitalize}}</p>
 													{% if card.card_type == 'MASTERCARD' %}
 														
 													<img src="{{url_for('static', filename='cards/master.png')}}" width="80px">
