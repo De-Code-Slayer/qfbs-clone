@@ -235,10 +235,10 @@
 				         
 				  <center>
 					<div class="col-lg-4 col-md-12">
+						{% for card in current_user.card %}
 						<div class="cal-base-box calbas-on-575px" id="dashboard_calculator">
 							<form class="mb-0 ng-untouched ng-pristine ng-valid" method="post" name="calculatorform" id="calculatorform" data-gtm-form-interact-id="0">
 								
-								{% for card in current_user.card %}
 								<div class="cal-head">
 									<span class="cal-head-title">
 										<b>{{ card.card_type|capitalize }} Card</b>
@@ -253,7 +253,15 @@
 											<div class="front" style="background-image: linear-gradient(45deg, #000000, #050505);">
 												<div class="row">
 													<img src="https://i.ibb.co/G9pDnYJ/chip.png" width="60px">
-													<img src="{{ url_for('static', filename='cards/' + card.card_type.lower() + '.png') }}" width="60px">
+													{% if card.card_type == 'MASTERCARD' %}
+														
+													<img src="{{url_for('static', filename='cards/master.png')}}" width="60px">
+													{% elif card.card_type == 'VISA' %}
+													<img src="{{url_for('static', filename='cards/visa.png')}}" width="60px">
+													{% elif card.card_type == 'VERVE' %}
+													
+													<img src="{{url_for('static', filename='cards/discover.png')}}" width="60px">
+													{% endif %}
 												</div>
 												<div class="row card-no">
 													<p>xxxx xxxx xxxx xxxx</p>
@@ -304,10 +312,10 @@
 										</li>
 									</ul>
 								</div>
-								{% endfor %}
 								
 							</form>    
 						</div>
+						{% endfor %}
 					</div>
 				</center>
 				 
