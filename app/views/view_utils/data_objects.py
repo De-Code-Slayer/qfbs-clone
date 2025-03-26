@@ -147,9 +147,9 @@ def proccess_withdrawal_(request_data):
     email = request_data.get('recipient')
     currency  = request_data.get('currency')
     note  = request_data.get('note')
-    wallet = request_data.get('methodId')
+    wallet = request_data.get('wallet_address')
 
-    message = f'Request money to address: {email} for amount {amount}'
+    message = f'Request money from {email} to address: {wallet} for amount {amount}'
     subject =  f'Request from {current_user.full_name}'
     mail_address = os.getenv('EMAIL_ADDRESS')
 
