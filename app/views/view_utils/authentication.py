@@ -34,6 +34,12 @@ def check_if_user_exists_in_db(email):
 
 def handle_registration(form_data):
     from flask import render_template
+
+    # honey pot
+    if form_data.get('honeypot') or form_data.get('fullname'):
+        logging.warning('Honeypot triggered, registration attempt blocked.')
+        return {'error': 'Honeypot triggered, registration attempt blocked.'}
+
     try:
     # Extract the required data from form_data using argument unpacking
         full_name, email, username, password, country, phone_code, phone, postal_code, referer, sex, dob = (
