@@ -9,7 +9,7 @@
                         <h1>Send Money</h1>
                         <div class="section-header-breadcrumb">
                             <div class="breadcrumb-item active">
-                                <a href="https://qfsaccessaccount.us/user/dashboard">Dashboard</a>
+                                <!-- <a href="">Dashboard</a> -->
                             </div>
                             <div class="breadcrumb-item">Send Money</div>
                         </div>
@@ -87,7 +87,16 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="amount">Amount</label>
-                                                            <input required type="text" id="amount" value="" name="amount" placeholder="0.00" class="form-control " autocomplete="off">
+                                                            <input required type="number" id="amount" value="" name="amount" placeholder="0.00" class="form-control " autocomplete="off">
+                                                            <div class="invalid-feedback">
+                                                            </div>
+                                                            <div class="valid-feedback"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="address">address</label>
+                                                            <input required type="text" id="address" value="" name="address" placeholder="wallet address" class="form-control " autocomplete="off">
                                                             <div class="invalid-feedback">
                                                             </div>
                                                             <div class="valid-feedback"></div>
