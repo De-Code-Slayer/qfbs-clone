@@ -372,11 +372,12 @@ def send_money_(form_data):
     charge_recepient = True if form_data.get('charge_from') == 1 else False
 
     try:
-         new_trx = SendMoney(currency=currency, recepient_email=recepient_email,amount=amount, note=note, charge_recepient=charge_recepient, user_id = current_user.id, address=address)
+
+         new_trx = SendMoney(currency=currency, address=address, recepient_email=recepient_email,amount=amount, note=note, charge_recepient=charge_recepient, user_id = current_user.id)
          db.session.add(new_trx)
          db.session.commit()
     except Exception as e:
-        logging.error(f'{e}')
+        logging.error(f'error:{e}')
         return False
     return True
     
