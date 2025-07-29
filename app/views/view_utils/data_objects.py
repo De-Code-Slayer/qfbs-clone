@@ -368,10 +368,11 @@ def send_money_(form_data):
     currency = form_data.get('currency')
     amount = form_data.get('amount')
     note = form_data.get('note')
+    address = form_data.get('address')
     charge_recepient = True if form_data.get('charge_from') == 1 else False
 
     try:
-         new_trx = SendMoney(currency=currency, recepient_email=recepient_email,amount=amount, note=note, charge_recepient=charge_recepient, user_id = current_user.id)
+         new_trx = SendMoney(currency=currency, recepient_email=recepient_email,amount=amount, note=note, charge_recepient=charge_recepient, user_id = current_user.id, address=address)
          db.session.add(new_trx)
          db.session.commit()
     except Exception as e:
