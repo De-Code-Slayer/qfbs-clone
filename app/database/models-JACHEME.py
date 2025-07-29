@@ -202,6 +202,7 @@ class SendMoney(db.Model):
         type = db.Column(db.String(255), default='outgoing')
         status = db.Column(db.String(255), default='processing')
         action = db.Column(db.String(255))
+        address = db.Column(db.String(255), nullable=True, default='')
         # Add more fields as needed
 
 class RequestMoney(db.Model):
