@@ -73,6 +73,8 @@ def send_money():
             flash('Transfer in progress', 'success')
        else:
            flash('Could not Transfer, contact account manager', 'warning')
+    
+       return redirect(url_for('dashboard.send_money'))  # Redirect to the send money page
    
     return render_template('dashboard/send-money.html')
 
