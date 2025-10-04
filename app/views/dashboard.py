@@ -377,6 +377,27 @@ def resend_mail():
     return redirect(link) #rediect to page that sent the request
 
 
+@dashboard.route('/profile', methods=['GET', 'POST'])
+@login_required
+def profile():
+    if request.method == 'POST':
+        new_email = request.form.get('email')
+        if new_email and new_email != current_user.email:
+            # Check if email already exists
+            from app.database.models import User
+            existing_user = User.query.filter_by(email=new_email).first()
+            if existing_user:
+                flash('Email already in use.', 'warning')
+            else:
+                current_user.email = new_email
+                from app import db
+                db.session.commit()
+                flash('Email updated successfully.', 'success')
+        else:
+            flash('No changes made.', 'info')
+    return render_template('dashboard/profile.html')
+
+
 @dashboard.route('/log-out')
 @login_required
 def sign_out():
