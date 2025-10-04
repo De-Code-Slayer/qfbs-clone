@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
 {% block body %}
+<div class="main-content" id="firebase-app">
+    <section class="section wallet-section">
 <div class="container mt-5">
     <h2>Profile</h2>
     <form method="POST" action="{{ url_for('dashboard.profile') }}">
@@ -21,5 +23,7 @@
         {% endfor %}
       {% endif %}
     {% endwith %}
+</div>
+    </section>
 </div>
 {% endblock %}
